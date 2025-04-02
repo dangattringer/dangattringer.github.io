@@ -47,6 +47,7 @@ export class FileNode {
   displayName: string
   file: QuartzPluginData | null
   depth: number
+  page: string | null
 
   constructor(slugSegment: string, displayName?: string, file?: QuartzPluginData, depth?: number) {
     this.children = []
@@ -54,6 +55,40 @@ export class FileNode {
     this.displayName = displayName ?? file?.frontmatter?.title ?? slugSegment
     this.file = file ? clone(file) : null
     this.depth = depth ?? 0
+    this.page = file?.frontmatter?.page as string | null
+  }
+
+  enrichFolders(allFiles: QuartzPluginData[], basePath: string = "") {
+    // console.log(allFiles)
+    if (!this.file && this.name !== "") { // It's a folder (and not the root placeholder)
+      const currentPath = joinSegments(basePath, this.name);
+      const indexFilePath = `${currentPath}/index.md`;
+      const underscoreIndexFilePath = `${currentPath}/_index.md`;
+
+      const indexFile = allFiles.find(
+        (f) => f.relativePath === indexFilePath || f.filePath === underscoreIndexFilePath
+      );
+      // console.log("Found index file for folder", currentPath, indexFile);
+      if (indexFile?.frontmatter) {
+        // console.log("Found index file", indexFile.filePath);
+        // Update folder node properties from its index file
+        if (indexFile.frontmatter.page !== undefined) {
+          // console.log("Found page in index file", indexFile.frontmatter.page);
+          const pageValue = Number(indexFile.frontmatter.page);
+          if (!isNaN(pageValue)) {
+            this.page = String(pageValue); // Store as string like the original
+          }
+        }
+        // Optionally update displayName if index title is better and not 'index'
+        const title = indexFile.frontmatter.title;
+        if (title && title.toLowerCase() !== 'index') {
+          this.displayName = title;
+        }
+      }
+    }
+
+    // Recurse children
+    this.children.forEach(child => child.enrichFolders(allFiles, this.name !== "" ? joinSegments(basePath, this.name) : ""));
   }
 
   private insert(fileData: DataWrapper) {

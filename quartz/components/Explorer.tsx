@@ -17,21 +17,29 @@ const defaultOptions = {
     return node
   },
   sortFn: (a, b) => {
-    // Sort order: folders first, then files. Sort folders and files alphabetically
-    if ((!a.file && !b.file) || (a.file && b.file)) {
-      // numeric: true: Whether numeric collation should be used, such that "1" < "2" < "10"
-      // sensitivity: "base": Only strings that differ in base letters compare as unequal. Examples: a ≠ b, a = á, a = A
-      return a.displayName.localeCompare(b.displayName, undefined, {
-        numeric: true,
-        sensitivity: "base",
-      })
+    const isAFolder = !a.file;
+    const isBFolder = !b.file;
+    if (isAFolder !== isBFolder) {
+      return isAFolder ? -1 : 1; // Folders (-1) come before files (1)
     }
-
-    if (a.file && !b.file) {
-      return 1
-    } else {
-      return -1
+    const aOrder = a.page ?? Infinity;
+    const bOrder = b.page ?? Infinity;
+    // At this point, both are either folders or both are files.
+    if (aOrder !== bOrder) {
+      // console.log(a, aOrder);
+      // console.log(b, bOrder);
+      // console.log(Number(aOrder) - Number(bOrder));
+      return Number(aOrder) - Number(bOrder);
     }
+    // console.log(a)
+    // Fallback: If 'page' is the same (or both are Infinity/undefined),
+    // sort alphabetically by display name. This applies to both files and folders
+    // equally when they have the same 'page' value or no 'page' value.
+    // console.log("fallback for", a, b);
+    return a.displayName.localeCompare(b.displayName, undefined, {
+      numeric: true,
+      sensitivity: "base",
+    });
   },
   filterFn: (node) => node.name !== "tags",
   order: ["filter", "map", "sort"],
@@ -50,6 +58,8 @@ export default ((userOpts?: Partial<Options>) => {
     // Construct tree from allFiles
     fileTree = new FileNode("")
     allFiles.forEach((file) => fileTree.add(file))
+    fileTree.enrichFolders(allFiles);
+
 
     // Execute all functions (sort, filter, map) that were provided (if none were provided, only default "sort" is applied)
     if (opts.order) {

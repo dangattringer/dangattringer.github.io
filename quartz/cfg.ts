@@ -8,41 +8,44 @@ import { Theme } from "./util/theme"
 export type Analytics =
   | null
   | {
-      provider: "plausible"
-      host?: string
-    }
+    provider: "none"
+  }
   | {
-      provider: "google"
-      tagId: string
-    }
+    provider: "plausible"
+    host?: string
+  }
   | {
-      provider: "umami"
-      websiteId: string
-      host?: string
-    }
+    provider: "google"
+    tagId: string
+  }
   | {
-      provider: "goatcounter"
-      websiteId: string
-      host?: string
-      scriptSrc?: string
-    }
+    provider: "umami"
+    websiteId: string
+    host?: string
+  }
   | {
-      provider: "posthog"
-      apiKey: string
-      host?: string
-    }
+    provider: "goatcounter"
+    websiteId: string
+    host?: string
+    scriptSrc?: string
+  }
   | {
-      provider: "tinylytics"
-      siteId: string
-    }
+    provider: "posthog"
+    apiKey: string
+    host?: string
+  }
   | {
-      provider: "cabin"
-      host?: string
-    }
+    provider: "tinylytics"
+    siteId: string
+  }
   | {
-      provider: "clarity"
-      projectId?: string
-    }
+    provider: "cabin"
+    host?: string
+  }
+  | {
+    provider: "clarity"
+    projectId?: string
+  }
 
 export interface GlobalConfiguration {
   pageTitle: string

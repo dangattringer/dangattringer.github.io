@@ -14,7 +14,7 @@ const isLocalUrl = (href: string) => {
     if (window.location.origin === url.origin) {
       return true
     }
-  } catch (e) {}
+  } catch (e) { }
   return false
 }
 
@@ -58,6 +58,7 @@ function startLoading() {
 
 let p: DOMParser
 async function navigate(url: URL, isBack: boolean = false) {
+  console.log("navigate is called", url)
   startLoading()
   p = p || new DOMParser()
   const contents = await fetchCanonical(url)
@@ -83,16 +84,30 @@ async function navigate(url: URL, isBack: boolean = false) {
   normalizeRelativeURLs(html, url)
 
   let title = html.querySelector("title")?.textContent
-  if (title) {
-    document.title = title
-  } else {
-    const h1 = document.querySelector("h1")
-    title = h1?.innerText ?? h1?.textContent ?? url.pathname
+  // if (title) {
+  //   document.title = title
+  // } else {
+  //   const h1 = document.querySelector("h1")
+  //   title = h1?.innerText ?? h1?.textContent ?? url.pathname
+  // }
+  // if (announcer.textContent !== title) {
+  //   announcer.textContent = title
+  // }
+  // announcer.dataset.persist = ""
+  console.log("title", title)
+  console.log("url.pathname", url.pathname, "typeof", typeof url.pathname)
+  if (url.pathname === "/" || url.pathname === "/index.html") {
+    title = "Home";
+  } else if (!title) {
+    const h1 = document.querySelector("h1");
+    title = h1?.innerText ?? h1?.textContent ?? url.pathname;
   }
+
+  document.title = title;
   if (announcer.textContent !== title) {
-    announcer.textContent = title
+    announcer.textContent = title;
   }
-  announcer.dataset.persist = ""
+
   html.body.appendChild(announcer)
 
   // morph body
@@ -120,6 +135,7 @@ async function navigate(url: URL, isBack: boolean = false) {
     history.pushState({}, "", url)
   }
 
+  document.title = title;
   notifyNav(getFullSlug(window))
   delete announcer.dataset.persist
 }

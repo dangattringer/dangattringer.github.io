@@ -3,15 +3,15 @@ import * as Plugin from "./quartz/plugins"
 
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "MrXcrypt",
+    pageTitle: "Daniel Gattringer",
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
     analytics: {
-      provider: "plausible",
+      provider: "none",
     },
     locale: "en-US",
-    baseUrl: "misterxcrypt.github.io",
+    baseUrl: "dangattringer.github.io",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "created",
     generateSocialImages: false,
