@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 880 340" width="880" height="340">
+
+  <defs>
+    <!-- Reusable Docker Logo (smaller) -->
+     <g id="docker-logo-tiny" transform="scale(0.5)">
+      <path class="logo-fill" d="m472 228s-18-17-55-11c-4-29-35-46-35-46s-29 35-8 74c-6 3-16 7-31 7H68c-5 19-5 145 133 145 99 0 173-46 208-130 52 4 63-39 63-39"/>
+       <rect class="logo-fill" x="155" y="180" width="40" height="40" />
+       <rect class="logo-fill" x="200" y="180" width="40" height="40" />
+       <rect class="logo-fill" x="245" y="180" width="40" height="40" />
+       <rect class="logo-fill" x="290" y="180" width="40" height="40" />
+       <rect class="logo-fill" x="155" y="135" width="40" height="40" />
+       <rect class="logo-fill" x="200" y="135" width="40" height="40" />
+       <rect class="logo-fill" x="245" y="135" width="40" height="40" />
+       <rect class="logo-fill" x="200" y="90" width="40" height="40" />
+       <rect class="logo-fill" x="245" y="90" width="40" height="40" />
+    </g>
+
+    <!-- Registry Icon (Cloud/Database) -->
+    <g id="registry-icon">
+        <!-- Cloud shape -->
+        <path class="registry-cloud" d="M105,40 C90,40 80,50 80,65 C80,67 80,67 80,67 C70,67 60,75 60,87.5 C60,100 70,110 82.5,110 L147.5,110 C160,110 170,100 170,87.5 C170,75 160,67 150,67 C150,50 135,40 120,40 C117.5,40 115,40.5 112.5,41 C110,40.5 107.5,40 105,40 z"/>
+        <!-- Database cylinders -->
+        <ellipse class="registry-db" cx="115" cy="100" rx="25" ry="7"/>
+        <rect class="registry-db" x="90" y="100" width="50" height="20"/>
+        <ellipse class="registry-db" cx="115" cy="120" rx="25" ry="7"/>
+         <rect class="registry-db" x="90" y="120" width="50" height="20"/>
+         <ellipse class="registry-db" cx="115" cy="140" rx="25" ry="7"/>
+    </g>
+
+    <!-- Arrowhead marker -->
+    <marker id="arrowhead-pipeline" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path class="arrow-stroke" d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+  </defs>
+
+  <!-- Styles -->
+   <style>
+    :root {
+      --bg-color: #faf8f8;
+      --primary-text-color: #24292e;
+      --secondary-text-color: #586069;
+      --border-color: #24292e;
+      --line-color: #24292e;
+      --box-bg: #ffffff;
+      --icon-fill: var(--primary-text-color);
+      --icon-stroke: var(--primary-text-color);
+      --running-container-color: #3a404d;
+      --registry-cloud-color: #e1e4e8;
+      --registry-db-color: #586069;
+      --build-element-color: var(--secondary-text-color);
+      --run-element-color: var(--secondary-text-color);
+      --run-led-color: #28a745; /* Green */
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #373534;
+        --primary-text-color: #dadada;
+        --secondary-text-color: #a0a0a0;
+        --border-color: #c0c0c0;
+        --line-color: #c0c0c0;
+        --box-bg: #2a2a2a;
+        --icon-fill: var(--primary-text-color);
+        --icon-stroke: var(--primary-text-color);
+        --running-container-color: #a0a0a0;
+        --registry-cloud-color: #444c56;
+        --registry-db-color: #7d8590;
+        --build-element-color: var(--secondary-text-color);
+        --run-element-color: var(--secondary-text-color);
+        --run-led-color: #34d058; /* Brighter Green */
+      }
+    }
+
+    /* General */
+    .diagram-bg { fill: var(--bg-color); }
+    .text-primary { fill: var(--primary-text-color); font-family: Arial, sans-serif; font-size: 16px; }
+    .text-secondary { fill: var(--secondary-text-color); font-family: Arial, sans-serif; font-size: 14px; }
+    .text-label { fill: var(--primary-text-color); font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; text-anchor: middle; }
+    .text-action { fill: var(--secondary-text-color); font-family: Arial, sans-serif; font-size: 14px; font-style: italic; text-anchor: middle; }
+    .text-bold { font-weight: bold; }
+    .v-center { dominant-baseline: middle; }
+
+    /* Components */
+    .box { fill: var(--box-bg); stroke: var(--border-color); stroke-width: 1.5; }
+    .logo-fill { fill: var(--icon-fill); }
+    .running-container-box { fill: none; stroke: var(--running-container-color); stroke-width: 1.5; }
+    .running-container-lines { stroke: var(--running-container-color); stroke-width: 2; }
+    .registry-cloud { fill: var(--registry-cloud-color); stroke: var(--secondary-text-color); stroke-width: 1; }
+    .registry-db { fill: var(--registry-db-color); stroke: var(--secondary-text-color); stroke-width: 1; }
+    .build-box { /* Specific styling if needed */ }
+    .build-element { fill: none; stroke: var(--build-element-color); stroke-width: 2; }
+    .run-box { /* Specific styling if needed */ }
+    .run-element { fill: var(--run-element-color); stroke: none; }
+    .run-led { fill: var(--run-led-color); }
+
+    /* Lines and Arrows */
+    .line { stroke: var(--line-color); stroke-width: 2; marker-end: url(#arrowhead-pipeline); }
+    .arrow-stroke { fill: var(--line-color); }
+
+  </style>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" class="diagram-bg"/>
+
+  <!-- Main Flow -->
+  <g id="pipeline">
+
+    <!-- BUILD Stage -->
+    <g id="build-stage" transform="translate(50, 50)">
+       <text class="text-label" x="75" y="0">BUILD</text>
+       <text class="text-primary" x="75" y="45" text-anchor="middle">Dockerfile + Code</text>
+       <text class="text-secondary" x="75" y="65" text-anchor="middle">(Developer Workstation / CI)</text>
+       <!-- Arrow to Image -->
+       <line class="line" x1="75" y1="75" x2="75" y2="120"/>
+       <text class="text-action" x="25" y="100">docker build</text>
+       <!-- Built Image -->
+       <use xlink:href="#docker-logo-tiny" x="40" y="300" transform="scale(0.5)"/>
+       <text class="text-primary v-center" x="58" y="150">Image</text>
+    </g>
+
+    <!-- Arrow Build -> Share -->
+    <line class="line" x1="225" y1="230" x2="340" y2="230"/>
+    <text class="text-action" x="275" y="215">docker push</text>
+
+    <!-- SHARE Stage (Registry) -->
+    <g id="share-stage" transform="translate(320, 50)">
+        <text class="text-label" x="130" y="0">SHARE</text>
+        <use xlink:href="#registry-icon" transform="translate(0, 50) scale(1.1)"/>
+        <text class="text-primary" x="130" y="240" text-anchor="middle">Docker Registry</text>
+        <text class="text-secondary" x="130" y="260" text-anchor="middle">(e.g., Docker Hub, ECR, GCR)</text>
+    </g>
+
+     <!-- Arrow Share -> Run -->
+    <line class="line" x1="540" y1="230" x2="650" y2="230"/>
+    <text class="text-action" x="590" y="215">docker pull</text>
+
+    <!-- RUN Stage -->
+    <g id="run-stage" transform="translate(680, 50)">
+       <text class="text-label" x="75" y="0">RUN</text>
+       <!-- Pulled Image -->
+       <use xlink:href="#docker-logo-tiny" x="35"  y="300" transform="scale(0.5)"/>
+       <text class="text-primary v-center" x="55" y="150">Container</text>
+       <!-- Arrow to Container -->
+        <line class="line" x1="75" y1="75" x2="75" y2="120"/>
+        <text class="text-action" x="125" y="100">docker run</text>
+        <!-- Running Container -->
+       <text class="text-primary" x="75" y="45" text-anchor="middle">Host / Cluster</text>
+    </g>
+
+  </g>
+
+</svg>

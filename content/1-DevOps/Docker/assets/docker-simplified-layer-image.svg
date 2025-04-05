@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 300" width="650" height="300">
+
+  <defs>
+    <!-- Arrowhead marker -->
+    <marker id="arrowhead-layer-label"
+            viewBox="0 0 10 10" refX="0" refY="5"
+            markerWidth="6" markerHeight="6"
+            orient="auto-start-reverse">
+      <path class="arrow-stroke" d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+  </defs>
+
+  <!-- Styles for Light/Dark Mode Conformance -->
+  <style>
+    :root {
+      /* Light Mode Defaults */
+      --bg-color: #faf8f8;
+      --text-color: #24292e;
+      --secondary-text-color: #586069;
+      --border-color: #586069;
+      --line-color: #586069;
+      --layer-fill-base: #e1e4e8; /* Layer 1 */
+      --layer-fill-1: #f6f8fa;    /* Layer 2 */
+      --layer-fill-2: #f1f3f5;    /* Layer 3 */
+      --layer-fill-3: #e9ecef;    /* Layer 4 */
+      --layer-fill-4: #dee2e6;    /* Layer 5 */
+      --layer-fill-5: #ced4da;    /* Layer 6 */
+      --layer-fill-6: #adb5bd;    /* Layer 7 */
+      --layer-fill-7: #9fa7af;    /* Layer 8 */
+      --image-outline-color: #066da5; /* Docker blue */
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        /* Dark Mode Overrides */
+        --bg-color: #373534;
+        --text-color: #dadada;
+        --secondary-text-color: #a0a0a0;
+        --border-color: #555c66;
+        --line-color: #a0a0a0;
+        --layer-fill-base: #3a404d; /* Layer 1 */
+        --layer-fill-1: #444c56;    /* Layer 2 */
+        --layer-fill-2: #4f5864;    /* Layer 3 */
+        --layer-fill-3: #5a6472;    /* Layer 4 */
+        --layer-fill-4: #657080;    /* Layer 5 */
+        --layer-fill-5: #707c8e;    /* Layer 6 */
+        --layer-fill-6: #7d889b;    /* Layer 7 */
+        --layer-fill-7: #8a94a9;    /* Layer 8 */
+        --image-outline-color: #389bf1; /* Lighter Docker blue */
+      }
+    }
+
+    /* Apply variables */
+    .diagram-bg { fill: var(--bg-color); }
+    .layer-box {
+      stroke: var(--border-color);
+      stroke-width: 1;
+      rx: 3; ry: 3;
+    }
+    /* Assign specific fills */
+    .layer-box.base { fill: var(--layer-fill-base); }
+    .layer-box.layer1 { fill: var(--layer-fill-1); }
+    .layer-box.layer2 { fill: var(--layer-fill-2); }
+    .layer-box.layer3 { fill: var(--layer-fill-3); }
+    .layer-box.layer4 { fill: var(--layer-fill-4); }
+    .layer-box.layer5 { fill: var(--layer-fill-5); }
+    .layer-box.layer6 { fill: var(--layer-fill-6); }
+    .layer-box.layer7 { fill: var(--layer-fill-7); }
+
+
+    .layer-internal-text {
+      fill: var(--text-color);
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+    .layer-external-label {
+       fill: var(--secondary-text-color);
+       font-family: Arial, sans-serif;
+       font-size: 16px;
+       text-anchor: start;
+       dominant-baseline: middle;
+    }
+    .image-outline {
+        fill: none;
+        stroke: var(--image-outline-color);
+        stroke-width: 3;
+        rx: 15; ry: 15;
+    }
+    .image-label-text {
+      fill: var(--text-color);
+      font-family: Arial, sans-serif;
+      font-size: 22px;
+      font-weight: bold;
+      text-anchor: middle;
+    }
+    .line-arrow {
+        stroke: var(--line-color);
+        stroke-width: 1.5;
+        marker-start: url(#arrowhead-layer-label);
+    }
+    .arrow-stroke { fill: var(--line-color); }
+
+  </style>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" class="diagram-bg"/>
+
+  <!-- Main Content: Stacked Layers within an Image Outline -->
+  <g id="image-layers-diagram" transform="translate(50, 50)">
+
+    <!-- Image Label -->
+    <text class="image-label-text" x="150" y="0">Image</text>
+
+    <!-- Outline around the layers -->
+    <!-- Adjusted height for 8 layers + padding -->
+    <!-- Height = (8 * 60) + 40 = 520 -->
+    <rect class="image-outline"
+          x="-20" y="20"
+          width="340" height="220" />
+
+    <!-- Stacked Layers (Inside the outline box) -->
+    <g id="layers-stack" transform="translate(0, 40)"> <!-- y offset for top padding -->
+
+        <!-- Layer 8 (Top) -->
+        <rect class="layer-box layer7" x="0" y="0" width="300" height="60"/>
+        <text class="layer-internal-text" x="150" y="30">App</text>
+
+        <!-- Layer 7 -->
+        <rect class="layer-box layer6" x="0" y="60" width="300" height="60"/>
+        <text class="layer-internal-text" x="150" y="90">Python</text>
+
+        <!-- Layer 6 -->
+        <rect class="layer-box layer5" x="0" y="120" width="300" height="60"/>
+        <text class="layer-internal-text" x="150" y="150">Ubuntu</text>
+
+
+    </g> <!-- End layers-stack -->
+
+    <!-- External Labels and Arrows (Positioned to the right) -->
+    <g id="external-labels" transform="translate(350, 40)"> <!-- Position labels group -->
+        <!-- Label & Arrow for Layer 8 -->
+        <text class="layer-external-label" x="45" y="32">Layer 3</text>
+        <line class="line-arrow" x1="30" y1="30" x2="-20" y2="30"/>
+
+        <!-- Label & Arrow for Layer 7 -->
+        <text class="layer-external-label" x="45" y="92">Layer 2</text>
+        <line class="line-arrow" x1="30" y1="90" x2="-20" y2="90"/>
+
+        <!-- Label & Arrow for Layer 6 -->
+        <text class="layer-external-label" x="45" y="152">Layer 1 (Base)</text>
+        <line class="line-arrow" x1="30" y1="150" x2="-20" y2="150"/>
+
+    </g>
+
+  </g> <!-- End image-layers-diagram -->
+
+</svg>

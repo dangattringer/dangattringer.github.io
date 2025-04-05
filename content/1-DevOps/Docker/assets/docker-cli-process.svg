@@ -1,0 +1,220 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 530" width="800" height="530">
+
+  <defs>
+    <!-- Reusable Docker Logo -->
+     <g id="docker-logo-small" transform="scale(0.7)">
+      <path class="logo-fill" d="m472 228s-18-17-55-11c-4-29-35-46-35-46s-29 35-8 74c-6 3-16 7-31 7H68c-5 19-5 145 133 145 99 0 173-46 208-130 52 4 63-39 63-39"/>
+       <rect class="logo-fill" x="155" y="180" width="40" height="40" />
+       <rect class="logo-fill" x="200" y="180" width="40" height="40" />
+       <rect class="logo-fill" x="245" y="180" width="40" height="40" />
+       <rect class="logo-fill" x="290" y="180" width="40" height="40" />
+       <rect class="logo-fill" x="155" y="135" width="40" height="40" />
+       <rect class="logo-fill" x="200" y="135" width="40" height="40" />
+       <rect class="logo-fill" x="245" y="135" width="40" height="40" />
+       <rect class="logo-fill" x="200" y="90" width="40" height="40" />
+       <rect class="logo-fill" x="245" y="90" width="40" height="40" />
+    </g>
+
+    <!-- Containerd Logo -->
+    <g id="containerd-logo">
+        <rect class="containerd-bg" width="30" height="30" />
+        <text class="containerd-text" x="15" y="20" text-anchor="middle" font-weight="bold" font-size="28">d</text>
+    </g>
+
+    <!-- Runc Element -->
+    <g id="runc-element">
+        <rect class="runc-box-dashed" width="140" height="50" rx="8" ry="8"/>
+        <rect class="runc-icon-bg" x="10" y="10" width="30" height="30" />
+        <text class="runc-icon-text" x="25" y="30" text-anchor="middle" font-weight="bold" font-size="18">RC</text>
+        <text class="runc-text" x="55" y="30" font-size="20" font-weight="bold">RUNC</text>
+    </g>
+
+    <!-- Running Container Icon -->
+    <g id="running-container-icon">
+        <rect class="running-container-box" width="100" height="50" rx="5" ry="5"/>
+        <!-- Vertical lines inside -->
+        <line class="running-container-lines" x1="10" y1="5" x2="10" y2="45" />
+        <line class="running-container-lines" x1="20" y1="5" x2="20" y2="45" />
+        <line class="running-container-lines" x1="30" y1="5" x2="30" y2="45" />
+        <line class="running-container-lines" x1="40" y1="5" x2="40" y2="45" />
+        <line class="running-container-lines" x1="50" y1="5" x2="50" y2="45" />
+        <line class="running-container-lines" x1="60" y1="5" x2="60" y2="45" />
+        <line class="running-container-lines" x1="70" y1="5" x2="70" y2="45" />
+        <line class="running-container-lines" x1="80" y1="5" x2="80" y2="45" />
+        <line class="running-container-lines" x1="90" y1="5" x2="90" y2="45" />
+    </g>
+
+    <!-- Arrowhead marker -->
+    <marker id="arrowhead-flow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path class="arrow-stroke" d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+     <!-- Arrowhead marker (just down) -->
+    <marker id="arrowhead-down" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path class="arrow-stroke" d="M 0 0 L 5 10 L 10 0 z" />
+    </marker>
+  </defs>
+
+  <!-- Styles for Light/Dark Mode Conformance -->
+  <style>
+    :root {
+      /* Light Mode Defaults */
+      --bg-color: #faf8f8;
+      --primary-text-color: #24292e;
+      --secondary-text-color: #586069;
+      --border-color: #24292e;
+      --dashed-border-color: #586069;
+      --line-color: #24292e;
+      --cli-box-bg: #3a404d;
+      --cli-box-text: #ffffff;
+      --box-bg: #ffffff;
+      --containerd-bg: #000000;
+      --containerd-text: #ffffff;
+      --runc-icon-bg: #2261a1; /* Blueish */
+      --runc-icon-text: #ffffff;
+      --runc-text-color: #586069; /* Grey */
+      --running-container-color: #3a404d;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        /* Dark Mode Overrides */
+        --bg-color: #373534;
+        --primary-text-color: #dadada;
+        --secondary-text-color: #a0a0a0;
+        --border-color: #c0c0c0;
+        --dashed-border-color: #a0a0a0;
+        --line-color: #c0c0c0;
+        --cli-box-bg: #4a505d;
+        --cli-box-text: #dadada;
+        --box-bg: #2a2a2a;
+        --containerd-bg: #ffffff;
+        --containerd-text: #000000;
+        --runc-icon-bg: #4f8bc8; /* Lighter Blueish */
+        --runc-icon-text: #000000;
+        --runc-text-color: #a0a0a0;
+        --running-container-color: #a0a0a0;
+      }
+    }
+
+    /* Apply variables */
+    .diagram-bg { fill: var(--bg-color); }
+    .text-primary { fill: var(--primary-text-color); font-family: Arial, sans-serif; font-size: 16px; } /* Slightly smaller font for descriptions */
+    .text-monospace { font-family: monospace, 'Courier New'; }
+
+    .box { fill: var(--box-bg); stroke: var(--border-color); stroke-width: 1.5; }
+    .box-dashed { fill: none; stroke: var(--dashed-border-color); stroke-width: 2; stroke-dasharray: 6 4; }
+
+    .cli-box { fill: var(--cli-box-bg); rx: 8; ry: 8; }
+    .cli-text { fill: var(--cli-box-text); font-size: 22px; font-weight: bold; text-anchor: middle; }
+
+    .daemon-box { rx: 8; ry: 8; }
+    .daemon-text { text-anchor: middle; font-size: 20px; }
+    .logo-fill { fill: var(--primary-text-color); } /* For docker logo */
+
+    .containerd-box { rx: 8; ry: 8; }
+    .containerd-text-label { text-anchor: middle; font-size: 20px; }
+    .containerd-bg { fill: var(--containerd-bg); }
+    .containerd-text { fill: var(--containerd-text); }
+
+    .shim-box { rx: 8; ry: 8; }
+    .shim-text { text-anchor: middle; font-size: 20px; }
+
+    .runc-box-dashed { fill: none; stroke: var(--dashed-border-color); stroke-width: 2; stroke-dasharray: 6 4; rx: 8; ry: 8;}
+    .runc-icon-bg { fill: var(--runc-icon-bg); }
+    .runc-icon-text { fill: var(--runc-icon-text); }
+    .runc-text { fill: var(--runc-text-color); }
+
+    .running-container-box { fill: none; stroke: var(--running-container-color); stroke-width: 2; }
+    .running-container-lines { stroke: var(--running-container-color); stroke-width: 3; }
+
+    .line-solid { stroke: var(--line-color); stroke-width: 1.5; }
+    .arrow-stroke { fill: var(--line-color); } /* For markers */
+
+    /* Centering text vertically in boxes */
+    .v-center { dominant-baseline: middle; }
+    .text-bold { font-weight: bold; }
+
+  </style>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" class="diagram-bg"/>
+
+  <!-- Main Elements & Connections -->
+  <g id="diagram-content">
+
+    <!-- Component Stack (Left Side) -->
+    <g id="component-stack" transform="translate(100, 0)">
+
+        <!-- $ docker CLI -->
+        <g id="cli-group" transform="translate(50, 30)">
+            <rect class="cli-box" width="200" height="50"/>
+            <text class="cli-text text-monospace v-center" x="100" y="25">$ docker CLI</text>
+        </g>
+        <!-- Arrow CLI <-> Daemon -->
+        <line class="line-solid" x1="150" y1="85" x2="150" y2="105" marker-start="url(#arrowhead-flow)" marker-end="url(#arrowhead-flow)"/>
+
+        <!-- Daemon -->
+        <g id="daemon-group" transform="translate(30, 110)">
+          <rect class="box daemon-box" width="240" height="60"/>
+          <use xlink:href="#docker-logo-small" x="95" y="-25" transform="scale(0.2)"/>
+          <text class="text-primary daemon-text v-center" x="140" y="30">daemon</text>
+        </g>
+        <!-- Arrow Daemon <-> Containerd -->
+        <line class="line-solid" x1="150" y1="175" x2="150" y2="195" marker-start="url(#arrowhead-flow)" marker-end="url(#arrowhead-flow)"/>
+
+        <!-- Containerd -->
+        <g id="containerd-group" transform="translate(30, 200)">
+          <rect class="box containerd-box" width="240" height="60"/>
+          <text class="text-primary containerd-text-label v-center" x="125" y="30">containerd</text>
+        </g>
+        <!-- Arrow Containerd <-> Shim -->
+        <line class="line-solid" x1="150" y1="265" x2="150" y2="285" marker-start="url(#arrowhead-flow)" marker-end="url(#arrowhead-flow)"/>
+
+        <!-- Shim -->
+        <g id="shim-group" transform="translate(90, 290)">
+            <rect class="box shim-box" width="120" height="50"/>
+            <text class="text-primary shim-text v-center" x="60" y="25">shim</text>
+        </g>
+        <!-- Arrow Shim -> Runc -->
+        <line class="line-solid" x1="150" y1="340" x2="150" y2="360" marker-end="url(#arrowhead-flow)"/>
+
+        <!-- Runc Layer -->
+        <g id="runc-group" transform="translate(80, 365)">
+             <use xlink:href="#runc-element"/>
+        </g>
+        <!-- Arrow Runc -> Running Container -->
+        <line class="line-solid" x1="150" y1="415" x2="150" y2="440" marker-end="url(#arrowhead-flow)"/>
+
+        <!-- Running Container -->
+        <g id="running-container-group" transform="translate(100, 445)">
+             <use xlink:href="#running-container-icon"/>
+        </g>
+
+    </g> <!-- End component-stack -->
+    
+    <!-- Descriptions (Right Side) -->
+    <g id="descriptions" transform="translate(400, 0)">
+        <text class="text-primary" x="0" y="50">
+            <tspan x="0" dy="0">Convert <tspan class="text-bold text-monospace">docker run</tspan> command into API</tspan>
+            <tspan x="0" dy="1.2em">request and send to API (daemon)</tspan>
+        </text>
+
+        <text class="text-primary" x="0" y="140">
+             <tspan x="0" dy="0">Receive API request and instruct</tspan>
+             <tspan x="0" dy="1.2em"><tspan class="text-bold">containerd</tspan> to start new container</tspan>
+        </text>
+
+         <text class="text-primary" x="0" y="225">
+             <tspan x="0" dy="0">Receive instruction to create new</tspan>
+             <tspan x="0" dy="1.2em">container and pass instruction to <tspan class="text-bold">runc</tspan></tspan>
+        </text>
+
+        <text class="text-primary" x="0" y="390">
+             <tspan x="0" dy="0"><tspan class="text-bold">runc</tspan> builds new container and exits</tspan>
+             <tspan x="0" dy="1.2em"><tspan class="text-bold">shim</tspan> becomes container's parent process</tspan>
+             <tspan x="0" dy="1.2em">and communicates with containerd</tspan>
+        </text>
+    </g>
+  </g> <!-- End diagram-content -->
+
+</svg>

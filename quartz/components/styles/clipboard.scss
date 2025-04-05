@@ -13,7 +13,7 @@
   opacity: 0;
   transition: 0.2s;
 
-  & > svg {
+  &>svg {
     fill: var(--light);
     filter: contrast(0.3);
   }
@@ -29,8 +29,15 @@
 }
 
 pre {
-  &:hover > .clipboard-button {
+  &:hover>.clipboard-button {
     opacity: 1;
     transition: 0.2s;
   }
+}
+
+pre code span[style*="--shiki-light:#6F42C1;"][style*="--shiki-dark:#B392F0;"] {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }

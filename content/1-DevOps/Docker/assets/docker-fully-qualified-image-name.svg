@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="800" height="300">
+
+  <defs>
+    <!-- Optional: Define reusable styles or elements if needed -->
+  </defs>
+
+  <!-- Styles for Light/Dark Mode Conformance -->
+  <style>
+    :root {
+      /* Light Mode Defaults */
+      --bg-color: #faf8f8;
+      --text-color: #24292e;
+      --secondary-text-color: #586069;
+      --separator-color: #d1d5da;
+      --box-fill-color: #f6f8fa;
+      --box-border-color: #d1d5da;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        /* Dark Mode Overrides */
+        --bg-color: #373534;
+        --text-color: #dadada;
+        --secondary-text-color: #a0a0a0;
+        --separator-color: #444c56;
+        --box-fill-color: #2a2a2a;
+        --box-border-color: #444c56;
+      }
+    }
+
+    /* Apply variables */
+    .diagram-bg { fill: var(--bg-color); }
+    .component-box {
+      fill: var(--box-fill-color);
+      stroke: var(--box-border-color);
+      stroke-width: 1;
+      rx: 5; ry: 5;
+    }
+    .example-text {
+      fill: var(--text-color);
+      font-family: monospace, 'Courier New';
+      font-size: 24px;
+      font-weight: bold;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+    .label-text {
+      fill: var(--secondary-text-color);
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      text-anchor: middle;
+    }
+    .separator-text {
+      fill: var(--separator-color);
+      font-family: Arial, sans-serif;
+      font-size: 40px; /* Larger size for visual separation */
+      font-weight: bold;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+    .full-name-text {
+       fill: var(--text-color);
+       font-family: monospace, 'Courier New';
+       font-size: 20px;
+       text-anchor: middle;
+    }
+    .note-text {
+       fill: var(--secondary-text-color);
+       font-family: Arial, sans-serif;
+       font-size: 14px;
+       text-anchor: middle;
+    }
+
+  </style>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" class="diagram-bg"/>
+
+  <!-- Main Content -->
+  <g id="image-name-breakdown">
+
+    <!-- Overall Example -->
+    <text class="full-name-text" x="400" y="40">Example: docker.io/library/nginx:latest</text>
+
+    <!-- Component Boxes and Labels -->
+    <g id="registry-part" transform="translate(50, 100)">
+       <rect class="component-box" width="180" height="70"/>
+       <text class="example-text" x="90" y="35">docker.io</text>
+       <text class="label-text" x="90" y="95">Registry (Optional)</text>
+    </g>
+
+    <g id="user-part" transform="translate(270, 100)">
+       <rect class="component-box" width="150" height="70"/>
+       <text class="example-text" x="75" y="35">library</text>
+       <text class="label-text" x="75" y="95">User / Organization</text>
+    </g>
+
+    <g id="repository-part" transform="translate(460, 100)">
+        <rect class="component-box" width="120" height="70"/>
+        <text class="example-text" x="60" y="35">nginx</text>
+        <text class="label-text" x="60" y="95">Repository</text>
+    </g>
+
+    <g id="tag-part" transform="translate(620, 100)">
+       <rect class="component-box" width="130" height="70"/>
+       <text class="example-text" x="65" y="35">latest</text>
+       <text class="label-text" x="65" y="95">Tag (Optional)</text>
+    </g>
+
+    <!-- Separators -->
+    <text class="separator-text" x="250" y="135">/</text>
+    <text class="separator-text" x="440" y="135">/</text>
+    <text class="separator-text" x="600" y="135">:</text>
+
+    <!-- Notes -->
+     <text class="note-text" x="400" y="230">
+        <tspan x="400" dy="0em">- If Registry is omitted, it defaults to Docker Hub (docker.io).</tspan>
+        <tspan x="400" dy="1.4em">- Official images on Docker Hub often omit the User (e.g., `nginx` implies `library/nginx`).</tspan>
+        <tspan x="400" dy="1.4em">- If Tag is omitted, it defaults to `latest`.</tspan>
+     </text>
+
+  </g>
+
+</svg>

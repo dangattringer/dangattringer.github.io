@@ -8,9 +8,16 @@ document.addEventListener("nav", () => {
   for (let i = 0; i < els.length; i++) {
     const codeBlock = els[i].getElementsByTagName("code")[0]
     if (codeBlock) {
+      // const source = (
+      //   codeBlock.dataset.clipboard ? JSON.parse(codeBlock.dataset.clipboard) : codeBlock.innerText
+      // ).replace(/\n\n/g, "\n")
       const source = (
         codeBlock.dataset.clipboard ? JSON.parse(codeBlock.dataset.clipboard) : codeBlock.innerText
-      ).replace(/\n\n/g, "\n")
+      )
+        .replace(/\n\n/g, "\n") // Normalize newlines
+        .replace(/^\$\s?/gm, "") // Remove '$' prompt and leading whitespace from each line
+        .replace(/^shell@.*$/gm, "") // Ignore lines starting with 'shell@ $'
+        .replace(/\n/g, "")
       const button = document.createElement("button")
       button.className = "clipboard-button"
       button.type = "button"

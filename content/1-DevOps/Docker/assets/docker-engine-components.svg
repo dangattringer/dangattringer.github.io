@@ -1,0 +1,242 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 950 550" width="950" height="550">
+
+  <defs>
+    <!-- Reusable Docker Logo (from previous example, adjusted size) -->
+     <g id="docker-logo-small" transform="scale(0.7)">
+      <path class="logo-fill" d="m472 228s-18-17-55-11c-4-29-35-46-35-46s-29 35-8 74c-6 3-16 7-31 7H68c-5 19-5 145 133 145 99 0 173-46 208-130 52 4 63-39 63-39"/>
+       <rect class="logo-fill" x="155" y="180" width="40" height="40" />
+       <rect class="logo-fill" x="200" y="180" width="40" height="40" />
+       <rect class="logo-fill" x="245" y="180" width="40" height="40" />
+       <rect class="logo-fill" x="290" y="180" width="40" height="40" />
+       <rect class="logo-fill" x="155" y="135" width="40" height="40" />
+       <rect class="logo-fill" x="200" y="135" width="40" height="40" />
+       <rect class="logo-fill" x="245" y="135" width="40" height="40" />
+       <rect class="logo-fill" x="200" y="90" width="40" height="40" />
+       <rect class="logo-fill" x="245" y="90" width="40" height="40" />
+    </g>
+
+    <!-- Runc Element -->
+    <g id="runc-element">
+        <rect class="runc-box-dashed" width="140" height="50" rx="8" ry="8"/>
+        <rect class="runc-icon-bg" x="10" y="10" width="30" height="30" />
+        <text class="runc-icon-text" x="25" y="30" text-anchor="middle" font-weight="bold" font-size="18">RC</text>
+        <text class="runc-text" x="55" y="30" font-size="20" font-weight="bold">RUNC</text>
+    </g>
+
+    <!-- Running Container Icon -->
+    <g id="running-container-icon">
+        <rect class="running-container-box" width="100" height="50" rx="5" ry="5"/>
+        <!-- Vertical lines inside -->
+        <line class="running-container-lines" x1="10" y1="5" x2="10" y2="45" />
+        <line class="running-container-lines" x1="20" y1="5" x2="20" y2="45" />
+        <line class="running-container-lines" x1="30" y1="5" x2="30" y2="45" />
+        <line class="running-container-lines" x1="40" y1="5" x2="40" y2="45" />
+        <line class="running-container-lines" x1="50" y1="5" x2="50" y2="45" />
+        <line class="running-container-lines" x1="60" y1="5" x2="60" y2="45" />
+        <line class="running-container-lines" x1="70" y1="5" x2="70" y2="45" />
+        <line class="running-container-lines" x1="80" y1="5" x2="80" y2="45" />
+        <line class="running-container-lines" x1="90" y1="5" x2="90" y2="45" />
+    </g>
+
+    <!-- Arrowhead marker -->
+    <marker id="arrowhead-diag" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path class="arrow-stroke" d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+  </defs>
+
+  <!-- Styles for Light/Dark Mode Conformance -->
+  <style>
+    :root {
+      /* Light Mode Defaults */
+      --bg-color: #faf8f8;
+      --primary-text-color: #24292e;
+      --secondary-text-color: #586069;
+      --border-color: #24292e;
+      --dashed-border-color: #586069;
+      --line-color: #24292e;
+      --dashed-line-color: #586069;
+      --cli-box-bg: #3a404d;
+      --cli-box-text: #ffffff;
+      --box-bg: #ffffff;
+      --containerd-bg: #000000;
+      --containerd-text: #ffffff;
+      --runc-icon-bg: #2261a1; /* Blueish */
+      --runc-icon-text: #ffffff;
+      --runc-text-color: #586069; /* Grey */
+      --running-container-color: #3a404d;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        /* Dark Mode Overrides */
+        --bg-color: #373534;
+        --primary-text-color: #dadada;
+        --secondary-text-color: #a0a0a0;
+        --border-color: #c0c0c0;
+        --dashed-border-color: #a0a0a0;
+        --line-color: #c0c0c0;
+        --dashed-line-color: #a0a0a0;
+        --cli-box-bg: #4a505d;
+        --cli-box-text: #dadada;
+        --box-bg: #2a2a2a; /* Slightly lighter than bg */
+        --containerd-bg: #ffffff;
+        --containerd-text: #000000;
+        --runc-icon-bg: #4f8bc8; /* Lighter Blueish */
+        --runc-icon-text: #000000;
+        --runc-text-color: #a0a0a0;
+        --running-container-color: #a0a0a0;
+      }
+    }
+
+    /* Apply variables */
+    .diagram-bg { fill: var(--bg-color); }
+    .text-primary { fill: var(--primary-text-color); font-family: Arial, sans-serif; font-size: 18px; }
+    .text-secondary { fill: var(--secondary-text-color); font-family: Arial, sans-serif; font-size: 18px; }
+    .text-annotation { fill: var(--secondary-text-color); font-family: Arial, sans-serif; font-size: 16px; }
+    .text-engine-stuff { fill: var(--secondary-text-color); font-family: Arial, sans-serif; font-size: 18px; text-anchor: middle; }
+    .text-monospace { font-family: monospace, 'Courier New'; }
+
+    .box { fill: var(--box-bg); stroke: var(--border-color); stroke-width: 1.5; }
+    .box-dashed { fill: var(--box-bg); stroke: var(--dashed-border-color); stroke-width: 1.5; stroke-dasharray: 6 4; }
+
+    .cli-box { fill: var(--cli-box-bg); rx: 8; ry: 8; }
+    .cli-text { fill: var(--cli-box-text); font-size: 22px; font-weight: bold; text-anchor: middle; }
+
+    .daemon-box { rx: 8; ry: 8; }
+    .daemon-text { text-anchor: middle; font-size: 20px; }
+    .logo-fill { fill: var(--primary-text-color); } /* For docker logo */
+
+    .containerd-box { rx: 8; ry: 8; }
+    .containerd-text-label { text-anchor: middle; font-size: 20px; }
+    .containerd-bg { fill: var(--containerd-bg); }
+    .containerd-text { fill: var(--containerd-text); }
+
+    .shim-box { rx: 8; ry: 8; }
+    .shim-text { text-anchor: middle; font-size: 20px; }
+
+    .runc-box-dashed { fill: none; stroke: var(--dashed-border-color); stroke-width: 2; stroke-dasharray: 6 4; }
+    .runc-icon-bg { fill: var(--runc-icon-bg); }
+    .runc-icon-text { fill: var(--runc-icon-text); }
+    .runc-text { fill: var(--runc-text-color); }
+
+    .running-container-box { fill: none; stroke: var(--running-container-color); stroke-width: 2; }
+    .running-container-lines { stroke: var(--running-container-color); stroke-width: 3; }
+
+    .line-solid { stroke: var(--line-color); stroke-width: 1.5; }
+    .line-dashed { stroke: var(--dashed-line-color); stroke-width: 1.5; stroke-dasharray: 6 4; }
+    .arrow-stroke { fill: var(--line-color); } /* For markers */
+    .engine-bracket { stroke: var(--secondary-text-color); stroke-width: 1.5; fill: none; }
+
+    /* Centering text vertically in boxes */
+    .v-center { dominant-baseline: middle; }
+
+  </style>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" class="diagram-bg"/>
+
+  <!-- Main Elements & Connections -->
+  <g id="diagram-content">
+
+    <!-- $ docker CLI -->
+    <g id="cli-group" transform="translate(300, 30)">
+        <rect class="cli-box" width="200" height="50"/>
+        <text class="cli-text text-monospace v-center" x="100" y="25">$ docker CLI</text>
+    </g>
+    <line class="line-dashed" x1="505" y1="55" x2="600" y2="55" />
+    <text class="text-annotation" x="610" y="60">Commands (CLI)</text>
+
+    <!-- Arrow CLI <-> Daemon -->
+    <line class="line-solid" x1="400" y1="85" x2="400" y2="108" marker-start="url(#arrowhead-diag)" marker-end="url(#arrowhead-diag)"/>
+
+    <!-- Daemon -->
+    <g id="daemon-group" transform="translate(280, 115)">
+      <rect class="box daemon-box" width="240" height="60"/>
+      <use xlink:href="#docker-logo-small" x="85" y="-25" transform="scale(0.2)"/>
+      <text class="text-primary daemon-text v-center" x="130" y="30">daemon</text>
+    </g>
+    <line class="line-dashed" x1="525" y1="145" x2="600" y2="145" />
+    <text class="text-annotation" x="610" y="150">Expose API</text>
+
+    <!-- Arrow Daemon <-> Containerd -->
+     <line class="line-solid" x1="400" y1="180" x2="400" y2="205" marker-start="url(#arrowhead-diag)" marker-end="url(#arrowhead-diag)"/>
+
+    <!-- Containerd -->
+    <g id="containerd-group" transform="translate(280, 210)">
+      <rect class="box containerd-box" width="240" height="60"/>
+      <text class="text-primary containerd-text-label v-center" x="120" y="30">containerd</text>
+    </g>
+    <line class="line-dashed" x1="525" y1="240" x2="600" y2="240" />
+    <text class="text-annotation" x="610" y="235">Lifecycle management</text>
+    <text class="text-annotation" x="610" y="255">(Start, stop, delete...)</text>
+
+    <!-- Arrows Containerd -> Shims -->
+    <line class="line-solid" x1="400" y1="270" x2="310" y2="305" marker-end="url(#arrowhead-diag)"/>
+    <line class="line-solid" x1="400" y1="270" x2="380" y2="305" marker-end="url(#arrowhead-diag)"/>
+    <line class="line-solid" x1="400" y1="270" x2="500" y2="305" marker-end="url(#arrowhead-diag)"/>
+    <line class="line-solid" x1="400" y1="270" x2="590" y2="305" marker-end="url(#arrowhead-diag)"/>
+
+    <!-- Shims -->
+    <g id="shims-group" transform="translate(0, 310)">
+        <g transform="translate(190, 0)">
+            <rect class="box shim-box" width="120" height="50"/>
+            <text class="text-primary shim-text v-center" x="60" y="25">shim</text>
+        </g>
+        <g transform="translate(323, 0)">
+            <rect class="box shim-box" width="120" height="50"/>
+            <text class="text-primary shim-text v-center" x="60" y="25">shim</text>
+        </g>
+        <g transform="translate(457, 0)">
+            <rect class="box shim-box" width="120" height="50"/>
+            <text class="text-primary shim-text v-center" x="60" y="25">shim</text>
+        </g>
+        <g transform="translate(590, 0)">
+            <rect class="box shim-box" width="120" height="50"/>
+            <text class="text-primary shim-text v-center" x="60" y="25">shim</text>
+        </g>
+    </g>
+    <line class="line-dashed" x1="715" y1="335" x2="760" y2="335" />
+    <text class="text-annotation" x="770" y="330">Enables pluggable</text>
+    <text class="text-annotation" x="770" y="350">lower level</text>
+
+    <!-- Lines Shims -> Runc -->
+    <line class="line-solid" x1="250" y1="360" x2="250" y2="390"/>
+    <line class="line-solid" x1="383" y1="360" x2="383" y2="390"/>
+    <line class="line-solid" x1="517" y1="360" x2="517" y2="390"/>
+    <line class="line-solid" x1="650" y1="360" x2="650" y2="390"/>
+
+    <!-- Runc Layer -->
+     <g id="runc-group" transform="translate(0, 390)">
+         <use xlink:href="#runc-element" transform="translate(162, 0)"/>
+         <use xlink:href="#runc-element" transform="translate(308, 0)"/>
+         <use xlink:href="#runc-element" transform="translate(453, 0)"/>
+         <use xlink:href="#runc-element" transform="translate(600, 0)"/>
+     </g>
+    <line class="line-dashed" x1="745" y1="415" x2="760" y2="415" />
+    <text class="text-annotation" x="770" y="420">Interface with kernel</text>
+
+    <!-- Lines Runc -> Running Containers -->
+    <line class="line-solid" x1="250" y1="440" x2="250" y2="470"/>
+    <line class="line-solid" x1="383" y1="440" x2="383" y2="470"/>
+    <line class="line-solid" x1="517" y1="440" x2="517" y2="470"/>
+    <line class="line-solid" x1="650" y1="440" x2="650" y2="470"/>
+
+    <!-- Running Containers -->
+    <g id="running-containers-group" transform="translate(0, 470)">
+         <use xlink:href="#running-container-icon" transform="translate(200, 0)"/>
+         <use xlink:href="#running-container-icon" transform="translate(333, 0)"/>
+         <use xlink:href="#running-container-icon" transform="translate(467, 0)"/>
+         <use xlink:href="#running-container-icon" transform="translate(600, 0)"/>
+    </g>
+    <line class="line-dashed" x1="705" y1="495" x2="760" y2="495" />
+    <text class="text-annotation" x="770" y="500">Running containers</text>
+
+    <!-- Engine Label -->
+    <g id="engine-stuff-label" transform="translate(80, 280)">
+        <text class="text-engine-stuff" transform="rotate(-90)">Engine</text>
+    </g>
+    <path class="engine-bracket" d="M 130 110 L 110 110 L 110 450 L 130 450" />
+
+  </g> <!-- End diagram-content -->
+
+</svg>

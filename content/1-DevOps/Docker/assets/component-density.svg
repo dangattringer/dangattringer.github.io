@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="631px" height="424px" viewBox="-0.5 -0.5 631 424">
+  <defs>
+    <style>
+      @media (prefers-color-scheme: dark) {
+        .bg { fill: #373534; } /* Dark mode background */
+        .text { fill: #ffffff; } /* Light text for contrast */
+        .border { stroke: #ffffff; } /* White stroke */
+        .app { fill:rgb(121, 149, 158); } /* Light blue for application */
+      }
+      @media (prefers-color-scheme: light) {
+        .bg { fill: #faf8f8; } /* Light mode background */
+        .text { fill: #000000; } /* Dark text */
+        .border { stroke: #000000; } /* Black stroke */
+        .app { fill:rgb(104, 119, 247); } /* Dark blue for application */
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" class="bg"/>
+
+  <!-- Virtual Machine Layer -->
+  <rect x="40" y="281" width="200" height="60" rx="12" ry="12" class="border" fill="none"/>
+  <text x="145" y="316" class="text" font-family="Helvetica" font-size="18px" text-anchor="middle">Host</text>
+
+  <rect x="40" y="221" width="200" height="60" rx="12" ry="12" class="border" fill="none"/>
+  <text x="145" y="256" class="text" font-family="Helvetica" font-size="18px" text-anchor="middle">Hypervisor</text>
+
+  <rect x="40" y="161" width="200" height="60" rx="12" ry="12" class="border" fill="none"/>
+  <text x="145" y="196" class="text" font-family="Helvetica" font-size="18px" text-anchor="middle">VM</text>
+
+  <rect x="40" y="101" width="200" height="60" rx="12" ry="12" class="border" fill="none"/>
+  <text x="145" y="136" class="text" font-family="Helvetica" font-size="18px" text-anchor="middle">Guest OS</text>
+
+  <rect x="40" y="41" width="200" height="60" rx="12" ry="12" class="border app"/>
+  <text x="145" y="76" class="text" font-family="Helvetica" font-size="18px" text-anchor="middle">Application</text>
+
+  <!-- Containers Layer -->
+  <rect x="360" y="281" width="200" height="60" rx="12" ry="12" class="border" fill="none"/>
+  <text x="465" y="316" class="text" font-family="Helvetica" font-size="18px" text-anchor="middle">Host</text>
+
+  <rect x="360" y="221" width="200" height="60" rx="12" ry="12" class="border" fill="none"/>
+  <text x="465" y="256" class="text" font-family="Helvetica" font-size="18px" text-anchor="middle">Container Engine</text>
+
+  <!-- Containers -->
+  <rect x="360" y="171" width="40" height="40" rx="8" ry="8" class="border" fill="none"/>
+  <rect x="413.5" y="171" width="40" height="40" rx="8" ry="8" class="border" fill="none"/>
+  <rect x="468" y="171" width="40" height="40" rx="8" ry="8" class="border" fill="none"/>
+  <rect x="520" y="171" width="40" height="40" rx="8" ry="8" class="border" fill="none"/>
+
+  <rect x="360" y="121" width="40" height="40" rx="8" ry="8" class="border" fill="none"/>
+  <rect x="413.5" y="121" width="40" height="40" rx="8" ry="8" class="border" fill="none"/>
+  <rect x="468" y="121" width="40" height="40" rx="8" ry="8" class="border" fill="none"/>
+  <rect x="520" y="121" width="40" height="40" rx="8" ry="8" class="border" fill="none"/>
+
+  <rect x="360" y="71" width="40" height="40" rx="8" ry="8" class="border" fill="none"/>
+  <rect x="413.5" y="71" width="40" height="40" rx="8" ry="8" class="border" fill="none"/>
+  <rect x="468" y="71" width="40" height="40" rx="8" ry="8" class="border" fill="none"/>
+  <rect x="520" y="71" width="40" height="40" rx="8" ry="8" class="border" fill="none"/>
+
+  <!-- Divider -->
+  <line x1="300" y1="421" x2="300" y2="1" class="border" stroke-width="2"/>
+
+  <!-- Labels -->
+  <text x="150" y="415" class="text" font-family="Helvetica" font-size="30px" text-anchor="middle">Virtual Machines</text>
+  <text x="465" y="415" class="text" font-family="Helvetica" font-size="30px" text-anchor="middle">Containers</text>
+</svg>
