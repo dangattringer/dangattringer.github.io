@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     aria-label="Docker" role="img"
+     viewBox="0 0 512 512">
+
+  <style>
+    :root {
+      /* Light Mode Defaults */
+      --bg-color: #ffffff;       /* Original white background */
+      --docker-blue: #066da5;    /* Original blue */
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        /* Dark Mode Overrides */
+        --bg-color: #373534;       /* Your specified dark background */
+        --docker-blue: #58a6ff;    /* A lighter blue for dark mode */
+      }
+    }
+
+    /* Apply variables using classes */
+    .docker-logo-bg {
+      fill: var(--bg-color);
+    }
+    .docker-logo-containers {
+      stroke: var(--docker-blue);
+      fill: none; /* Ensure only stroke is applied */
+    }
+    .docker-logo-whale {
+      fill: var(--docker-blue);
+      stroke: none; /* Ensure only fill is applied */
+    }
+  </style>
+
+  <!-- Background Rectangle -->
+  <rect
+      class="docker-logo-bg" 
+      width="512" height="512"
+      rx="15%"
+      /> <!-- Removed inline fill -->
+
+  <!-- Container Strokes -->
+  <path
+      class="docker-logo-containers" 
+      stroke-width="38"
+      d="M296 226h42m-92 0h42m-91 0h42m-91 0h41m-91 0h42m8-46h41m8 0h42m7 0h42m-42-46h42"
+      /> <!-- Removed inline stroke -->
+
+  <!-- Whale Body Fill -->
+  <path
+      class="docker-logo-whale" 
+      d="m472 228s-18-17-55-11c-4-29-35-46-35-46s-29 35-8 74c-6 3-16 7-31 7H68c-5 19-5 145 133 145 99 0 173-46 208-130 52 4 63-39 63-39"
+      /> <!-- Removed inline fill -->
+
+</svg>

@@ -58,7 +58,6 @@ function startLoading() {
 
 let p: DOMParser
 async function navigate(url: URL, isBack: boolean = false) {
-  console.log("navigate is called", url)
   startLoading()
   p = p || new DOMParser()
   const contents = await fetchCanonical(url)
@@ -94,8 +93,6 @@ async function navigate(url: URL, isBack: boolean = false) {
   //   announcer.textContent = title
   // }
   // announcer.dataset.persist = ""
-  console.log("title", title)
-  console.log("url.pathname", url.pathname, "typeof", typeof url.pathname)
   if (url.pathname === "/" || url.pathname === "/index.html") {
     title = "Home";
   } else if (!title) {

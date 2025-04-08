@@ -2,7 +2,7 @@
 title: Monitoring-Logging
 author: "Daniel Gattringer"
 description: "Index file for the Monitoring-Logging folder."
-draft: false
+draft: true
 page: 3
 ---
 # Monitoring-Logging 

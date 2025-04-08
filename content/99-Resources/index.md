@@ -2,7 +2,7 @@
 title: Resources
 author: "Daniel Gattringer"
 description: "Index file for the Resources folder."
-draft: false
+draft: true
 page: 30
 ---
 # Resources 

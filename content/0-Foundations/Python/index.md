@@ -2,7 +2,7 @@
 title: Python
 author: "Daniel Gattringer"
 description: "Index file for the Python folder."
-draft: false
+draft: true
 page: 2
 ---
 # Python

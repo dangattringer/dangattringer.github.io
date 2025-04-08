@@ -2,7 +2,7 @@
 title: Linux-Bash
 author: "Daniel Gattringer"
 description: "Index file for the Linux-Bash folder."
-draft: false
+draft: true
 page: 1
 ---
 # Linux-Bash 

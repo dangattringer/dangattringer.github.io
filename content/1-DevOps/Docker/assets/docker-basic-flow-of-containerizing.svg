@@ -1,0 +1,201 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 550" width="800" height="550">
+
+  <defs>
+     <!-- Docker Logo (Image) -->
+     <g id="docker-logo-img" transform="scale(0.8)">
+      <path class="logo-fill" d="m472 228s-18-17-55-11c-4-29-35-46-35-46s-29 35-8 74c-6 3-16 7-31 7H68c-5 19-5 145 133 145 99 0 173-46 208-130 52 4 63-39 63-39"/>
+       <rect class="logo-fill" x="155" y="180" width="40" height="40" /> <rect class="logo-fill" x="200" y="180" width="40" height="40" /> <rect class="logo-fill" x="245" y="180" width="40" height="40" /> <rect class="logo-fill" x="290" y="180" width="40" height="40" /> <rect class="logo-fill" x="155" y="135" width="40" height="40" /> <rect class="logo-fill" x="200" y="135" width="40" height="40" /> <rect class="logo-fill" x="245" y="135" width="40" height="40" /> <rect class="logo-fill" x="200" y="90" width="40" height="40" /> <rect class="logo-fill" x="245" y="90" width="40" height="40" />
+    </g>
+    <!-- Running Container Icon -->
+    <g id="running-container-icon">
+        <rect class="container-box" width="120" height="60" rx="5"/> <line class="container-lines" x1="10" y1="5" x2="10" y2="55" /> <line class="container-lines" x1="22" y1="5" x2="22" y2="55" /> <line class="container-lines" x1="34" y1="5" x2="34" y2="55" /> <line class="container-lines" x1="46" y1="5" x2="46" y2="55" /> <line class="container-lines" x1="58" y1="5" x2="58" y2="55" /> <line class="container-lines" x1="70" y1="5" x2="70" y2="55" /> <line class="container-lines" x1="82" y1="5" x2="82" y2="55" /> <line class="container-lines" x1="94" y1="5" x2="94" y2="55" /> <line class="container-lines" x1="106" y1="5" x2="106" y2="55" />
+    </g>
+    <!-- Registry Icon -->
+    <g id="registry-icon" transform="scale(0.8)">
+        <path class="registry-cloud" d="M105,40 C90,40 80,50 80,65 C80,67 80,67 80,67 C70,67 60,75 60,87.5 C60,100 70,110 82.5,110 L147.5,110 C160,110 170,100 170,87.5 C170,75 160,67 150,67 C150,50 135,40 120,40 C117.5,40 115,40.5 112.5,41 C110,40.5 107.5,40 105,40 z"/>
+        <ellipse class="registry-db" cx="115" cy="100" rx="25" ry="7"/> <rect class="registry-db" x="90" y="100" width="50" height="20"/> <ellipse class="registry-db" cx="115" cy="120" rx="25" ry="7"/> <rect class="registry-db" x="90" y="120" width="50" height="20"/> <ellipse class="registry-db" cx="115" cy="140" rx="25" ry="7"/>
+    </g>
+    <!-- Code Icon (App) -->
+    <g id="code-icon">
+        <rect class="icon-rect code-rect" x="0" y="0" width="90" height="70" rx="5"/>
+        <polyline class="code-element" points="25,15 40,35 25,55" />
+        <polyline class="code-element" points="65,15 50,35 65,55" />
+    </g>
+    <!-- Dockerfile Icon -->
+    <g id="dockerfile-icon">
+         <rect class="icon-rect dockerfile-rect" x="0" y="0" width="90" height="70" rx="5"/>
+         <line class="dockerfile-element" x1="15" y1="15" x2="75" y2="15"/> <line class="dockerfile-element" x1="15" y1="25" x2="75" y2="25"/> <line class="dockerfile-element" x1="15" y1="35" x2="55" y2="35"/> <line class="dockerfile-element" x1="15" y1="45" x2="75" y2="45"/> <line class="dockerfile-element" x1="15" y1="55" x2="65" y2="55"/>
+    </g>
+    <!-- Arrowhead marker -->
+    <marker id="arrowhead-bsr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path class="arrow-stroke" d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+  </defs>
+
+  <!-- Styles -->
+  <style>
+      :root {
+        --bg-color: #faf8f8;
+        --text-color: #1f2328;
+        --secondary-text-color: #57606a;
+        --border-color: #d0d7de;
+        --line-color: #57606a;
+        --box-fill: #f6f8fa;
+        --stage-box-border: #a0aec0; /* Grey border for main boxes */
+        --stage-label-fill: #2c5282; /* Dark blue */
+        --stage-label-text: #ffffff;
+        --icon-rect-fill: #ffffff;
+        --icon-stroke: var(--secondary-text-color);
+        --container-color: #3a404d;
+        --registry-cloud-color: #e1e4e8;
+        --registry-db-color: #586069;
+        --monospace-font: monospace, 'Courier New', 'DejaVu Sans Mono';
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-color: #373534; /* Dark background */
+          --text-color: #e2e8f0;
+          --secondary-text-color: #a0aec0; /* Grey text */
+          --border-color: #4a5568; /* Darker border */
+          --line-color: #a0aec0;
+          --box-fill: #2d3748; /* Dark box fill */
+          --stage-box-border: #718096; /* Lighter grey border */
+          --stage-label-fill: #63b3ed; /* Light blue */
+          --stage-label-text: #1a202c; /* Dark text on light blue */
+          --icon-rect-fill: #2d3748;
+          --icon-stroke: var(--secondary-text-color);
+          --container-color: #a0aec0;
+          --registry-cloud-color: #4a5568;
+          --registry-db-color: #718096;
+        }
+      }
+
+      .diagram-bg { fill: var(--bg-color); }
+      .stage-box {
+          fill: none; /* Transparent fill */
+          stroke: var(--stage-box-border);
+          stroke-width: 2;
+          rx: 10; ry: 10;
+      }
+      .stage-label-box {
+          fill: var(--stage-label-fill);
+          rx: 5; ry: 5;
+      }
+       .stage-label-text {
+          font-family: Arial, sans-serif;
+          font-size: 18px;
+          font-weight: bold;
+          fill: var(--stage-label-text);
+          text-anchor: middle;
+          dominant-baseline: middle;
+       }
+       .action-text {
+           font-family: Arial, sans-serif;
+           font-size: 14px;
+           fill: var(--secondary-text-color);
+           text-anchor: middle;
+       }
+       .icon-rect {
+           fill: var(--icon-rect-fill);
+           stroke: var(--border-color);
+           stroke-width: 1;
+       }
+       .code-rect {}
+       .code-element { fill: none; stroke: var(--icon-stroke); stroke-width: 2; stroke-linecap: round; }
+       .dockerfile-rect {}
+       .dockerfile-element { stroke: var(--icon-stroke); stroke-width: 1.5; }
+       .logo-fill { fill: var(--text-color); }
+
+       .registry-cloud { fill: var(--registry-cloud-color); stroke: var(--secondary-text-color); stroke-width: 1; }
+       .registry-db { fill: var(--registry-db-color); stroke: var(--secondary-text-color); stroke-width: 1; }
+       .container-box { fill: none; stroke: var(--container-color); stroke-width: 2; }
+       .container-lines { stroke: var(--container-color); stroke-width: 4; }
+
+       .line-arrow { stroke: var(--line-color); stroke-width: 2; marker-end: url(#arrowhead-bsr); }
+       .arrow-stroke { fill: var(--line-color); }
+
+       .icon-label {
+           font-family: Arial, sans-serif;
+           font-size: 14px;
+           fill: var(--secondary-text-color);
+           text-anchor: middle;
+       }
+
+  </style>
+
+   <!-- Background -->
+  <rect width="100%" height="100%" class="diagram-bg"/>
+
+  <!-- Main Diagram -->
+  <g id="bsr-diagram">
+    
+      <!-- Ship Stage -->
+       <g id="ship-stage" transform="translate(450, 350)">
+            <rect class="stage-box" x="0" y="0" width="300" height="180"/>
+            <rect class="stage-label-box" x="10" y="10" width="80" height="35"/>
+            <text class="stage-label-text" x="50" y="27.5">Ship</text>
+
+            <!-- Arrow 3 -> 4 -->
+            <line class="line-arrow" x1="140" y1="10" x2="140" y2="40" transform="translate(0, -50)"/> <!-- Repositioned arrow start/end -->
+             <text class="action-text" x="187" y="-22">Push Image</text> <!-- Adjusted text pos -->
+
+            <!-- 4. Registry -->
+             <g transform="translate(30, 10)"> <!-- Adjusted x -->
+                <use xlink:href="#registry-icon" transform="scale(1.2)"/>
+                 <text class="icon-label" x="110" y="160">Registry</text> <!-- Adjusted y -->
+            </g>
+       </g>
+
+
+      <!-- Run Stage -->
+      <g id="run-stage" transform="translate(50, 350)">
+           <rect class="stage-box" x="0" y="0" width="300" height="180"/>
+           <rect class="stage-label-box" x="10" y="10" width="80" height="35"/>
+           <text class="stage-label-text" x="50" y="27.5">Run</text>
+
+           <!-- Arrow 4 -> 5 -->
+           <line class="line-arrow" x1="380" y1="110" x2="320" y2="110"/> <!-- Repositioned arrow -->
+           <text class="action-text" x="350" y="95">Run</text>
+
+            <!-- 5. Container -->
+            <g transform="translate(90, 70)">
+                 <use xlink:href="#running-container-icon"/>
+                 <text class="icon-label" x="60" y="80">Container</text>
+            </g>
+      </g>
+    <!-- Build Stage -->
+      <g id="build-stage" transform="translate(50, 50)">
+          <rect class="stage-box" x="0" y="0" width="700" height="250"/>
+          <rect class="stage-label-box" x="10" y="10" width="80" height="35"/>
+          <text class="stage-label-text" x="50" y="27.5">Build</text>
+
+          <!-- 1. App -->
+          <g transform="translate(50, 100)">
+              <use xlink:href="#code-icon"/>
+              <text class="icon-label" x="45" y="90">App Code</text>
+          </g>
+          <!-- Arrow 1 -> 2 -->
+           <line class="line-arrow" x1="150" y1="135" x2="200" y2="135"/>
+           <!-- <text class="action-text" x="175" y="90"></text> -->
+           <!-- <text class="action-text" x="175" y="108">Code</text> -->
+
+          <!-- 2. Dockerfile -->
+           <g transform="translate(210, 100)">
+               <use xlink:href="#dockerfile-icon"/>
+               <text class="icon-label" x="45" y="90">Dockerfile</text>
+           </g>
+            <!-- Arrow 2 -> 3 -->
+           <line class="line-arrow" x1="310" y1="135" x2="405" y2="135"/>
+           <text class="action-text" x="355" y="120">Build Image</text>
+
+          <!-- 3. Image -->
+           <g transform="translate(390, 0)">
+               <use xlink:href="#docker-logo-img" transform="scale(0.6)"/>
+               <text class="icon-label" x="105" y="160">Docker Image</text> <!-- Adjusted y -->
+           </g>
+      </g>
+
+  </g>
+
+</svg>

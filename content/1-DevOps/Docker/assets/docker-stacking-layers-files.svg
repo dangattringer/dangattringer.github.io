@@ -1,0 +1,209 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 340" width="650" height="340">
+
+  <defs>
+    <!-- Arrowhead marker for layer labels -->
+    <marker id="arrowhead-layer-label"
+            viewBox="0 0 10 10" refX="0" refY="5"
+            markerWidth="6" markerHeight="6"
+            orient="auto-start-reverse">
+      <path class="arrow-stroke" d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+    <!-- Arrowhead marker for connecting arrow (pointing down) -->
+    <marker id="arrowhead-layer-connect"
+            viewBox="0 0 10 10" refX="0" refY="5"
+            markerWidth="6" markerHeight="6"
+            orient="auto-start-reverse">
+      <path class="arrow-stroke-connect" d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+  </defs>
+
+  <!-- Styles for Light/Dark Mode Conformance -->
+  <style>
+    :root {
+      /* Light Mode Defaults */
+      --bg-color: #faf8f8;
+      --text-color: #24292e;
+      --secondary-text-color: #586069;
+      --border-color: #586069;
+      --line-color: #586069;
+      --line-color-label: #218bff; /* Softer grey for label lines */
+      --line-color-connect: #218bff; /* Blue for connection */
+      --file-box-fill: #ffffff;
+      --file-box-border: #d1d5da;
+      --file-text-color: #24292e;
+      /* Using more logical layer naming now */
+      --layer-fill-base: #ced4da; /* Layer 1 (Bottom) */
+      --layer-fill-1: #adb5bd;    /* Layer 2 */
+      --layer-fill-2: #9fa7af;    /* Layer 3 (Top) */
+      --image-outline-color: #066da5; /* Docker blue */
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        /* Dark Mode Overrides */
+        --bg-color: #373534;
+        --text-color: #dadada;
+        --secondary-text-color: #a0a0a0;
+        --border-color: #555c66;
+        --line-color: #a0a0a0;
+        --line-color-connect: #58a6ff; /* Lighter blue for connection */
+        --line-color-label: #58a6ff; /* Lighter blue for connection */
+        --file-box-fill: #2a2a2a;
+        --file-box-border: #444c56;
+        --file-text-color: #dadada;
+        --layer-fill-base: #707c8e; /* Layer 1 (Bottom) */
+        --layer-fill-1: #7d889b;    /* Layer 2 */
+        --layer-fill-2: #8a94a9;    /* Layer 3 (Top) */
+        --image-outline-color: #389bf1; /* Lighter Docker blue */
+      }
+    }
+
+    /* Apply variables */
+    .diagram-bg { fill: var(--bg-color); }
+    .layer-box {
+      stroke: var(--border-color);
+      stroke-width: 1;
+      rx: 3; ry: 3;
+    }
+    /* Assign specific fills (Corrected logical order) */
+    .layer-box.base { fill: var(--layer-fill-base); } /* Bottom */
+    .layer-box.layer1 { fill: var(--layer-fill-1); } /* Middle */
+    .layer-box.layer2 { fill: var(--layer-fill-2); } /* Top */
+
+    .file-box {
+        fill: var(--file-box-fill);
+        stroke: var(--file-box-border);
+        stroke-width: 1;
+        rx: 2; ry: 2;
+    }
+    .file-text {
+        fill: var(--file-text-color);
+        font-family: monospace, 'Courier New';
+        font-size: 11px;
+        text-anchor: middle;
+        dominant-baseline: middle;
+    }
+
+    .layer-external-label {
+       fill: var(--secondary-text-color);
+       font-family: Arial, sans-serif;
+       font-size: 16px;
+       text-anchor: start;
+       dominant-baseline: middle;
+    }
+    .image-outline {
+        fill: none;
+        stroke: var(--image-outline-color);
+        stroke-width: 3;
+        rx: 15; ry: 15;
+    }
+    .image-label-text {
+      fill: var(--text-color);
+      font-family: Arial, sans-serif;
+      font-size: 22px;
+      font-weight: bold;
+      text-anchor: middle;
+    }
+    .line-arrow {
+        stroke: var(--line-color);
+        stroke-width: 1.5;
+        marker-start: url(#arrowhead-layer-label);
+    }
+     .line-arrow-connect { /* Arrow connecting layers */
+        stroke: var(--line-color-connect);
+        stroke-width: 2; /* Slightly thicker */
+        marker-end: url(#arrowhead-layer-connect); /* Pointing down */
+    }
+    .arrow-stroke-label { fill: var(--line-color-label); }
+    .arrow-stroke-connect { fill: var(--line-color-connect); }
+    .arrow-stroke { fill: var(--line-color); }
+
+  </style>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" class="diagram-bg"/>
+
+  <!-- Main Content: Stacked Layers within an Image Outline -->
+  <g id="image-layers-diagram" transform="translate(50, 50)">
+
+    <!-- Image Label -->
+    <text class="image-label-text" x="150" y="0">Image</text>
+
+    <!-- Outline around the layers -->
+    <!-- Height based on 3 layers * 70px height + padding -->
+    <rect class="image-outline"
+          x="-20" y="20"
+          width="420" height="250" />
+
+    <!-- Stacked Layers (Inside the outline box) -->
+    <g id="layers-stack" transform="translate(0, 40)"> <!-- y offset for top padding -->
+
+        <!-- Layer 3 (Top) -->
+        <g transform="translate(0, 0)">
+            <rect class="layer-box layer2" width="380" height="70"/> <!-- Class layer2 -->
+             <!-- Files within Layer 3 -->
+             <g transform="translate(230, 15)"> <!-- Position file group -->
+                <rect class="file-box" width="60" height="40"/>
+                <text class="file-text" x="30" y="20">File 6</text>
+            </g>
+            <!-- Add more files here if needed -->
+        </g>
+
+        <!-- Layer 2 (Middle) -->
+        <g transform="translate(0, 70)"> <!-- y = 70 -->
+            <rect class="layer-box layer1" width="380" height="70"/> <!-- Class layer1 -->
+            <!-- Files within Layer 2 -->
+            <g transform="translate(160, 15)">
+                <rect class="file-box" width="60" height="40"/>
+                <text class="file-text" x="30" y="20">File 3</text>
+            </g>
+             <g transform="translate(230, 15)">
+                <rect class="file-box" width="60" height="40" opacity="0.5"/>
+                <text class="file-text" x="30" y="20">File 4</text>
+            </g>
+             <g transform="translate(300, 15)">
+                <rect class="file-box" width="60" height="40"/>
+                <text class="file-text" x="30" y="20">File 5</text>
+            </g>
+             <!-- Add more files here if needed -->
+        </g>
+
+       <line class="line-arrow-connect" x1="260" y1="85" x2="260" y2="65" />
+
+
+        <!-- Layer 1 (Base) -->
+         <g transform="translate(0, 140)"> <!-- y = 70 + 70 -->
+            <rect class="layer-box base" width="380" height="70"/> <!-- Class base -->
+             <!-- Files within Layer 1 -->
+            <g transform="translate(20, 15)">
+                <rect class="file-box" width="60" height="40"/>
+                <text class="file-text" x="30" y="20">File 1</text>
+            </g>
+             <g transform="translate(90, 15)">
+                <rect class="file-box" width="60" height="40"/>
+                <text class="file-text" x="30" y="20">File 2</text>
+            </g>
+            <!-- Add more files here if needed -->
+         </g>
+
+    </g> <!-- End layers-stack -->
+
+    <!-- External Labels and Arrows (Positioned to the right) -->
+    <g id="external-labels" transform="translate(430, 40)"> <!-- Position labels group -->
+        <!-- Label & Arrow for Layer 3 (Top) -->
+        <text class="layer-external-label" x="45" y="37">Layer 3</text> <!-- y = layer_y + layer_height/2 = 0 + 70/2 = 35 -->
+        <line class="line-arrow" x1="30" y1="35" x2="-20" y2="35"/>
+
+        <!-- Label & Arrow for Layer 2 (Middle) -->
+        <text class="layer-external-label" x="45" y="107">Layer 2</text> <!-- y = 70 + 70/2 = 105 -->
+        <line class="line-arrow" x1="30" y1="105" x2="-20" y2="105"/>
+
+        <!-- Label & Arrow for Layer 1 (Base) -->
+        <text class="layer-external-label" x="45" y="177">Layer 1 (Base)</text> <!-- y = 140 + 70/2 = 175 -->
+        <line class="line-arrow" x1="30" y1="175" x2="-20" y2="175"/>
+
+    </g>
+
+  </g> <!-- End image-layers-diagram -->
+
+</svg>

@@ -2,7 +2,7 @@
 title: Generative-AI
 author: "Daniel Gattringer"
 description: "Index file for the Generative-AI folder."
-draft: false
+draft: true
 page: 3
 ---
 # Generative-AI 

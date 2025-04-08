@@ -2,7 +2,7 @@
 title: Git-GitHub
 author: "Daniel Gattringer"
 description: "Index file for the Git-GitHub folder."
-draft: false
+draft: true
 page: 3
 ---
 # Git-GitHub 

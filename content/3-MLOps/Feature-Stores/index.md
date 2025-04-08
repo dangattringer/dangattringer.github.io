@@ -2,7 +2,7 @@
 title: Feature-Stores
 author: "Daniel Gattringer"
 description: "Index file for the Feature-Stores folder."
-draft: false
+draft: true
 page: 4
 ---
 # Feature-Stores 

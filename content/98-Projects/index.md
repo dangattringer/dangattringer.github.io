@@ -1,7 +1,12 @@
 ---
 title: Projects
 author: "Daniel Gattringer"
-description: "Index file for the Resources folder."
+description: ""
 draft: false
 page: 20
 ---
+
+# Projects
+
+<!-- AUTO-INDEX-START -->
+<!-- AUTO-INDEX-END -->

@@ -2,7 +2,7 @@
 title: CI-CD
 author: "Daniel Gattringer"
 description: "Index file for the CI-CD folder."
-draft: false
+draft: true
 page: 3
 ---
 # CI-CD 

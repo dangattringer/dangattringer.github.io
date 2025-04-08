@@ -2,7 +2,7 @@
 title: Model-Deployment
 author: "Daniel Gattringer"
 description: "Index file for the Model-Deployment folder."
-draft: false
+draft: true
 page: 2
 ---
 # Model-Deployment 

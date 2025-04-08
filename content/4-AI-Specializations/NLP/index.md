@@ -2,7 +2,7 @@
 title: NLP
 author: "Daniel Gattringer"
 description: "Index file for the NLP folder."
-draft: false
+draft: true
 page: 2
 ---
 # NLP 

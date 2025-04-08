@@ -137,6 +137,7 @@ This decoupled architecture makes the system more robust and allows components l
 
 With this foundation, you can explore further:
 
+* **Images and Registries:** Understand how to build, tag, and push images to registries like Docker Hub or private registries [[Working with Images|Docker Images]].
 * **Building Images:** Learn best practices for writing efficient [[The Dockerfile|Dockerfiles]].
 * **Networking:** Understand how containers communicate with each other and the outside world [[Networking|Docker Networking Concepts]].
 * **Storage:** Explore volumes and bind mounts for persistent data [[Volumes and persistent data|Managing Data in Docker]].

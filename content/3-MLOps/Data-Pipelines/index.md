@@ -2,7 +2,7 @@
 title: Data-Pipelines
 author: "Daniel Gattringer"
 description: "Index file for the Data-Pipelines folder."
-draft: false
+draft: true
 page: 5
 ---
 # Data-Pipelines 

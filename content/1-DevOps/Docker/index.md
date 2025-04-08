@@ -1,45 +1,18 @@
 ---
 title: Docker 
+author: "Daniel Gattringer"
+description: "Core concepts, commands, and best practices for using Docker."
+date: 2025-03-29
 draft: false
 page: 1
 ---
 
-# 🐳 Docker
+<h1>
+<img src="docker.svg" width="50" height="50" style="vertical-align: middle" />
+Docker
+</h1>
 
-Core concepts, commands, and best practices for using Docker.
-
-### Fundamentals
-
-* [[Infrastructure/Docker/What is Docker|What is Docker?]]
-* [[Infrastructure/Docker/Images vs Containers|Images vs Containers]]
-* [[Infrastructure/Docker/Docker Engine Explained|Docker Engine]]
-
-### Dockerfiles
-
-* [[Infrastructure/Docker/Dockerfile Basics|Dockerfile Basics]] *[[Infrastructure/Docker/Dockerfile Best Practices|Best Practices]]* [[Infrastructure/Docker/Multi-stage Docker Builds Explained|Multi-stage Builds]]
-
-### Management & Commands
-
-* [[Infrastructure/Docker/Docker CLI Commands Cheatsheet|CLI Cheatsheet]]
-* [[Infrastructure/Docker/Managing Docker Containers|Managing Containers]]
-* [[Infrastructure/Docker/Managing Docker Images|Managing Images]]
-* [[Infrastructure/Docker/Docker Volumes Explained|Volumes & Persistence]]
-* [[Infrastructure/Docker/Docker Networking Basics|Networking]]
-
-### Compose
-
-* [[Infrastructure/Docker/Docker Compose Introduction|Introduction]] * [[Infrastructure/Docker/Docker Compose for Development Environments|Compose for Dev]]
-
-### MLOps/AI Use Cases
-
-* [[Infrastructure/Docker/Docker for Reproducible ML Environments|Reproducible Environments]]
-* [[Infrastructure/Docker/Packaging ML Models with Docker|Packaging Models]]
-* [[Infrastructure/Docker/Docker and GPUs (NVIDIA Container Toolkit)|Docker & GPUs]]
-
----
-
-**Related:**
-[[content/1-DevOps/Kubernetes/index|Kubernetes]],
-[[MLOps/Deployment/index|MLOps Deployment]]
-
-**Parent:** [[content/Infrastructure/index|Infrastructure]]
+<figure align="center">
+  <img src="docker-website.png" alt="Docker definition from the official website: 'Accelerate how you build, share, and run applications. Docker helps developers build, share, run, and verify applications anywhere — without tedious environment configuration or management.'">
+  <figcaption>Docker definition from the official website</figcaption>
+</figure>

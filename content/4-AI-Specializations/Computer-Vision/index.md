@@ -2,7 +2,7 @@
 title: Computer-Vision
 author: "Daniel Gattringer"
 description: "Index file for the Computer-Vision folder."
-draft: false
+draft: true
 page: 1
 ---
 # Computer-Vision 

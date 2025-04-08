@@ -2,7 +2,7 @@
 title: MLOps
 author: "Daniel Gattringer"
 description: "Index file for the 3-MLOps folder."
-draft: false
+draft: true
 page: 3
 ---
 # 3-MLOps 

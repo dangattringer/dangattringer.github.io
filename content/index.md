@@ -1,25 +1,39 @@
-# 🌱 Knowledge Base
+---
+title: "Learning Notes"
+author: "Daniel Gattringer"
+description: "Personal notes on technology topics, organized by area. Current focus includes MLOps, AI, Cloud, and DevOps."
+date: 2025-03-29
+draft: false
+page: 1
+---
 
-This is my growing knowledge base, where I store notes, discoveries, and findings. It grows as I explore new challenges and refine my skills.
+# Welcome! 👋
 
+This site contains my personal notes on technology topics I'm exploring.
 
-<img src="assets/img2.jpeg" alt="Alt text describing the image" style="width: auto; height: auto;">
+My current focus is heavily on MLOps, AI (Computer Vision, LLMs), Cloud (AWS, Azure, GCP), and the DevOps tools (Docker, K8s) and practices that support them.
+
+<img src="assets/img.png" alt="Alt text describing the image" style="width: auto; height: auto;">
   
-
 ---
 
-## Main Areas
+> [!info] Work in Progress
+> These notes are a work in progress and may not be complete or fully accurate. They are intended for personal use and reference.
+> Content is added and updated regularly.
 
-*   **🚀 [[MLOps/index|MLOps]]**: Principles and practices for the machine learning lifecycle.
-*   **🧠 [[AI/index|Artificial Intelligence]]**: Exploring concepts, models (CV, LLMs), and agents.
-*   **🏗️ [[content/Infrastructure/index|Infrastructure]]**: Foundations using [[content/1-DevOps/Docker/index|Docker]], [[content/1-DevOps/Kubernetes/index|Kubernetes]], and other tools.
+## Site Organization
+
+Use the links, folder navigation, search, or graph view to explore.
+
+<!-- AUTO-INDEX-START -->
+### [[1-DevOps|DevOps]]
+*   [[1-DevOps/Docker|Docker]]
+*   [[1-DevOps/Kubernetes|Kubernetes]]
+*   [[1-DevOps/IaC|IaC]]
+
+### [[98-Projects|Projects]]
+*   [[98-Projects/Image Similarity Search.md|Image Similarity Search]]
+*   [[98-Projects/Image Restoration.md|Image Restoration]]
+<!-- AUTO-INDEX-END -->
 
 ---
-
-## Other Sections
-
-*   **🛠️ [[content/98-Projects/index|Projects]]**: Applied experiments and implementations.
-*   **📚 [[content/99-Resources/index|Resources]]**: Curated links, papers, and documentation.
-
----
-
