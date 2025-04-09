@@ -1,6 +1,8 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
 
+const apiKey = process.env.POSTHOG_API_KEY;
+console.log("API_KEY", apiKey);
 
 const config: QuartzConfig = {
   configuration: {
@@ -10,7 +12,7 @@ const config: QuartzConfig = {
     enablePopovers: true,
     analytics: {
       provider: "posthog",
-      apiKey: "phc_3qJMLCMnsmBMbidxKRJt9RzGKFyLe9S9OAryfKosmr9",
+      apiKey: apiKey || "",
       host: "https://eu.i.posthog.com",
     },
     locale: "en-US",
