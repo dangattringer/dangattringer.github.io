@@ -11,7 +11,7 @@ page: 1
 
 This site contains my personal notes on technology topics I'm exploring.
 
-My current focus is heavily on MLOps, AI (Computer Vision, LLMs), Cloud (AWS, Azure, GCP), and the DevOps tools (Docker, K8s) and practices that support them.
+My current focus is on MLOps, AI (Computer Vision, LLMs), Cloud (AWS, Azure, GCP), and DevOps tools and practices that support them.
 
 <img src="assets/img.png" alt="Alt text describing the image" style="width: auto; height: auto;">
   
@@ -27,13 +27,15 @@ Use the links, folder navigation, search, or graph view to explore.
 
 <!-- AUTO-INDEX-START -->
 ### [[1-DevOps|DevOps]]
-*   [[1-DevOps/Docker|Docker]]
-*   [[1-DevOps/Kubernetes|Kubernetes]]
-*   [[1-DevOps/IaC|IaC]]
+
+* [[1-DevOps/Docker|Docker]]
+* [[1-DevOps/Kubernetes|Kubernetes]]
+* [[1-DevOps/IaC|IaC]]
 
 ### [[98-Projects|Projects]]
-*   [[98-Projects/Image Similarity Search.md|Image Similarity Search]]
-*   [[98-Projects/Image Restoration.md|Image Restoration]]
+
+* [[98-Projects/Image Similarity Search.md|Image Similarity Search]]
+* [[98-Projects/Image Restoration.md|Image Restoration]]
 <!-- AUTO-INDEX-END -->
 
 ---
