@@ -27,32 +27,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: 'npm' 
       - name: Set up Python
         uses: actions/setup-python@v5 
         with:
           python-version: '3.11'
-      - name: Cache Node Modules
-        id: cache-node-modules 
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm 
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
+          cache: 'pip'
       - name: Install Node.js Dependencies
         run: npm ci
-      - name: Cache Pip Dependencies
-        id: cache-pip
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.pip-cache-dir.outputs.dir }} 
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}-${{ matrix.python-version }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-      - name: Get pip cache directory path
-        id: pip-cache-dir 
-        run: echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
       - name: Install Python Dependencies
         run: pip install -r requirements.txt 
       - name: Generate Index Content
