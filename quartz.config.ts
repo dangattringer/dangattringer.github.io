@@ -1,11 +1,6 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
-import dotenv from "dotenv";
-dotenv.config();
 
-// read api key from environment variable
-const apiKey = process.env.POSTHOG_API_KEY
-const host = process.env.POSTHOG_HOST
 
 const config: QuartzConfig = {
   configuration: {
@@ -15,8 +10,8 @@ const config: QuartzConfig = {
     enablePopovers: true,
     analytics: {
       provider: "posthog",
-      apiKey: apiKey || "",
-      host: host,
+      apiKey: "phc_3qJMLCMnsmBMbidxKRJt9RzGKFyLe9S9OAryfKosmr9",
+      host: "https://eu.i.posthog.com",
     },
     locale: "en-US",
     baseUrl: "dangattringer.github.io",
