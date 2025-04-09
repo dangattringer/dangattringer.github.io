@@ -1,6 +1,10 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
 
+// read api key from environment variable
+const apiKey = process.env.POSTHOG_API_KEY
+const host = process.env.POSTHOG_HOST
+
 const config: QuartzConfig = {
   configuration: {
     pageTitle: "d://log",
@@ -8,7 +12,9 @@ const config: QuartzConfig = {
     enableSPA: true,
     enablePopovers: true,
     analytics: {
-      provider: "none",
+      provider: "posthog",
+      apiKey: apiKey || "",
+      host: host,
     },
     locale: "en-US",
     baseUrl: "dangattringer.github.io",
