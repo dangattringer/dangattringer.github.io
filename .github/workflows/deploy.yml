@@ -40,6 +40,9 @@ jobs:
       - name: Generate Index Content
         run: python generate_index.py 
       - name: Build Quartz
+        env:
+            POSTHOG_API_KEY: ${{ secrets.POSTHOG_API_KEY }}
+            POSTHOG_HOST: ${{ secrets.POSTHOG_HOST }}
         run: npx quartz build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
