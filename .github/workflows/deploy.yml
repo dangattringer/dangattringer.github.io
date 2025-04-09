@@ -5,6 +5,11 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy'
+        required: true
+        default: 'github-pages'
  
 permissions:
   contents: read
@@ -18,6 +23,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-22.04
+    environment:
+      name: ${{ github.event.inputs.environment || 'github-pages' }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -39,6 +46,13 @@ jobs:
         run: pip install -r requirements.txt 
       - name: Generate Index Content
         run: python generate_index.py 
+      - name: Debug Secrets
+        run: |
+          echo "POSTHOG_API_KEY is ${POSTHOG_API_KEY:+set}"
+          echo "POSTHOG_HOST is ${POSTHOG_HOST:+set}"
+        env:
+          POSTHOG_API_KEY: ${{ secrets.POSTHOG_API_KEY }}
+          POSTHOG_HOST: ${{ secrets.POSTHOG_HOST }}
       - name: Build Quartz
         env:
             POSTHOG_API_KEY: ${{ secrets.POSTHOG_API_KEY }}
