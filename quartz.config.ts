@@ -2,7 +2,6 @@ import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
 
 const apiKey = process.env.POSTHOG_API_KEY;
-console.log("API_KEY", apiKey);
 
 const config: QuartzConfig = {
   configuration: {
