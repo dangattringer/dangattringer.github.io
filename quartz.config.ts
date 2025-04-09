@@ -1,5 +1,7 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
+import dotenv from "dotenv";
+dotenv.config();
 
 // read api key from environment variable
 const apiKey = process.env.POSTHOG_API_KEY
