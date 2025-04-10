@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 64 64"
+     role="img"
+     aria-label="X logo">
+
+  <style>
+    :root {
+      /* Light Mode Defaults */
+      --x-bg-color: #faf8f8; /* White background */
+      --x-fg-color: #000000; /* Black X */
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        /* Dark Mode Overrides */
+        --x-bg-color: #373534; /* Black background */
+        --x-fg-color: #ffffff; /* White X */
+      }
+    }
+
+    .x-logo-bg {
+      fill: var(--x-bg-color);
+    }
+    .x-logo-fg {
+      fill: var(--x-fg-color);
+    }
+  </style>
+
+  <!-- Background Rectangle -->
+  <!-- Added rx to match the rounding implied by the original path's corner definition -->
+  <!-- 15% of 50 is 7.5 -->
+  <rect
+      class="x-logo-bg"
+      width="64" height="64"
+      rx="7.5" ry="7.5"/>
+
+  <!-- X Logo Path -->
+  <path
+      class="x-logo-fg"
+      d="M 6.9199219 6 L 21.136719 26.726562 L 6.2285156 44 L 9.40625 44 L 22.544922 28.777344 L 32.986328 44 L 43 44 L 28.123047 22.3125 L 42.203125 6 L 39.027344 6 L 26.716797 20.261719 L 16.933594 6 L 6.9199219 6 z"
+    transform="translate(-1, -1) scale(1.3)"/>
+
+</svg>

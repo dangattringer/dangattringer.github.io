@@ -21,11 +21,15 @@ export default ((opts?: Options) => {
         <ul>
           {Object.entries(links).map(([text, link]) => (
             <li>
-              <a href={link} target="_blank" rel="noopener noreferrer">{text} </a>
+              <a href={link} target="_blank" rel="noopener noreferrer">
+                <img src={`static/${text.toLowerCase()}.svg`}
+                  alt={text}
+                  style={{ width: "20px", height: "20px", marginRight: "4px" }} />
+              </a>
             </li>
           ))}
         </ul>
-      </footer>
+      </footer >
     )
   }
 

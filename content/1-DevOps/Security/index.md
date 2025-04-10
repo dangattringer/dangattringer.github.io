@@ -3,18 +3,18 @@ title: Security
 author: "Daniel Gattringer"
 description: "Index file for the Security folder."
 draft: true
-page: 5
+page: 6
 ---
-# Security 
+# Security
 
-This is the index file for the **Security** folder. 
+This is the index file for the **Security** folder.
 
-Use this page to list and link to the main notes within this section. 
+Use this page to list and link to the main notes within this section.
 
 ## Key Notes
 
-* [[Link to Note 1]] 
-* [[Link to Note 2]] 
-* ... 
+* [[Link to Note 1]]
+* [[Link to Note 2]]
+* ...
 
---- 
+---

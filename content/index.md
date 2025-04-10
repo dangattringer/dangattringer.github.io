@@ -27,15 +27,14 @@ Use the links, folder navigation, search, or graph view to explore.
 
 <!-- AUTO-INDEX-START -->
 ### [[1-DevOps|DevOps]]
-
-* [[1-DevOps/Docker|Docker]]
-* [[1-DevOps/Kubernetes|Kubernetes]]
-* [[1-DevOps/IaC|IaC]]
+*   [[1-DevOps/Docker|Docker]]
+*   [[1-DevOps/Kubernetes|Kubernetes]]
+*   [[1-DevOps/IaC|IaC]]
+*   [[1-DevOps/WebAssembly|WebAssembly]]
 
 ### [[98-Projects|Projects]]
-
-* [[98-Projects/Image Similarity Search.md|Image Similarity Search]]
-* [[98-Projects/Image Restoration.md|Image Restoration]]
+*   [[98-Projects/Image Similarity Search.md|Image Similarity Search]]
+*   [[98-Projects/Image Restoration.md|Image Restoration]]
 <!-- AUTO-INDEX-END -->
 
 ---
