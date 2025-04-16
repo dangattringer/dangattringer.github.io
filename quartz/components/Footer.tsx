@@ -22,7 +22,7 @@ export default ((opts?: Options) => {
           {Object.entries(links).map(([text, link]) => (
             <li>
               <a href={link} target="_blank" rel="noopener noreferrer">
-                <img src={`static/${text.toLowerCase()}.svg`}
+                <img src={`/static/${text.toLowerCase()}.svg`}
                   alt={text}
                   style={{ width: "20px", height: "20px", marginRight: "4px" }} />
               </a>
