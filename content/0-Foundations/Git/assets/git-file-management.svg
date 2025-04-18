@@ -1,0 +1,231 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 950 280" width="950" height="280">
+
+  <defs>
+    <!-- Arrowhead marker (points left for main arrows) -->
+    <marker id="arrowhead-parent-link" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="4" markerHeight="4" orient="auto-start">
+      <path class="arrow-stroke-main" d="M 10 0 L 0 5 L 10 10 z" />
+    </marker>
+     <!-- Arrowhead for Parent/Child diagonal links (smaller, pointing left) -->
+    <marker id="arrowhead-diag-left" viewBox="0 0 10 10" refX="3" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path class="arrow-stroke-diag" d="M 10 0 L 0 5 L 10 10 z" />
+    </marker>
+     <!-- Arrowhead for Parent/Child diagonal links (smaller, pointing right) -->
+    <marker id="arrowhead-diag-right" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path class="arrow-stroke-diag" d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+  </defs>
+
+  <!-- Styles -->
+  <style>
+    :root {
+        --bg-color: #faf8f8;
+        --text-color: #24292e;
+        --secondary-text-color: #586069; /* Labels */
+        --hash-color: #000000; /* Main commit hash */
+        --parent-hash-color: #0052cc; /* Clickable/link-like */
+        --message-text-color: #586069;
+        --line-dashed-color: #aaaaaa;
+        --arrow-main-color: #0052cc; /* Blue for main parent arrows */
+        --arrow-diag-color: #5b99e5; /* Lighter blue for diagonal */
+        --arrow-diag-label-color: #0052cc;
+        --commit-node-fill: #4e8cf1; /* Blue commit circles */
+        --commit-node-stroke: #0052cc;
+        --pointer-text-color: #24292e;
+        --branch-tag-bg: #ddefff; /* Light blue tag */
+        --branch-tag-text: #0052cc;
+        --branch-tag-border: #a0c8f0;
+        --monospace-font: monospace, 'Courier New', 'DejaVu Sans Mono';
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --bg-color: #373534;
+            --text-color: #c9d1d9;
+            --secondary-text-color: #8b949e;
+            --hash-color: #ffffff;
+            --parent-hash-color: #79c0ff;
+            --message-text-color: #8b949e;
+            --line-dashed-color: #555555;
+            --arrow-main-color: #58a6ff;
+            --arrow-diag-color: #70a8ff;
+            --arrow-diag-label-color: #79c0ff;
+            --commit-node-fill: #3b82f6;
+            --commit-node-stroke: #58a6ff;
+            --pointer-text-color: #c9d1d9;
+            --branch-tag-bg: #102c46;
+            --branch-tag-text: #79c0ff;
+            --branch-tag-border: #1e4c78;
+        }
+    }
+
+    .diagram-bg { fill: var(--bg-color); }
+
+    .commit-node {
+        fill: var(--commit-node-fill);
+        stroke: var(--commit-node-stroke);
+        stroke-width: 1.5;
+    }
+    .metadata-block { 
+        fill: var(--commit-box-bg);
+        stroke: var(--commit-box-border);
+        stroke-width: 1.5;
+        rx: 8; ry: 8;
+    } /* Group for text below node */
+
+    .commit-text {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        fill: var(--text-color);
+    }
+    .commit-label {
+        fill: var(--secondary-text-color);
+        font-family: var(--monospace-font);
+    }
+    .commit-value {
+        font-family: var(--monospace-font);
+        font-weight: bold;
+    }
+    .commit-value.hash { fill: var(--hash-color); }
+    .commit-value.tree { fill: var(--secondary-text-color); }
+    .commit-value.parent { fill: var(--parent-hash-color); }
+    .commit-value.nil { fill: var(--secondary-text-color); font-weight: normal; }
+    .commit-message {
+        font-style: italic;
+        fill: var(--message-text-color);
+        font-family: var(--monospace-font);
+    }
+
+    .history-line {
+        stroke: var(--line-dashed-color);
+        stroke-width: 1;
+        stroke-dasharray: 3 3;
+    }
+    .lifeline {
+        stroke: var(--line-dashed-color);
+        stroke-width: 1;
+        stroke-dasharray: 4 4;
+    }
+    .parent-arrow {
+        stroke: var(--arrow-main-color);
+        stroke-width: 4; /* Thicker main arrow */
+        marker-start: url(#arrowhead-parent-link);
+    }
+    .parent-child-link {
+        stroke: var(--arrow-diag-color);
+        stroke-width: 1.5;
+        stroke-dasharray: 4 3;
+        marker-start: url(#arrowhead-diag-left);
+        marker-end: url(#arrowhead-diag-right);
+    }
+    .arrow-stroke-main { fill: var(--arrow-main-color); }
+    .arrow-stroke-diag { fill: var(--arrow-diag-color); }
+
+     .parent-child-label {
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        fill: var(--arrow-diag-label-color);
+        text-anchor: middle;
+     }
+
+     .pointer-text { /* For HEAD */
+         font-family: Arial, sans-serif;
+         font-size: 14px;
+         font-weight: bold;
+         fill: var(--pointer-text-color);
+         text-anchor: middle;
+     }
+     .branch-tag-rect {
+         fill: var(--branch-tag-bg);
+         stroke: var(--branch-tag-border);
+         stroke-width: 1;
+         rx: 4; ry: 4;
+     }
+     .branch-tag-text {
+         font-family: Arial, sans-serif;
+         font-size: 14px;
+         font-weight: bold;
+         fill: var(--branch-tag-text);
+         text-anchor: middle;
+         dominant-baseline: middle;
+     }
+
+  </style>
+
+  <!-- Background -->
+  <rect class="diagram-bg" width="100%" height="100%"/>
+
+  <!-- Diagram Content -->
+  <g id="git-commits-inspired">
+
+    <!-- Main Horizontal Dashed Line -->
+    <line class="history-line" x1="50" y1="50" x2="950" y2="50"/>
+
+    <!-- Commit 1 (Left - Oldest) -->
+    <g id="commit-1-group" transform="translate(150, 50)">
+        <circle class="commit-node" cx="0" cy="0" r="12"/>
+        <line class="lifeline" x1="0" y1="12" x2="0" y2="80"/>
+        <g class="metadata-block" transform="translate(-100, 90)"> <!-- Centered below node -->
+            <text class="commit-value hash" x="100" y="15" text-anchor="middle">b70fc01</text>
+            <text class="commit-text" x="0" y="40"><tspan class="commit-label">tree:</tspan> <tspan class="commit-value tree">d6f50a2</tspan></text>
+            <text class="commit-text" x="0" y="60"><tspan class="commit-label">parent:</tspan> <tspan class="commit-value nil">NIL</tspan></text>
+            <text class="commit-text" x="0" y="80"><tspan class="commit-label">author:</tspan> John Doe</text>
+            <text class="commit-text" x="0" y="100"><tspan class="commit-label">committer:</tspan> John Doe</text>
+            <text class="commit-message" x="100" y="125" text-anchor="middle">Initial project setup</text>
+        </g>
+    </g>
+
+     <!-- Commit 2 (Middle) -->
+    <g id="commit-2-group" transform="translate(450, 50)">
+        <circle class="commit-node" cx="0" cy="0" r="12"/>
+        <line class="lifeline" x1="0" y1="12" x2="0" y2="80"/>
+         <g class="metadata-block" transform="translate(-100, 90)">
+            <text class="commit-value hash" x="100" y="15" text-anchor="middle">93f9864</text>
+            <text class="commit-text" x="0" y="40"><tspan class="commit-label">tree:</tspan> <tspan class="commit-value tree">d6f50a2</tspan></text>
+            <text class="commit-text" x="0" y="60"><tspan class="commit-label">parent:</tspan> <tspan class="commit-value parent">b70fc01</tspan></text>
+            <text class="commit-text" x="0" y="80"><tspan class="commit-label">author:</tspan> Jenny P</text>
+            <text class="commit-text" x="0" y="100"><tspan class="commit-label">committer:</tspan> Jenny P</text>
+            <text class="commit-message" x="100" y="125" text-anchor="middle">Add feature X</text>
+        </g>
+    </g>
+
+    <!-- Commit 3 (Right - Newest) -->
+    <g id="commit-3-group" transform="translate(750, 50)">
+        <circle class="commit-node" cx="0" cy="0" r="12"/>
+        <line class="lifeline" x1="0" y1="12" x2="0" y2="80"/>
+         <g class="metadata-block" transform="translate(-100, 90)">
+            <text class="commit-value hash" x="100" y="15" text-anchor="middle">Fb36640</text>
+            <text class="commit-text" x="0" y="40"><tspan class="commit-label">tree:</tspan> <tspan class="commit-value tree">d6f50a2</tspan></text>
+            <text class="commit-text" x="0" y="60"><tspan class="commit-label">parent:</tspan> <tspan class="commit-value parent">93f9864</tspan></text>
+            <text class="commit-text" x="0" y="80"><tspan class="commit-label">author:</tspan> George H</text>
+            <text class="commit-text" x="0" y="100"><tspan class="commit-label">committer:</tspan> George H</text>
+            <text class="commit-message" x="100" y="125" text-anchor="middle">Fix bug in feature X</text>
+        </g>
+    </g>
+
+    <!-- Main Parent Arrows -->
+    <line class="parent-arrow" x1="165" y1="50" x2="435" y2="50"/> <!-- Arrow 2 -> 1 -->
+    <line class="parent-arrow" x1="465" y1="50" x2="735" y2="50"/> <!-- Arrow 3 -> 2 -->
+
+    <!-- Diagonal Parent/Child Links & Labels -->
+    <!-- Link 2 -> 1 -->
+    <line class="parent-child-link" x1="335" y1="190" x2="200" y2="150"/> <!-- from C2 parent hash to C1 hash -->
+    <text class="parent-child-label" x="245" y="183" transform="rotate(15 265 155)">Parent</text>
+    <text class="parent-child-label" x="320" y="180" transform="rotate(17 335 130)">Child</text>
+
+    <!-- Link 3 -> 2 -->
+    <line class="parent-child-link" x1="635" y1="190" x2="500" y2="150"/> <!-- from C3 parent hash to C2 hash -->
+    <text class="parent-child-label" x="545" y="183" transform="rotate(15 565 155)">Parent</text>
+    <text class="parent-child-label" x="620" y="180" transform="rotate(17 635 130)">Child</text>
+
+    <!-- Pointers -->
+    <text class="pointer-text" x="750" y="25">HEAD</text>
+    <g id="main-branch-tag" transform="translate(20, 35)">
+      <use xlink:href="#pointer-tag-shape" class="pointer-tag"/>
+         <rect class="branch-tag-rect" width="60" height="30"/>
+         <text class="branch-tag-text" x="30" y="15">main</text>
+    </g>
+
+
+  </g> <!-- End git-commits-inspired -->
+
+</svg>

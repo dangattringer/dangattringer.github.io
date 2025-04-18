@@ -1,0 +1,198 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 820 475" width="820" height="475">
+
+  <defs>
+    <!-- Standard Arrowhead -->
+    <marker id="arrowhead-git-obj" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path class="arrow-stroke" d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+    <!-- File Icon for Blob -->
+    <g id="blob-file-icon">
+        <path class="blob-icon-base" d="M2,0 h12 a2,2 0 0 1 2,2 v16 a2,2 0 0 1 -2,2 h-12 a2,2 0 0 1 -2,-2 v-16 a2,2 0 0 1 2,-2 z" />
+        <path class="blob-icon-fold" d="M11,0 v5 a2,2 0 0 0 2,2 h5 z" />
+    </g>
+  </defs>
+
+  <!-- Styles -->
+  <style>
+    :root {
+        --bg-color: #faf8f8;
+        --text-color: #1f2937;
+        --secondary-text-color: #4b5563; /* Labels, non-linked hashes */
+        --header-bg: #3b82f6; /* Blue header */
+        --header-text: #ffffff;
+        --content-bg: #f9fafb; /* Very light grey content */
+        --content-border: #d1d5db;
+        --highlight-hash-color: #dc2626; /* Red for commit tree hash */
+        --link-hash-color: #111827; /* Bold black for linked tree hashes */
+        --arrow-color: #3b82f6; /* Blue arrows */
+        --blob-icon-base-color: #9ca3af; /* Grey file */
+        --blob-icon-fold-color: #e5e7eb; /* Lighter fold */
+        --monospace-font: Consolas, Menlo, Monaco, 'Courier New', monospace;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --bg-color: #373534;
+            --text-color: #d1d5db;
+            --secondary-text-color: #9ca3af;
+            --header-bg: #60a5fa; /* Lighter blue header */
+            --header-text: #111827; /* Dark text on light blue */
+            --content-bg: #374151; /* Dark grey content */
+            --content-border: #4b5563;
+            --highlight-hash-color: #f87171; /* Lighter red */
+            --link-hash-color: #f9fafb; /* White for linked tree hashes */
+            --arrow-color: #93c5fd; /* Lighter blue arrows */
+            --blob-icon-base-color: #6b7280;
+            --blob-icon-fold-color: #4b5563;
+        }
+    }
+
+    .diagram-bg { fill: var(--bg-color); }
+
+    .object-box { } /* Container group */
+    .header-box {
+        fill: var(--header-bg);
+        rx: 6; ry: 6;
+        /* Make top corners rounded, bottom square for stacking */
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .content-box {
+        fill: var(--content-bg);
+        stroke: var(--content-border);
+        stroke-width: 1;
+        rx: 6; ry: 6;
+        /* Make bottom corners rounded, top square for stacking */
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+     .commit-content-box { /* Commit has all corners rounded */
+         border-radius: 6px;
+     }
+
+    .header-text {
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+        font-weight: bold;
+        fill: var(--header-text);
+        text-anchor: middle;
+        dominant-baseline: middle;
+    }
+    .content-text {
+        font-family: var(--monospace-font);
+        font-size: 14px;
+        fill: var(--text-color);
+    }
+    .content-label { fill: var(--secondary-text-color); }
+    .content-hash { fill: var(--secondary-text-color); }
+    .content-name { fill: var(--text-color); }
+    .hash-highlight { fill: var(--highlight-hash-color); font-weight: bold; }
+    .hash-link { fill: var(--link-hash-color); font-weight: bold; }
+    .commit-message { font-style: italic; fill: var(--secondary-text-color); }
+
+    .arrow {
+        stroke: var(--arrow-color);
+        stroke-width: 1.5;
+        marker-end: url(#arrowhead-git-obj);
+        fill: none;
+    }
+    .arrow-stroke { fill: var(--arrow-color); } /* For marker fill */
+
+    .blob-object-group { }
+    .blob-icon-base { fill: var(--blob-icon-base-color); }
+    .blob-icon-fold { fill: var(--blob-icon-fold-color); }
+    .blob-object-text {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        fill: var(--secondary-text-color);
+        dominant-baseline: middle;
+    }
+
+  </style>
+
+  <!-- Background -->
+  <rect class="diagram-bg" width="100%" height="100%"/>
+
+  <!-- Diagram Content -->
+  <g id="git-object-diagram">
+
+    <!-- Commit Object -->
+    <g class="object-box" id="commit-group" transform="translate(30, 30)">
+       <rect class="header-box" x="0" y="0" width="260" height="35"/>
+       <rect class="content-box commit-content-box" x="0" y="35" width="260" height="130"/>
+       <text class="header-text" x="130" y="17.5">Commit - c0ffee0</text>
+       <!-- Commit Content -->
+       <text class="content-text" x="15" y="60"><tspan class="content-label">tree:</tspan> <tspan class="hash-highlight">abc123d</tspan></text>
+       <text class="content-text" x="15" y="80"><tspan class="content-label">parent:</tspan> <tspan class="content-hash">b4e5f6a</tspan></text>
+       <text class="content-text" x="15" y="100"><tspan class="content-label">author:</tspan> Alice A</text>
+       <text class="content-text" x="15" y="120"><tspan class="content-label">committer:</tspan> Alice A</text>
+       <text class="content-text commit-message" x="15" y="145">Add initial files</text>
+    </g>
+
+    <!-- Tree 1 -->
+    <g class="object-box" id="tree1-group" transform="translate(350, 65)">
+        <rect class="header-box" x="0" y="0" width="300" height="35"/>
+        <rect class="content-box" x="0" y="35" width="300" height="100"/>
+        <text class="header-text" x="150" y="17.5">Tree - abc123d</text>
+        <!-- Tree 1 Content -->
+        <text class="content-text" x="15" y="60"><tspan class="content-label">blob</tspan> <tspan class="content-hash">1a2b3c4</tspan> <tspan class="content-name">README.md</tspan></text>
+        <text class="content-text" x="15" y="85"><tspan class="content-label">blob</tspan> <tspan class="content-hash">5d6e7f8</tspan> <tspan class="content-name">.gitignore</tspan></text>
+        <text class="content-text" x="15" y="110"><tspan class="content-label">tree</tspan> <tspan class="hash-link">def456e</tspan> <tspan class="content-name">src</tspan></text>
+    </g>
+
+    <!-- Tree 2 -->
+     <g class="object-box" id="tree2-group" transform="translate(350, 235)">
+        <rect class="header-box" x="0" y="0" width="300" height="35"/>
+        <rect class="content-box" x="0" y="35" width="300" height="75"/>
+        <text class="header-text" x="150" y="17.5">Tree - def456e</text>
+        <!-- Tree 2 Content -->
+        <text class="content-text" x="15" y="60"><tspan class="content-label">blob</tspan> <tspan class="content-hash">9g8h7i6</tspan> <tspan class="content-name">main.py</tspan></text>
+        <text class="content-text" x="15" y="85"><tspan class="content-label">tree</tspan> <tspan class="hash-link">ghi789f</tspan> <tspan class="content-name">  utils</tspan></text>
+     </g>
+
+     <!-- Tree 3 -->
+     <g class="object-box" id="tree3-group" transform="translate(350, 380)">
+        <rect class="header-box" x="0" y="0" width="300" height="35"/>
+        <rect class="content-box" x="0" y="35" width="300" height="50"/>
+        <text class="header-text" x="150" y="17.5">Tree - ghi789f</text>
+         <!-- Tree 3 Content -->
+        <text class="content-text" x="15" y="60"><tspan class="content-label">blob</tspan> <tspan class="content-hash">j1k2l3m</tspan> <tspan class="content-name">helpers.py</tspan></text>
+     </g>
+
+     <!-- Blob Object Representations -->
+     <g class="blob-object-group" transform="translate(703, 120)">
+         <use xlink:href="#blob-file-icon" x="0" y="-10"/>
+         <text class="blob-object-text" x="25" y="0">Blob Object</text>
+     </g>
+     <g class="blob-object-group" transform="translate(703, 148)">
+          <use xlink:href="#blob-file-icon" x="0" y="-10"/>
+          <text class="blob-object-text" x="25" y="0">Blob Object</text>
+     </g>
+      <g class="blob-object-group" transform="translate(703, 292)">
+          <use xlink:href="#blob-file-icon" x="0" y="-10"/>
+          <text class="blob-object-text" x="25" y="0">Blob Object</text>
+     </g>
+     <g class="blob-object-group" transform="translate(703, 437)">
+          <use xlink:href="#blob-file-icon" x="0" y="-10"/>
+          <text class="blob-object-text" x="25" y="0">Blob Object</text>
+     </g>
+
+    <!-- Arrows -->
+    <!-- Commit -> Tree 1 -->
+    <polyline class="arrow" points="160,85 350,85"/>
+    <!-- Tree 1 -> Tree 2 -->
+    <polyline class="arrow" points="425,185 425,210 490,210 490,235"/> <!-- Adjusted x/y from Tree 1 content hash -->
+     <!-- Tree 2 -> Tree 3 -->
+    <polyline class="arrow" points="425,330 425,355 490,355 490,380"/> <!-- Adjusted x/y from Tree 2 content hash -->
+
+    <!-- Tree 1 Blobs -> Blob Objects -->
+    <line class="arrow" x1="580" y1="120" x2="700" y2="120"/> <!-- Blob README -->
+    <line class="arrow" x1="580" y1="148" x2="700" y2="148"/> <!-- Blob .gitignore -->
+    <!-- Tree 2 Blob -> Blob Object -->
+    <line class="arrow" x1="580" y1="292" x2="700" y2="292"/> <!-- Blob main.py -->
+    <!-- Tree 3 Blob -> Blob Object -->
+    <line class="arrow" x1="580" y1="437" x2="700" y2="437"/> <!-- Blob helpers.py -->
+
+  </g> <!-- End git-object-diagram -->
+
+</svg>

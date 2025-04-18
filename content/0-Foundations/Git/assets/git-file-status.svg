@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 465" width="800" height="465">
+
+  <defs>
+    <!-- Arrowhead marker -->
+    <marker id="arrowhead-git" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"> <!-- The key change -->
+      <path class="arrow-stroke" d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+  </defs>
+
+  <!-- Styles -->
+  <style>
+    :root {
+        --bg-color: #faf8f8;
+        --text-light: #ffffff;
+        --text-dark: #24292e;
+        --line-dashed-color: #aaaaaa;
+        --line-arrow-color: #24292e;
+        --arrow-label-color: #24292e;
+        --arrow-stroke-color: var(--line-arrow-color);
+
+        --box-untracked-bg: #cad5e0; /* Light Blue-Grey */
+        --box-tracked-bg: #b0b8c1;   /* Medium Grey */
+        --box-unmodified-bg: #a5c8ed; /* Light Blue */
+        --box-modified-bg: #3b77bc;  /* Medium Blue */
+        --box-staged-bg: #204a7b;    /* Dark Blue */
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --bg-color: #373534;
+            --text-light: #e0e0e0;
+            --text-dark: #dadada;
+            --line-dashed-color: #666666;
+            --line-arrow-color: #cccccc;
+            --arrow-label-color: #cccccc;
+            --arrow-stroke-color: var(--line-arrow-color);
+
+            --box-untracked-bg: #52606e;
+            --box-tracked-bg: #718096;
+            --box-unmodified-bg: #5f89b8;
+            --box-modified-bg: #6fa5e3;
+            --box-staged-bg: #8ab4f8;
+
+            --text-dark: #1e1e1e;
+            --text-light: #e0e0e0;
+        }
+    }
+
+    .diagram-bg { fill: var(--bg-color); }
+
+    .state-box { rx: 8; ry: 8; stroke: none; }
+    .box-untracked { fill: var(--box-untracked-bg); }
+    .box-tracked { fill: var(--box-tracked-bg); }
+    .box-unmodified { fill: var(--box-unmodified-bg); }
+    .box-modified { fill: var(--box-modified-bg); }
+    .box-staged { fill: var(--box-staged-bg); }
+
+    .box-text { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; text-anchor: middle; dominant-baseline: middle; }
+    .text-color-light { fill: var(--text-light); }
+    .text-color-dark { fill: var(--text-dark); }
+
+    .lifeline { stroke: var(--line-dashed-color); stroke-width: 2; stroke-dasharray: 6 4; }
+
+    .arrow-line {
+        stroke: var(--line-arrow-color);
+        stroke-width: 2.5;
+        /* Default: marker at end */
+        marker-end: url(#arrowhead-git);
+    }
+    .arrow-line.reverse {
+        /* Apply marker at start instead */
+        marker-end: none;
+        marker-start: url(#arrowhead-git);
+    }
+
+    .arrow-stroke { fill: var(--arrow-stroke-color); }
+    .arrow-label { font-family: Arial, sans-serif; font-size: 16px; fill: var(--arrow-label-color); text-anchor: middle; dominant-baseline: auto; }
+
+  </style>
+
+  <!-- Background -->
+  <rect class="diagram-bg" width="100%" height="100%"/>
+
+  <!-- Diagram Content -->
+  <g id="git-lifecycle" transform="translate(-40, 0)">
+
+    <!-- State Boxes -->
+    <g id="state-boxes" transform="translate(0, 20)">
+        <rect class="state-box box-untracked" x="50" y="0" width="180" height="40"/>
+        <text class="box-text text-color-dark" x="140" y="20">Untracked</text>
+        <rect class="state-box box-tracked" x="250" y="0" width="580" height="40"/>
+        <text class="box-text text-color-light" x="550" y="20">Tracked</text>
+        <rect class="state-box box-unmodified" x="250" y="50" width="180" height="40"/>
+        <text class="box-text text-color-dark" x="340" y="70">Unmodified</text>
+        <rect class="state-box box-modified" x="450" y="50" width="180" height="40"/>
+        <text class="box-text text-color-light" x="540" y="70">Modified</text>
+        <rect class="state-box box-staged" x="650" y="50" width="180" height="40"/>
+        <text class="box-text text-color-light" x="740" y="70">Staged</text>
+    </g>
+
+    <!-- Lifelines -->
+    <g id="lifelines" transform="translate(0, 80)">
+        <line class="lifeline" x1="140" y1="-20" x2="140" y2="380"/>
+        <line class="lifeline" x1="340" y1="30" x2="340" y2="380"/>
+        <line class="lifeline" x1="540" y1="30" x2="540" y2="380"/>
+        <line class="lifeline" x1="740" y1="30" x2="740" y2="380"/>
+    </g>
+
+    <!-- Transitions (Arrows and Labels) -->
+    <g id="transitions" transform="translate(0, 110)">
+        <!-- Add the file (Right arrow) -->
+        <line class="arrow-line" x1="140" y1="80" x2="340" y2="80"/>
+        <text class="arrow-label" x="240" y="75">Add file</text>
+
+        <!-- Edit the file (Right arrow) -->
+        <line class="arrow-line" x1="340" y1="140" x2="540" y2="140"/>
+        <text class="arrow-label" x="440" y="135">Edit file</text>
+
+        <!-- Stage the file (Right arrow) -->
+        <line class="arrow-line" x1="540" y1="200" x2="740" y2="200"/>
+        <text class="arrow-label" x="640" y="195">Stage file</text>
+
+        <!-- Commit (Left arrow) -->
+        <line class="arrow-line reverse" x1="340" y1="260" x2="740" y2="260"/>
+        <text class="arrow-label" x="500" y="255">Commit</text>
+
+         <!-- Remove the file (Left arrow) -->
+        <line class="arrow-line reverse" x1="140" y1="320" x2="340" y2="320"/>
+        <text class="arrow-label" x="240" y="315">Remove file</text>
+    </g>
+
+  </g> <!-- End git-lifecycle -->
+
+</svg>
