@@ -2,13 +2,16 @@
 title: Interactive Docker
 author: "Daniel Gattringer"
 description: "Interactive Docker, the container lifecycle, all you need to know to get started with Docker CLI."
-date: 2025-04-04
+date: 2025-04-16
 tags: ["Docker"]
 draft: true
 page: 2
 ---
 
 # Interactive Docker
+
+> [!WARNING]
+> This part is not done yet.
 
 ## The Container Lifecycle
 
@@ -49,3 +52,33 @@ stateDiagram-v2
 
 Note:
   `docker container [cmd]` and `docker [cmd]` are doing the same  
+
+## Using the Docker CLI
+
+The Docker command is what you will use to interact with the Docker daemon. Using this single executable, you can do the following, and more:
+
+- Start and stop containers
+- Pull and push images
+- Run a shell in an active container
+- Look at container logs
+- Create Docker volumes
+- Create Docker networks
+- Prune old images and volumes
+  
+This is not meant to include an exhaustive explanation of every Docker command; instead, we will explain some of the common commands that you will need to use to interact with the Docker daemon and containers.
+
+You can break down Docker commands into two categories: general Docker commands and Docker management commands. The standard Docker commands allow you to manage containers, while management commands allow you to manage Docker options such as managing volumes and networking.
+
+### docker help
+
+It is quite common to forget the syntax or options of a command, and Docker acknowledges this. If you ever find yourself in a situation where you can’t recall a command, you can always depend on the docker help command. It will help you by providing what the command can do and how to use it.
+
+### docker run
+
+To run a container, use the docker run command with the provided image name. But, before executing a docker run command, you should understand the options you can supply when starting a container. In its simplest form, an example command you can use to run an NGINX web server would be docker run bitnami/nginx:latest. This will start a container running NGINX, and it will run in the foreground, showing logs of the application running in the container. Pressing Ctrl + C will stop the running container and terminate the NGINX server:
+
+> [!WARNING]
+> This part is not done yet.  
+> USE OTHER IMAGES
+> /home/daniel/Downloads/books/Kubernetes_An_Enterprise_Guide_by_Boorshtein_Surovich_24.pdf  
+> page 49
