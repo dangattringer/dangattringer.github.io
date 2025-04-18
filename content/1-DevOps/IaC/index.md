@@ -2,7 +2,7 @@
 title: IaC
 author: "Daniel Gattringer"
 description: ""
-draft: false
+draft: true
 page: 4
 ---
 # Infrastructure as code (IaC)

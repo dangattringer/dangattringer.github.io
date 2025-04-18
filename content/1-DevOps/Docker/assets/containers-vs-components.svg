@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 600" width="1200" height="600">
+
+  <defs>
+    <!-- Containerd-like Icon -->
+    <g id="container-icon">
+        <rect class="icon-box containerd-bg" width="50" height="50" rx="3" />
+        <text class="icon-text containerd-text" x="25" y="33" text-anchor="middle" font-weight="bold" font-size="35">d</text>
+    </g>
+    <!-- Lego-like Icon (Component) -->
+    <g id="component-icon">
+        <rect class="icon-box containerd-bg" width="50" height="50" rx="3" />
+        <text class="icon-text containerd-text" x="25" y="33" text-anchor="middle" font-weight="bold" font-size="35">w</text>
+    </g>
+  </defs>
+
+  <!-- Styles -->
+  <style>
+      :root {
+          --bg-color: #ffffff;
+          --container-bg: #e9ecef; /* Light grey */
+          --component-bg: #00c853; /* Bright Green */
+          --container-text: #212529;
+          --component-text: #ffffff;
+          --criteria-text: #00a040; /* Darker green for criteria */
+          --border-color: #dee2e6; /* Separator line */
+          --icon-container-bg: #000000;
+          --icon-container-text: #ffffff;
+          --icon-component-base: #0056b3; /* Lego Blue */
+          --icon-component-stud: #007bff; /* Lighter Lego Blue */
+      }
+       @media (prefers-color-scheme: dark) {
+          :root {
+              --bg-color: #1a1a1a;
+              --container-bg: #343a40; /* Dark grey */
+              --component-bg: #007a33; /* Darker Green */
+              --container-text: #e9ecef;
+              --component-text: #e9ecef;
+              --criteria-text: #28a745; /* Brighter green for criteria */
+              --border-color: #495057; /* Separator line */
+              --icon-container-bg: #ffffff;
+              --icon-container-text: #000000;
+              --icon-component-base: #3b82f6; /* Lighter Lego Blue */
+              --icon-component-stud: #60a5fa; /* Even Lighter Lego Blue */
+          }
+      }
+
+      .diagram-bg { fill: var(--bg-color); }
+      .container-column { fill: var(--container-bg); }
+      .component-column { fill: var(--component-bg); }
+      .column-rect { rx: 15; ry: 15; }
+
+      .header-text {
+          font-family: Arial, sans-serif;
+          font-size: 28px;
+          font-weight: bold;
+          text-anchor: start;
+      }
+      .container-header { fill: var(--container-text); }
+      .component-header { fill: var(--component-text); }
+
+      .desc-text {
+          font-family: Arial, sans-serif;
+          font-size: 20px;
+          dominant-baseline: middle;
+          text-anchor: start;
+      }
+      .container-desc { fill: var(--container-text); }
+      .component-desc { fill: var(--component-text); }
+
+      .criteria-text {
+           font-family: Arial, sans-serif;
+           font-size: 22px;
+           font-weight: bold;
+           dominant-baseline: middle;
+           text-anchor: middle;
+           fill: var(--criteria-text);
+      }
+
+      .separator {
+          stroke: var(--border-color);
+          stroke-width: 1.5;
+      }
+
+       /* Icons */
+      .icon-box { stroke: none; }
+      .containerd-bg { fill: var(--icon-container-bg); }
+      .containerd-text { fill: var(--icon-container-text); }
+      .component-base { fill: var(--icon-component-base); }
+      .icon-stud { fill: var(--icon-component-stud); }
+
+  </style>
+
+  <!-- Background -->
+  <rect class="diagram-bg" width="100%" height="100%"/>
+
+  <!-- Layout -->
+  <g id="comparison-chart">
+      <!-- Column Backgrounds -->
+      <rect class="column-rect container-column" x="20" y="20" width="490" height="560"/>
+      <rect class="column-rect component-column" x="690" y="20" width="490" height="560"/>
+
+      <!-- Row Height & Positions -->
+      <g id="rows" font-family="Arial, sans-serif">
+          <!-- Row 1: Headers & Size -->
+          <g id="row1" transform="translate(0, 90)">
+              <!-- Icons -->
+               <use xlink:href="#component-icon" x="45" y="-50"/>
+               <use xlink:href="#container-icon" x="1105" y="-50"/>
+               <!-- Headers -->
+              <text class="header-text container-header" x="115" y="0">Components</text>
+              <text class="header-text component-header" x="935" y="0">Containers</text>
+              <!-- Desc -->
+              <text class="desc-text container-desc" x="115" y="43">KBs to MBs</text>
+              <text class="desc-text container-desc" x="115" y="73">10,000s per host</text>
+              <text class="desc-text component-desc" x="935" y="40">MBs to GBs</text>
+              <text class="desc-text component-desc" x="935" y="65">100s per VM</text>
+              <!-- Criteria -->
+              <text class="criteria-text" x="600" y="52.5">Size</text>
+              <line class="separator" x1="50" y1="100" x2="980" y2="100"/>
+          </g>
+
+           <!-- Row 2: Security -->
+           <g id="row2" transform="translate(0, 180)"> <!-- y = 80 + 100 -->
+               <!-- Desc -->
+              <text class="desc-text container-desc" x="115" y="40">Shared-nothing Sandboxes</text>
+              <text class="desc-text container-desc" x="115" y="65">Deny-by-default permissions</text>
+              <text class="desc-text component-desc" x="935" y="40">Lateral Movement Risk</text>
+              <text class="desc-text component-desc" x="935" y="65">More work to secure</text>
+              <!-- Criteria -->
+              <text class="criteria-text" x="600" y="52.5">Security</text>
+              <line class="separator" x1="20" y1="100" x2="980" y2="100"/>
+          </g>
+
+           <!-- Row 3: Portability -->
+           <g id="row3" transform="translate(0, 280)"> <!-- y = 180 + 100 -->
+               <!-- Desc -->
+              <text class="desc-text container-desc" x="45" y="40">Build Multiple Versions of the</text>
+              <text class="desc-text container-desc" x="45" y="65">Same App</text>
+              <text class="desc-text component-desc" x="555" y="40">One App on Cloud, On Prem, On</text>
+              <text class="desc-text component-desc" x="555" y="65">Edge</text>
+              <!-- Criteria -->
+              <text class="criteria-text" x="500" y="52.5">Portability</text>
+              <line class="separator" x1="20" y1="100" x2="980" y2="100"/>
+          </g>
+
+           <!-- Row 4: Cold Start -->
+           <g id="row4" transform="translate(0, 380)"> <!-- y = 280 + 100 -->
+               <!-- Desc -->
+              <text class="desc-text container-desc" x="45" y="52.5">High Cost of Idle Infrastructure</text>
+              <text class="desc-text component-desc" x="555" y="40">Zero Cold Start,</text>
+              <text class="desc-text component-desc" x="555" y="65">Autoscaling</text>
+              <!-- Criteria -->
+              <text class="criteria-text" x="500" y="52.5">Cold Start Time</text>
+              <line class="separator" x1="20" y1="100" x2="980" y2="100"/>
+          </g>
+
+          <!-- Row 5: Maintenance -->
+           <g id="row5" transform="translate(0, 480)"> <!-- y = 380 + 100 -->
+               <!-- Desc -->
+              <text class="desc-text container-desc" x="45" y="52.5">5,000 Teams Patch 1 vulnerability</text>
+              <text class="desc-text component-desc" x="555" y="52.5">1 Team Patches 5000 Apps</text>
+              <!-- Criteria -->
+              <text class="criteria-text" x="500" y="52.5">Maintenance</text>
+              <!-- No separator after last row -->
+          </g>
+
+      </g> <!-- End rows -->
+
+  </g> <!-- End comparison-chart -->
+
+</svg>

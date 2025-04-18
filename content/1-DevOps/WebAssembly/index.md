@@ -3,7 +3,7 @@ title: WebAssembly
 author: "Daniel Gattringer"
 description: "WebAssembly"
 date: 2025-04-10
-draft: false
+draft: true
 page: 5
 ---
 

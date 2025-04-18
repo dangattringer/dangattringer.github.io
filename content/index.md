@@ -26,11 +26,12 @@ My current focus is on MLOps, AI (Computer Vision, LLMs), Cloud (AWS, Azure, GCP
 Use the links, folder navigation, search, or graph view to explore.
 
 <!-- AUTO-INDEX-START -->
+### [[0-Foundations|Foundations]]
+*   [[0-Foundations/Git|Git]]
+
 ### [[1-DevOps|DevOps]]
 *   [[1-DevOps/Docker|Docker]]
 *   [[1-DevOps/Kubernetes|Kubernetes]]
-*   [[1-DevOps/IaC|IaC]]
-*   [[1-DevOps/WebAssembly|WebAssembly]]
 
 ### [[98-Projects|Projects]]
 *   [[98-Projects/Image Similarity Search.md|Image Similarity Search]]
