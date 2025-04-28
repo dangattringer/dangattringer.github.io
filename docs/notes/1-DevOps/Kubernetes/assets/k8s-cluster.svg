@@ -1,0 +1,310 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1100 750" width="1100" height="750">
+  <defs>
+<!--Arrowhead marker-->
+    <marker id="arrowhead-k8s-detail" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path class="arrow-stroke" d="M 0 0 L 10 5 L 0 10 z"/>
+    </marker>
+<!--Arrowhead marker (reversed for up arrows)-->
+    <marker id="arrowhead-k8s-detail-up" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path class="arrow-stroke" d="M 10 0 L 0 5 L 10 10 z"/>
+    </marker>
+<!--Container Cube Icon-->
+    <g id="container-cube-icon" transform="scale(0.7)">
+      <path class="container-icon-stroke" d="M5,5 h20 v20 h-20 z"/>
+      <path class="container-icon-stroke" d="M5,5 l10,-5 h20 l-10,5 z"/>
+      <path class="container-icon-stroke" d="M25,25 l10,-5 v-20 l-10,5 z"/>
+      <line class="container-icon-stroke" x1="5" y1="25" x2="15" y2="20"/>
+      <line class="container-icon-stroke" x1="25" y1="5" x2="35" y2="0"/>
+    </g>
+<!--Cloud Icon-->
+    <g id="cloud-icon">
+      <path class="cloud-icon-fill" d="M38.1,17.4c-0.2-4.2-3.6-7.5-7.8-7.5c-2,0-3.9,0.8-5.2,2.1c-1.2-3.3-4.3-5.5-8-5.5 c-4.8,0-8.8,3.9-8.8,8.8c0,0.4,0,0.7,0.1,1.1C4.6,16.8,0,21.9,0,28.2c0,6.6,5.4,12,12,12h26.5c5.8,0,10.5-4.7,10.5-10.5 C49,23.4,44.3,18.5,38.1,17.4z"/>
+    </g>
+<!--Placeholder K8s Component Icons (Simple Hexagons)-->
+    <g id="k8s-icon-placeholder">
+      <polygon class="k8s-icon-fill" points="25,0 50,14.4 50,43.3 25,57.7 0,43.3 0,14.4"/>
+<!--Optional inner detail - e.g., a smaller hexagon or circle-->
+      <circle class="k8s-icon-inner" cx="25" cy="28.8" r="8"/>
+    </g>
+<!--You can reuse the placeholder or make slightly different ones if needed-->
+    <use id="api-icon-placeholder" xlink:href="#k8s-icon-placeholder"/>
+    <use id="etcd-icon-placeholder" xlink:href="#k8s-icon-placeholder"/>
+    <use id="sched-icon-placeholder" xlink:href="#k8s-icon-placeholder"/>
+    <use id="cm-icon-placeholder" xlink:href="#k8s-icon-placeholder"/>
+<!--Controller Manager-->
+    <use id="ccm-icon-placeholder" xlink:href="#k8s-icon-placeholder"/>
+<!--Cloud Controller Manager-->
+    <use id="kubelet-icon-placeholder" xlink:href="#k8s-icon-placeholder"/>
+    <use id="kproxy-icon-placeholder" xlink:href="#k8s-icon-placeholder"/>
+  </defs>
+<!--Styles-->
+  <style>
+    :root {
+        /* Light Mode */
+        --bg-color: #faf8f8;
+        --text-color: #1f2937;
+        --secondary-text-color: #4b5563;
+        --label-text-color: #111827; /* Bolder labels */
+        --box-bg-outer: #e5e7eb;
+        --box-bg-inner: #ffffff;
+        --control-plane-bg: #f3f4f6; /* Slightly different bg for control plane area */
+        --cluster-border-color: #6b7280;
+        --arrow-color: #1f2937;
+        --arrow-dashed-color: #6b7280;
+        --container-icon-color: #4b5563;
+        --k8s-icon-fill-color: #3b82f6; /* Blue K8s Icons */
+        --k8s-icon-inner-color: #ffffff; /* White inner detail */
+        --k8s-icon-text-color: #ffffff;
+        --cloud-icon-fill-color: #60a5fa; /* Lighter blue cloud */
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+             /* Dark Mode */
+            --bg-color: #373534;
+            --text-color: #d1d5db;
+            --secondary-text-color: #9ca3af;
+            --label-text-color: #f9fafb;
+            --box-bg-outer: #4b5563;
+            --box-bg-inner: #374151;
+            --control-plane-bg: #403d3c; /* Slightly different dark bg */
+            --cluster-border-color: #9ca3af;
+            --arrow-color: #d1d5db;
+            --arrow-dashed-color: #9ca3af;
+            --container-icon-color: #9ca3af;
+            --k8s-icon-fill-color: #60a5fa; /* Lighter Blue K8s Icons */
+            --k8s-icon-inner-color: #1e3a8a; /* Dark blue inner detail */
+            --k8s-icon-text-color: #1e3a8a;
+            --cloud-icon-fill-color: #93c5fd; /* Lighter blue cloud */
+        }
+    }
+
+    .diagram-bg { fill: var(--bg-color); }
+
+    .text-primary {
+        font-family: Arial, sans-serif; font-size: 14px;
+        fill: var(--text-color); text-anchor: middle; dominant-baseline: middle;
+    }
+    .text-secondary {
+        font-family: Arial, sans-serif; font-size: 13px;
+        fill: var(--secondary-text-color); text-anchor: middle; dominant-baseline: middle;
+    }
+    .text-label {
+        font-family: Arial, sans-serif; font-size: 14px; font-weight: bold;
+        fill: var(--label-text-color); text-anchor: middle;
+    }
+     .text-k8s-icon {
+         font-family: Arial, sans-serif; font-size: 8px; font-weight: bold;
+         fill: var(--k8s-icon-text-color); text-anchor: middle; dominant-baseline: central;
+     }
+    .arrow-label {
+        font-family: Arial, sans-serif; font-size: 13px;
+        fill: var(--text-color); text-anchor: middle;
+    }
+
+    .box-outer { fill: var(--box-bg-outer); rx: 5; ry: 5; }
+    .box-inner { fill: var(--box-bg-inner); rx: 3; ry: 3; }
+    .control-plane-area { fill: var(--control-plane-bg); }
+
+
+    .cluster-border {
+        fill: none; stroke: var(--cluster-border-color);
+        stroke-width: 2; stroke-dasharray: 8 4; rx: 10; ry: 10;
+    }
+
+    .arrow {
+        stroke: var(--arrow-color); stroke-width: 1.5;
+        fill: none; marker-end: url(#arrowhead-k8s-detail);
+    }
+    .arrow-up {
+         stroke: var(--arrow-color); stroke-width: 1.5;
+         fill: none; marker-end: url(#arrowhead-k8s-detail-up);
+    }
+    .arrow-dashed {
+         stroke: var(--arrow-dashed-color); stroke-width: 1.5;
+         fill: none; marker-end: url(#arrowhead-k8s-detail);
+         stroke-dasharray: 4 4;
+    }
+
+    .arrow-stroke { fill: var(--arrow-color); }
+    .container-icon-stroke {
+        stroke: var(--container-icon-color); stroke-width: 1.5; fill: none;
+    }
+     .k8s-icon-fill { fill: var(--k8s-icon-fill-color); }
+     .k8s-icon-inner { fill: var(--k8s-icon-inner-color); }
+     .cloud-icon-fill { fill: var(--cloud-icon-fill-color); }
+  </style>
+<!--Background-->
+  <rect class="diagram-bg" width="100%" height="100%"/>
+<!--Diagram Content-->
+  <g id="k8s-detailed-diagram">
+<!--Client-->
+    <g id="client-group" transform="translate(450, 10)">
+        <rect class="box-outer" width="180" height="40"/>
+        <text class="text-label" x="90" y="25">Client</text>
+    </g>
+<!--Kubernetes Cluster Area-->
+    <rect class="cluster-border" x="20" y="80" width="1060" height="550"/>
+    <text class="text-label" x="150" y="40">Kubernetes cluster</text>
+<!--Control Plane Area Background-->
+    <rect class="control-plane-area" x="40" y="120" width="800" height="200" rx="5" ry="5"/>
+    <text class="text-label" x="540" y="225">Control plane</text>
+<!--Control Plane Components-->
+    <g id="control-plane-components" transform="translate(0, 250)">
+<!--API Server (Central)-->
+      <g transform="translate(490, 40)">
+        <use xlink:href="#api-icon-placeholder" width="50" height="57.7"/>
+        <text class="text-k8s-icon" x="25" y="48">api</text>
+      </g>
+<!--etcd-->
+      <g transform="translate(300, 90)">
+        <use xlink:href="#etcd-icon-placeholder" width="50" height="57.7"/>
+        <text class="text-k8s-icon" x="25" y="48">etcd</text>
+      </g>
+<!--Scheduler-->
+      <g transform="translate(300, 0)">
+        <use xlink:href="#sched-icon-placeholder" width="50" height="57.7"/>
+        <text class="text-k8s-icon" x="25" y="48">sched</text>
+      </g>
+<!--Controller Manager-->
+      <g transform="translate(110, 0)">
+        <use xlink:href="#cm-icon-placeholder" width="50" height="57.7"/>
+        <text class="text-k8s-icon" x="25" y="48">c-m</text>
+      </g>
+<!--Cloud Controller Manager-->
+      <g transform="translate(680, 0)">
+        <use xlink:href="#ccm-icon-placeholder" width="50" height="57.7"/>
+        <text class="text-k8s-icon" x="25" y="48">c-c-m</text>
+      </g>
+      <g transform="translate(680, 90)">
+        <use xlink:href="#ccm-icon-placeholder" width="50" height="57.7"/>
+        <text class="text-k8s-icon" x="25" y="48">c-c-m</text>
+      </g>
+    </g>
+<!--Cloud Provider API-->
+    <g id="cloud-api-group" transform="translate(850, 280)">
+      <use xlink:href="#cloud-icon" width="49" height="40.2"/>
+      <text class="text-secondary" x="25" y="55">Cloud Provider API</text>
+    </g>
+<!--Compute Nodes-->
+    <g id="compute-nodes-group" transform="translate(0, 430)">
+<!--Node 1-->
+      <g id="compute-node-1" transform="translate(50, 0)">
+        <rect class="box-outer" width="300" height="280"/>
+        <text class="text-secondary" x="150" y="20">Compute node 1</text>
+<!--Kubelet & Kube-proxy-->
+        <g transform="translate(40, 40)">
+          <use xlink:href="#kubelet-icon-placeholder" width="40" height="46.2"/>
+          <text class="text-k8s-icon" x="20" y="38">kubelet</text>
+        </g>
+        <g transform="translate(100, 40)">
+          <use xlink:href="#kproxy-icon-placeholder" width="40" height="46.2"/>
+          <text class="text-k8s-icon" x="20" y="38">k-proxy</text>
+        </g>
+<!--Container Runtime-->
+        <rect class="box-inner" x="160" y="45" width="130" height="40"/>
+        <text class="text-primary" x="225" y="65">Container Runtime</text>
+<!--Containers-->
+        <rect class="box-inner" x="10" y="155" width="280" height="115"/>
+        <text class="text-secondary" x="150" y="140">Containers</text>
+<!--Container Icons-->
+        <use xlink:href="#container-cube-icon" x="40" y="180"/>
+        <use xlink:href="#container-cube-icon" x="85" y="180"/>
+        <use xlink:href="#container-cube-icon" x="130" y="180"/>
+        <use xlink:href="#container-cube-icon" x="175" y="180"/>
+        <use xlink:href="#container-cube-icon" x="220" y="180"/>
+      </g>
+<!--Node 2-->
+      <g id="compute-node-2" transform="translate(400, 0)">
+        <rect class="box-outer" width="300" height="280"/>
+        <text class="text-secondary" x="150" y="20">Compute node 2</text>
+<!--Kubelet & Kube-proxy-->
+        <g transform="translate(40, 40)">
+          <use xlink:href="#kubelet-icon-placeholder" width="40" height="46.2"/>
+          <text class="text-k8s-icon" x="20" y="38">kubelet</text>
+        </g>
+        <g transform="translate(100, 40)">
+          <use xlink:href="#kproxy-icon-placeholder" width="40" height="46.2"/>
+          <text class="text-k8s-icon" x="20" y="38">k-proxy</text>
+        </g>
+<!--Container Runtime-->
+        <rect class="box-inner" x="160" y="45" width="130" height="40"/>
+        <text class="text-primary" x="225" y="65">Container Runtime</text>
+<!--Containers-->
+        <rect class="box-inner" x="10" y="155" width="280" height="115"/>
+        <text class="text-secondary" x="150" y="140">Containers</text>
+<!--Container Icons-->
+        <use xlink:href="#container-cube-icon" x="40" y="180"/>
+        <use xlink:href="#container-cube-icon" x="85" y="180"/>
+        <use xlink:href="#container-cube-icon" x="130" y="180"/>
+        <use xlink:href="#container-cube-icon" x="175" y="180"/>
+        <use xlink:href="#container-cube-icon" x="220" y="180"/>
+      </g>
+<!--Node 3-->
+      <g id="compute-node-3" transform="translate(750, 0)">
+        <rect class="box-outer" width="300" height="280"/>
+        <text class="text-secondary" x="150" y="20">Compute node 3</text>
+<!--Kubelet & Kube-proxy-->
+        <g transform="translate(40, 40)">
+          <use xlink:href="#kubelet-icon-placeholder" width="40" height="46.2"/>
+          <text class="text-k8s-icon" x="20" y="38">kubelet</text>
+        </g>
+        <g transform="translate(100, 40)">
+          <use xlink:href="#kproxy-icon-placeholder" width="40" height="46.2"/>
+          <text class="text-k8s-icon" x="20" y="38">k-proxy</text>
+        </g>
+<!--Container Runtime-->
+        <rect class="box-inner" x="160" y="45" width="130" height="40"/>
+        <text class="text-primary" x="225" y="65">Container Runtime</text>
+<!--Containers-->
+        <rect class="box-inner" x="10" y="155" width="280" height="115"/>
+        <text class="text-secondary" x="150" y="140">Containers</text>
+<!--Container Icons-->
+        <use xlink:href="#container-cube-icon" x="40" y="180"/>
+        <use xlink:href="#container-cube-icon" x="85" y="180"/>
+        <use xlink:href="#container-cube-icon" x="130" y="180"/>
+        <use xlink:href="#container-cube-icon" x="175" y="180"/>
+        <use xlink:href="#container-cube-icon" x="220" y="180"/>
+      </g>
+    </g>
+<!--Arrows-->
+    <g id="diagram-arrows">
+<!--Client -> API Server-->
+      <line class="arrow" x1="140" y1="140" x2="515" y2="295"/>
+<!--From You box bottom-center to API icon top-->
+      <text class="arrow-label" x="260" y="160">Send Instruction</text>
+<!--Control Plane Internal Arrows-->
+      <line class="arrow" x1="515" y1="327" x2="350" y2="350"/>
+<!--API -> etcd-->
+      <line class="arrow" x1="515" y1="300" x2="350" y2="280"/>
+<!--API -> Sched-->
+      <line class="arrow-up" x1="350" y1="308" x2="490" y2="310"/>
+<!--etcd -> API-->
+      <line class="arrow-up" x1="350" y1="280" x2="490" y2="295"/>
+<!--Sched -> API-->
+      <line class="arrow-dashed" x1="490" y1="305" x2="160" y2="280"/>
+<!--API -> c-m-->
+      <line class="arrow-dashed" x1="490" y1="315" x2="680" y2="280"/>
+<!--API -> c-c-m (upper)-->
+      <line class="arrow-dashed" x1="540" y1="315" x2="680" y2="338"/>
+<!--API -> c-c-m (lower)-->
+<!--Cloud Arrows-->
+      <line class="arrow" x1="730" y1="290" x2="850" y2="300"/>
+<!--c-c-m (upper) -> Cloud-->
+      <line class="arrow" x1="730" y1="340" x2="850" y2="315"/>
+<!--c-c-m (lower) -> Cloud-->
+<!--API Server -> Compute Nodes-->
+      <line class="arrow" x1="515" y1="327" x2="515" y2="410"/>
+<!--Straight down to middle node area-->
+      <line class="arrow" x1="515" y1="410" x2="550" y2="430"/>
+<!--Down to Node 2 (kubelet)-->
+      <line class="arrow" x1="515" y1="410" x2="200" y2="430"/>
+<!--Down to Node 1 (kubelet)-->
+      <line class="arrow" x1="515" y1="410" x2="900" y2="430"/>
+<!--Down to Node 3 (kubelet)-->
+<!--Compute Nodes -> API Server (Implicit Up Arrow - often omitted, but shown here)-->
+      <line class="arrow-up" x1="515" y1="410" x2="515" y2="327"/>
+    </g>
+  </g>
+<!--End k8s-detailed-diagram-->
+</svg>

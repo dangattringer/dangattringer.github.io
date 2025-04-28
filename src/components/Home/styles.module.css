@@ -1,0 +1,150 @@
+/* .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.title>img {
+    border-radius: 50%;
+    min-width: 15%;
+    max-width: 30%;
+    border: 3px solid;
+    object-fit: fill;
+    object-position: 50% 8%;
+}
+
+.title>span {
+    margin-top: 1rem;
+    display: block;
+    font-family: 'Times New Roman', serif;
+    text-align: center;
+}
+
+.subtitle {
+    font-family: 'Roboto Slab', serif;
+    font-size: 1.5em;
+    font-weight: lighter;
+    -webkit-font-smoothing: antialiased;
+    margin: 0 0 0.3rem 0;
+    color: var(--ifm-font-color-secondary);
+}
+
+.divider {
+    width: 25%;
+    margin: 2% auto;
+    border-top: 0.01rem solid;
+}
+
+.divider::before {
+    line-height: 0;
+    text-indent: 0;
+    letter-spacing: 0;
+    content: '';
+    display: block;
+}
+
+.description>p {
+    margin: 0;
+    text-align: center;
+    font-size: 1.2em;
+    line-height: 1.5rem;
+    letter-spacing: 0.05rem;
+}
+
+@media (max-width: 640px) {
+    .subtitle {
+        font-size: 1.2rem;
+    }
+}
+
+@media (min-width: 640px) {
+    .description {
+        max-width: 30%;
+    }
+} */
+/* src/components/Home/styles.module.css */
+.hero {
+    padding: 4rem 2rem;
+    text-align: center;
+    max-width: 800px;
+    /* Adjust as needed */
+    margin: 0 auto;
+    /* Center the section */
+}
+
+.title {
+    display: inline-flex;
+    /* Align image and text */
+    align-items: center;
+    font-size: 2.5rem;
+    /* Adjust size */
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    text-decoration: none;
+    /* Remove underline from link */
+    color: inherit;
+    /* Inherit color from parent */
+}
+
+.title:hover {
+    text-decoration: none;
+    /* Keep underline off on hover */
+    opacity: 0.8;
+    /* Slight visual feedback */
+}
+
+.logo {
+    height: 120px;
+    /* bigger for better focus */
+    width: 120px;
+    border-radius: 50%;
+    border: 2px solid;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 1rem;
+    /* center it + add space below */
+}
+
+.subtitle {
+    display: block;
+    font-size: 1.5rem;
+    /* Adjust size */
+    color: var(--ifm-color-secondary-darkest);
+    /* Use Docusaurus theme variables */
+    margin-bottom: 1.5rem;
+}
+
+.divider {
+    border: 0;
+    height: 1px;
+    background-color: var(--ifm-color-emphasis-300);
+    /* Use Docusaurus theme variables */
+    margin: 2rem auto;
+    width: 50%;
+    /* Adjust width */
+}
+
+.description {
+    font-size: 1.1rem;
+    /* Adjust size */
+    line-height: 1.6;
+    color: var(--ifm-font-color-base);
+    /* Use Docusaurus theme variables */
+}
+
+.description p {
+    margin-bottom: 1rem;
+    /* Space between paragraphs */
+}

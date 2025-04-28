@@ -1,0 +1,129 @@
+---
+title: "K8s Architecture"
+author: "Daniel Gattringer"
+description: "Understand the core components of Kubernetes architecture, including the control plane (API server, etcd, scheduler, controllers) and worker nodes (kubelet, kube-proxy)."
+date: 2025-04-16
+tags: ["kubernetes", "devops"]
+draft: true
+sidebar_position: 2
+---
+
+import ThemedAsset from '@site/src/components/ThemedAsset/ThemedAsset';
+
+# Kubernetes Architecture
+
+:::warning
+This part is not done yet.
+:::
+:::warning
+This part is not done yet.
+/home/daniel/Downloads/books/The_Kubernetes_Bible_by_Madapparambath_McKendrick_24.pdf  
+page 36
+:::
+
+Kubernetes automates deploying, scaling, and managing containerized applications. Kubernetes, by its inherent design, functions as a distributed application. When we refer to Kubernetes, it's not a standalone, large-scale application released in a single build for installation on a dedicated machine. Instead, Kubernetes embodies a compilation of small projects, each crafted in Go (language), collectively constituting the overarching Kubernetes project. To establish a fully operational Kubernetes cluster, it's necessary to individually install and configure each of these components, ensuring seamless communication among them. Once these prerequisites are fulfilled, you can commence running your containers using the Kubernetes orchestrator.
+
+Each Kubernetes component has its own clearly defined responsibility. It is important for you to understand each component's responsibility and how it articulates with the other components to understand the overall working of Kubernetes.
+
+To use it effectively, you need to understand its **core architecture**. Depending on its role, a component will have to be deployed on a control plane node or a compute node. While some components are responsible for maintaining the state of a whole cluster and operating the cluster itself, others are responsible for running our application containers by interacting with the container runtime directly (e.g., containerd or Docker daemons). Therefore, the components of Kubernetes can be grouped into two families: **Control Plane** (aka Master Nodes) and **Compute Nodes** (aka Worker Nodes).
+
+:::info
+In various contexts, you might encounter the terms "master nodes" and "worker nodes," which were previously used to describe the conventional hierarchical distribution of roles in a distributed system. In this setup, the "master" node oversaw and assigned tasks to the "worker" nodes. However, these terms may carry historical and cultural connotations that could be perceived as insensitive or inappropriate. In response to this concern, the Kubernetes community has chosen to replace these terms with "control plane nodes" (or controller nodes), denoting the collection of components responsible for managing the overall state of the cluster.
+:::
+
+## The Kubernetes Control Plane
+
+The **Kubernetes control plane** makes global decisions about the cluster (like scheduling applications) and responds to cluster events. It acts as the central management point. Its key components typically run on dedicated machines but can run elsewhere. Due to the distributed nature of Kubernetes, the control plane components can be spread across multiple machines. There are two ways to set up the control plane components:
+
+* You can run all the control planes on the same machine or on different machines. To achieve maximum fault tolerance, it's a good idea to spread the control plane components across different machines. The idea is that Kubernetes components must be able to communicate with each other, and this still can be achieved by installing them on different hosts.
+* Things are simpler when it comes to compute nodes (or worker nodes). In these, you start from a standard machine running a supported container runtime, and you install the compute node components next to the container runtime. These components will interface with the local container engine that is installed on said machine and execute containers based on the instructions you send to the control plane components. Adding more computing power to your cluster is easy; you just need to add more worker nodes and have them join the cluster to make room for more containers.
+
+Here is a simplified diagram of a full-featured Kubernetes cluster with all the components listed. Here, all of the control plane components are installed on a single master node machine:
+
+<figure align="center">
+<ThemedAsset
+  lightSource={require('./assets/k8s-cluster-one-node.svg').default}
+  darkSource={require('./assets/k8s-cluster-one-node.svg').default}
+  className="themed-image"
+  alt="A full-featured Kubernetes cluster with one control plane node and three compute nodes" />
+  <figcaption>A full-featured Kubernetes cluster with one control plane node and three compute nodes</figcaption>
+</figure>
+
+The preceding diagram displays a four-node Kubernetes cluster with all the necessary components. Bear in mind that Kubernetes is modified and, therefore, can be modified to fit a given environment. When Kubernetes is deployed and used as part of a distribution such as Amazon EKS or Red Hat Open-Shift, additional components could be present, or the behavior of the default ones might differ. Here, for the most part, we will discuss bare or vanilla Kubernetes. The components discussed here are the default ones and you will find them everywhere as they are the backbone of Kubernetes.
+
+The following diagram shows the basic and core components of a Kubernetes cluster.
+
+<figure align="center">
+<ThemedAsset
+  lightSource={require('./assets/k8s-cluster.svg').default}
+  darkSource={require('./assets/k8s-cluster.svg').default}
+  className="themed-image"
+  alt="The components of a Kubernetes cluster" />
+  <figcaption>The components of a Kubernetes cluster</figcaption>
+</figure>
+
+You might have noticed that most of these components have a name starting with kube: these are the components that are part of the Kubernetes project. Additionally, you might have noticed that there are two components with a name that does not start with kube. The other two components (`etcd` and `Container Engine`) are two external dependencies that are not strictly part of the Kubernetes project, but which Kubernetes needs to work:
+
+* etcd is a distributed key-value store that is used to store all of the cluster data. It is a third-party component that is not part of the Kubernetes project, but it is a core dependency of Kubernetes.
+* Container engine is the software that is used to run containers. Kubernetes does not ship with a container engine, but it needs one to run containers. The most common container engine is Docker, but there are others such as containerd and CRI-O.
+
+### Control Plane Components
+
+These components are responsible for maintaining the state of the cluster. They should be installed on a control plane node. These are the components that will keep the list of containers executed by your Kubernetes cluster or the number of machines that are part of the cluster. As an administrator, when you interact with Kubernetes, you interact with the control plane components and the following are the major components in the control plane:
+
+* **`kube-apiserver`**: This is the front end for the control plane. It exposes the Kubernetes API, processing REST requests, validating them, and updating the corresponding objects in `etcd`. All communication to and from the control plane goes through the API server.
+* **`etcd`**: A consistent and highly available key-value store used as Kubernetes' backing store for all cluster data. Think of it as the cluster's database, holding the configuration and state.
+* **`kube-scheduler`**: Watches for newly created Pods that don't have a node assigned. It selects an appropriate Worker Node for the Pod to run on based on resource requirements, policies, and affinity rules.
+* **`kube-controller-manager`**: Runs controller processes. Controllers watch the cluster's state through the `kube-apiserver` and work to move the current state towards the desired state. Examples include the Node controller, Replication controller, and Deployment controller.
+* **`cloud-controller-manager` (Optional)**: Interacts with the underlying cloud provider's API. It manages cloud-specific resources like load balancers or storage volumes. This allows Kubernetes to work with different cloud providers without vendor-specific code in the core components.
+
+## Kubernetes Worker Nodes
+
+These components are responsible for interacting with the container runtime in order to launch containers according to the instructions they receive from the control plane components. Compute node components must be installed on a Linux machine running a supported container runtime and you are not supposed to interact with these components directly. It's possible to have hundreds or thousands of compute nodes in a Kubernetes cluster. The following are the major component parts of the compute nodes:
+
+### kube-apiserver
+
+Kubernetes' most important component is a Representational State Transfer (REST) API called kube-apiserver, which exposes all the Kubernetes features. You will be interacting with Kubernetes by calling this REST API through the kubectl command-line tool, direct API calls, or the Kubernetes dashboard (Web UI) utilities.
+
+#### The role of kube-apiserver
+
+kube-apiserver is a part of the control plane in Kubernetes. It's written in Go, and its source code is open and available on GitHub under the Apache 2.0 license. To interact with Kubernetes, the process is straightforward. Whenever you want to instruct Kubernetes, you send an HTTP request to kube-apiserver. Whether it's creating, deleting, or updating a container, you always make these calls to the appropriate kube-apiserver endpoint using the right HTTP verb. This is the routine with Kubernetes—kube-apiserver serves as the sole entry point for all operations directed to the orchestrator. It's considered a good practice to avoid direct interactions with container runtimes (unless it is some troubleshooting activity).
+
+kube-apiserver is constructed following the REST standard. REST proves highly efficient in showcasing functionalities through HTTP endpoints, accessible by employing different methods of the HTTP protocol like GET, POST, PUT, PATCH, and DELETE. When you combine HTTP methods and paths, you can perform various operations specified by the method on resources identified by the path.
+The REST standard provides considerable flexibility, allowing easy extension of any REST API by adding new resources through the addition of new paths. Typically, REST APIs employ a datastore to manage the state of objects or resources.
+
+Data retention in such an API can be approached in several ways, including the following:
+
+REST API memory storage:
+
+* Keeps data in its own memory.
+* However, this results in a stateful API, making scaling impossible.
+
+Database engine usage:
+
+* Utilizes full-featured database engines like MariaDB or PostgreSQL.
+* Delegating storage to an external engine makes the API stateless and horizontally scalable.
+
+## Add-on components
+
+Add-ons utilize Kubernetes resources such as DaemonSet, Deployment, and others to implement cluster features. As these features operate at the cluster level, resources for add-ons that are namespaced are located within the kube-system namespace. The following are some of the add-on components you will see commonly in your Kubernetes clusters:
+
+* DNS
+* Web UI (dashboard)
+* Container resource monitoring
+* Cluster-level logging
+* Network plugins
+
+## How Components Interact
+
+Here's a simplified workflow:
+
+1. You use `kubectl` (or another client) to interact with the `kube-apiserver`.
+2. You request to create a Deployment, which the `kube-apiserver` validates and stores in `etcd`.
+3. The `kube-controller-manager` (specifically the Deployment controller) notices the new Deployment object.
+4. It creates ReplicaSets and then Pods to match the desired state.
+5. The `kube-scheduler` sees the new Pods without assigned nodes and picks suitable Worker Nodes.
+6. The `kubelet` on the chosen Worker Nodes sees the Pods assigned to them via the `kube-apiserver`.
+7. The `kubelet` tells the **Container Runtime** to pull the required images and run the containers for the Pods.
+8. The `kubelet` reports the status of the Pods and containers back to the `kube-apiserver`, updating `etcd`.
+9. `kube-proxy` manages network rules to make the Pods accessible via Services.

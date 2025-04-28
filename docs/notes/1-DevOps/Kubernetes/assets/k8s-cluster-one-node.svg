@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 540" width="1000" height="540">
+
+  <defs>
+    <!-- Arrowhead marker -->
+    <marker id="arrowhead-k8s" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path class="arrow-stroke" d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+    <!-- Arrowhead marker (reversed for up arrows) -->
+    <marker id="arrowhead-k8s-up" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path class="arrow-stroke" d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+    <!-- Container Cube Icon -->
+    <g id="container-cube-icon" transform="scale(0.7)">
+      <path class="container-icon-stroke" d="M5,5 h20 v20 h-20 z" />
+      <path class="container-icon-stroke" d="M5,5 l10,-5 h20 l-10,5 z" />
+      <path class="container-icon-stroke" d="M25,25 l10,-5 v-20 l-10,5 z" />
+       <line class="container-icon-stroke" x1="5" y1="25" x2="15" y2="20"/>
+       <line class="container-icon-stroke" x1="25" y1="5" x2="35" y2="0"/>
+    </g>
+  </defs>
+
+  <!-- Styles -->
+  <style>
+    :root {
+        --bg-color: #faf8f8;
+        --text-color: #1f2937; /* Dark grey text */
+        --secondary-text-color: #4b5563; /* Slightly lighter grey */
+        --box-bg-outer: #e5e7eb; /* Light grey outer boxes */
+        --box-bg-inner: #ffffff; /* White inner boxes */
+        --cluster-border-color: #6b7280; /* Dashed border color */
+        --arrow-color: #1f2937; /* Dark arrows */
+        --container-icon-color: #4b5563; /* Grey icon stroke */
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --bg-color: #373534; /* Dark blue-grey background */
+            --text-color: #d1d5db; /* Light grey text */
+            --secondary-text-color: #9ca3af; /* Medium grey */
+            --box-bg-outer: #4b5563; /* Darker grey outer boxes */
+            --box-bg-inner: #374151; /* Dark grey inner boxes */
+            --cluster-border-color: #9ca3af; /* Lighter dashed border */
+            --arrow-color: #d1d5db; /* Light arrows */
+            --container-icon-color: #9ca3af; /* Lighter grey icon */
+        }
+    }
+
+    .diagram-bg { fill: var(--bg-color); }
+
+    .text-primary {
+        font-family: Arial, sans-serif; font-size: 14px; font-weight: bold;
+        fill: var(--text-color); text-anchor: middle; dominant-baseline: middle;
+    }
+    .text-secondary {
+        font-family: Arial, sans-serif; font-size: 13px; 
+        fill: var(--secondary-text-color); text-anchor: middle; dominant-baseline: middle;
+    }
+    .text-label { /* For labels like 'Client', 'Kubernetes cluster' */
+        font-family: Arial, sans-serif; font-size: 14px; font-weight: bold;
+        fill: var(--text-color); text-anchor: middle;
+    }
+    .text-label-big { /* For labels like 'Client', 'Kubernetes cluster' */
+        font-family: Arial, sans-serif; font-size: 18px; font-weight: bold;
+        fill: var(--text-color); text-anchor: middle;
+    }
+    .arrow-label {
+        font-family: Arial, sans-serif; font-size: 13px;
+        fill: var(--text-color); text-anchor: middle;
+    }
+
+    .box-outer { fill: var(--box-bg-outer); rx: 5; ry: 5; }
+    .box-inner { fill: var(--box-bg-inner); rx: 3; ry: 3; }
+
+    .cluster-border {
+        fill: none; stroke: var(--cluster-border-color);
+        stroke-width: 2; stroke-dasharray: 8 4; rx: 10; ry: 10;
+    }
+
+    .arrow {
+        stroke: var(--arrow-color); stroke-width: 1.5;
+        fill: none; marker-end: url(#arrowhead-k8s);
+  marker-start: url(#arrowhead-k8s-up);
+    }
+    .arrow-one {
+        stroke: var(--arrow-color); stroke-width: 1.5;
+        fill: none; marker-end: url(#arrowhead-k8s);
+    }
+
+    .arrow-stroke { fill: var(--arrow-color); }
+    .container-icon-stroke {
+        stroke: var(--container-icon-color); stroke-width: 1.5; fill: none;
+    }
+
+  </style>
+
+  <!-- Background -->
+  <rect class="diagram-bg" width="100%" height="100%"/>
+
+  <!-- Diagram Content -->
+  <g id="k8s-cluster-diagram">
+
+    <!-- Client -->
+    <g id="client-group" transform="translate(410, 10)">
+        <rect class="box-outer" width="180" height="40"/>
+        <text class="text-label" x="90" y="25">Client</text>
+    </g>
+
+     <!-- Kubernetes Cluster Area -->
+    <rect class="cluster-border" x="20" y="80" width="960" height="450"/>
+    <text class="text-label-big" x="150" y="140">Kubernetes Cluster</text>
+
+    <!-- Control Plane -->
+    <g id="control-plane-group" transform="translate(400, 110)">
+         <rect class="box-outer" width="200" height="90"/>
+         <rect class="box-inner" x="10" y="35" width="180" height="45"/>
+         <text class="text-primary" x="100" y="20">Control Plane Node</text>
+         <text class="text-secondary" x="100" y="57.5">Control Plane Components</text>
+    </g>
+
+    <!-- Compute Nodes -->
+    <g id="compute-nodes-group" transform="translate(0, 280)">
+        <!-- Node 1 -->
+        <g id="compute-node-1" transform="translate(50, 0)">
+            <rect class="box-outer" width="250" height="220"/>
+            <text class="text-primary" x="125" y="20">Compute Node 1</text>
+            <rect class="box-inner" x="10" y="40" width="230" height="50"/>
+            <text class="text-secondary" x="125" y="65">Container Runtime</text>
+            <line class="arrow-one" x1="125" y1="90" x2="125" y2="110"/>
+            <rect class="box-inner" x="10" y="115" width="230" height="95"/>
+            <text class="text-secondary" x="125" y="135">Containers</text>
+            <!-- Container Icons -->
+            <use xlink:href="#container-cube-icon" x="30" y="160"/>
+            <use xlink:href="#container-cube-icon" x="70" y="160"/>
+            <use xlink:href="#container-cube-icon" x="110" y="160"/>
+            <use xlink:href="#container-cube-icon" x="150" y="160"/>
+            <use xlink:href="#container-cube-icon" x="190" y="160"/>
+        </g>
+         <!-- Node 2 -->
+        <g id="compute-node-2" transform="translate(375, 0)">
+            <rect class="box-outer" width="250" height="220"/>
+            <text class="text-primary" x="125" y="20">Compute Node 2</text>
+            <rect class="box-inner" x="10" y="40" width="230" height="50"/>
+            <text class="text-secondary" x="125" y="65">Container Runtime</text>
+            <line class="arrow-one" x1="125" y1="90" x2="125" y2="110"/>
+            <rect class="box-inner" x="10" y="115" width="230" height="95"/>
+            <text class="text-secondary" x="125" y="135">Containers</text>
+             <!-- Container Icons -->
+            <use xlink:href="#container-cube-icon" x="30" y="160"/>
+            <use xlink:href="#container-cube-icon" x="70" y="160"/>
+            <use xlink:href="#container-cube-icon" x="110" y="160"/>
+            <use xlink:href="#container-cube-icon" x="150" y="160"/>
+            <use xlink:href="#container-cube-icon" x="190" y="160"/>
+        </g>
+         <!-- Node 3 -->
+        <g id="compute-node-3" transform="translate(700, 0)">
+            <rect class="box-outer" width="250" height="220"/>
+            <text class="text-primary" x="125" y="20">Compute Node 3</text>
+            <rect class="box-inner" x="10" y="40" width="230" height="50"/>
+            <text class="text-secondary" x="125" y="65">Container Runtime</text>
+             <line class="arrow-one" x1="125" y1="90" x2="125" y2="110"/>
+            <rect class="box-inner" x="10" y="115" width="230" height="95"/>
+            <text class="text-secondary" x="125" y="135">Containers</text>
+             <!-- Container Icons -->
+            <use xlink:href="#container-cube-icon" x="30" y="160"/>
+            <use xlink:href="#container-cube-icon" x="70" y="160"/>
+            <use xlink:href="#container-cube-icon" x="110" y="160"/>
+            <use xlink:href="#container-cube-icon" x="150" y="160"/>
+            <use xlink:href="#container-cube-icon" x="190" y="160"/>
+        </g>
+    </g>
+
+    <!-- Arrows Between Components -->
+    <g id="main-arrows">
+        <!-- Client -> Control Plane -->
+        <polyline class="arrow-one" points="500,50 500,110"/>
+
+
+         <!-- Compute Nodes -> Control Plane (Up) -->
+         <line class="arrow" x1="500" y1="280" x2="500" y2="200"/> <!-- From Node 2 -->
+         <polyline class="arrow" points="175,280 175,245 470,245 470,200"/> <!-- From Node 1 -->
+         <polyline class="arrow" points="825,280 825,245 530,245 530,200"/> <!-- From Node 3 -->
+
+    </g>
+
+  </g> <!-- End k8s-cluster-diagram -->
+
+</svg>

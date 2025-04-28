@@ -1,0 +1,164 @@
+---
+title: "Docker Explained"
+author: "Daniel Gattringer"
+description: "Learn how Docker works, from basic containers vs VMs to the engine architecture. Understand containerd, runc, shims, and the container lifecycle. Notes for learners."
+date: 2025-03-29
+tags: ["docker", "containers", "devops"]
+sidebar_position: 1
+---
+
+import ThemedAsset from '@site/src/components/ThemedAsset/ThemedAsset';
+
+# Docker Explained: From Containers to Engine
+
+Docker is more than just running containers it's a powerful platform for building, shipping, and managing isolated environments. Knowing **how Docker works** under the hood, including its core components, helps with troubleshooting, optimization, and working effectively with tools like Kubernetes. These notes cover **Docker container** basics and dive into the **Docker Engine architecture**.
+
+## What is a Docker Container?
+
+A Docker container is essentially **a process with isolation**. Unlike virtual machines (VMs) that simulate entire hardware stacks, containers leverage existing host operating system features (like kernel namespaces and control groups) to create sandboxed environments for applications.
+
+### Key Benefits of Using Containers
+
+* **Consistency:** Applications run reliably across development, testing, and production environments.
+* **Efficiency:** Containers start faster and use fewer CPU/RAM resources compared to VMs due to sharing the host OS kernel.
+* **Portability:** Build an application image once and run it anywhere Docker is installed.
+* **Isolation:** Enhances security by separating processes and dependencies; prevents conflicts.
+* **Scalability:** Easily scale applications horizontally by adding or removing container instances..
+
+## The Docker Platform: Client and Engine
+
+The [Docker](https://www.docker.com/) platform primarily consists of two parts:
+
+* **The Docker CLI (client):** The command-line tool (`docker`) used to issue commands.
+* **The Docker Engine (server/daemon `dockerd`):** A background service that manages Docker objects and executes commands received from the CLI via a REST API.
+
+<figure style={{ textAlign: 'center' }}>
+<ThemedAsset
+  lightSource={require('./assets/docker-client-engine-light.png').default}
+  darkSource={require('./assets/docker-client-engine-dark.png').default}
+  className="themed-image"
+  alt="Diagram showing Docker Client CLI communicating via API with the Docker Engine (Server/Daemon)" />
+  <figcaption>Docker Client and Engine Interaction</figcaption>
+</figure>
+
+The CLI translates user-friendly commands (like `docker run`) into API requests sent to the Docker Engine. The Engine then handles the complex tasks of building images, starting/stopping containers, managing networks, and storing data.
+
+### The Three Pillars of Containerization
+
+Container technology relies on core Linux kernel features:
+
+1. **Isolation Namespaces**: Containers use Linux **namespaces** to provide isolated views of system resources:
+    * `pid`: Isolates process IDs.
+    * `net`: Isolates network interfaces, IP addresses, and ports.
+    * `mnt`: Isolates filesystem mount points.
+    * `uts`: Isolates hostname and domain name.
+    * `ipc`: Isolates inter-process communication resources.
+    * `user`: Isolates user and group IDs.
+
+2. **Resource Control (cgroups)**: **cgroups** limit and monitor resource usage (CPU, memory, disk I/O) for a collection of processes. Docker uses cgroups to enforce resource limits on containers.
+
+3. **Portability (Images)**: Docker images are immutable, layered filesystem snapshots containing the application, libraries, and dependencies. This packaging ensures consistency wherever the image is run – from a developer laptop to production servers.
+
+### Docker Across Different Teams
+
+Different teams often value different aspects of Docker:
+
+| Team         | Priority                           | How Docker Helps                                   |
+| :----------- | :--------------------------------- | :------------------------------------------------- |
+| **Devs**     | Modularity, Development Speed      | Isolated dependencies per container, fast spin-up. |
+| **DevOps**   | CI/CD, Environment Consistency     | Identical builds/runs locally, staging, prod.      |
+| **Ops**      | Scalability, Monitoring, Stability | Standardized units, resource limits, easier management. |
+| **Security** | Isolation, Vulnerability Control   | Kernel namespaces limit attack surface, image scanning. |
+| **Business** | Cost Efficiency, Agility           | Higher density than VMs, faster deployment cycles. |
+
+## Related Technologies: Wasm and Kubernetes
+
+* **Wasm (WebAssembly):** A binary instruction format offering potential benefits in size, speed, and sandboxing. While promising, the Wasm ecosystem is less mature than containers for general server-side applications. Docker is exploring integration, but containers remain dominant.
+* **[Kubernetes](../Kubernetes/index.mdx):** The standard platform for container orchestration (managing containerized applications at scale). Newer Kubernetes versions typically use `containerd` directly as the container runtime, bypassing the main Docker daemon but still running OCI-compliant containers (including those built with Docker).
+
+## Virtualization vs Containerization
+
+[Virtual Machines (VMs)](https://www.vmware.com/) were a significant step, allowing multiple applications to run safely on shared hardware. However, VMs virtualize the *hardware*, meaning each VM needs a full guest operating system.
+
+This leads to drawbacks:
+
+* High resource overhead (CPU, RAM) per VM for the guest OS.
+* Separate patching and monitoring required for each guest OS.
+* Larger image sizes and slower boot times.
+
+Containers virtualize the *operating system*. They share the host OS kernel, making them much more lightweight.
+
+<figure align="center">
+<ThemedAsset
+  lightSource={require('./assets/docker-component-density-light.png').default}
+  darkSource={require('./assets/docker-component-density-dark.png').default}
+  className="themed-image"
+  alt="Docker Engine that create and run containers" />
+  <figcaption>Docker Engine that create and run containers</figcaption>
+</figure>
+
+This allows a single host to run significantly more containers than VMs, leading to better resource utilization, faster startup, and smaller image sizes.
+
+## Understanding the Docker Engine Architecture
+
+The original Docker Engine was a monolithic daemon that included everything from the API to container execution using [LXC](https://linuxcontainers.org/) initially. This became difficult to maintain and innovate on.
+
+The engine has since been refactored into separate, specialized components, promoting modularity and adherence to standards like the **[Open Container Initiative (OCI)](https://opencontainers.org/)**.
+
+### Core Docker Engine Components
+
+<figure align="center">
+<ThemedAsset
+  lightSource={require('./assets/docker-engine-components-light.png').default}
+  darkSource={require('./assets/docker-engine-components-dark.png').default}
+  className="themed-image"
+   alt="Docker Engine components that are used to run containers and lists the primary responsibilities of each component." />
+  <figcaption>Docker Engine components</figcaption>
+</figure>
+
+1. **Docker Daemon (`dockerd`):** The main service. It exposes the Docker API, processes requests, and orchestrates operations by communicating with other components, primarily `containerd`.
+2. **containerd:** A high-level container runtime focused on managing the complete container lifecycle. It handles image transfer/storage, container execution/supervision, and manages storage/networking. `dockerd` communicates with `containerd` via [gRPC](https://grpc.io/). `containerd` itself is designed to be embedded into larger systems (like Docker Engine or Kubernetes).
+3. **runc:** A low-level container runtime; the reference implementation of the OCI runtime specification. Its job is to create and run containers according to the OCI spec. `containerd` uses `runc` (or another OCI-compatible runtime) to handle the actual process of creating namespaces, cgroups, and starting the container process defined in an OCI bundle.
+4. **Shim:** A small intermediary process launched by `containerd` for each container.
+    * It allows `runc` to exit after starting the container, decoupling the container's lifecycle from the low-level runtime.
+    * It acts as the container's parent process, reporting the exit status back to `containerd`.
+    * It keeps STDIN/STDOUT streams open.
+    * Enables "daemonless containers" – `dockerd` or `containerd` can be restarted without terminating running containers.
+
+### How a Container Starts (Simplified Flow)
+
+When you run `docker run -d --name my-container nginx`:
+
+1. **Docker CLI** sends an API request to the **Docker Daemon (`dockerd`)**.
+2. **`dockerd`** receives the request and calls **`containerd`** (via gRPC) to start a container based on the `nginx` image.
+3. **`containerd`** manages pulling the image if needed and prepares an OCI runtime bundle (config.json + root filesystem).
+4. **`containerd`** calls the appropriate **`containerd-shim`**.
+5. The **shim** calls **`runc`** with the OCI bundle path.
+6. **`runc`** interfaces with the Linux kernel to create the necessary namespaces and cgroups and launches the container process (`nginx` in this case).
+7. **`runc`** exits once the container process is started.
+8. The **shim** remains as the container's parent, managing its streams and reporting its status to `containerd`.
+
+<figure align="center">
+<ThemedAsset
+  lightSource={require('./assets/docker-cli-process-light.png').default}
+  darkSource={require('./assets/docker-cli-process-dark.png').default}
+  className="themed-image"
+  alt="Flowchart of 'docker run': CLI -> Daemon API -> containerd -> containerd-shim -> runc creates container process." />
+  <figcaption>Docker Container Start Process Flow</figcaption>
+</figure>
+
+This decoupled architecture makes the system more robust and allows components like `containerd` and `runc` to be used independently, for example, directly by Kubernetes.
+
+---
+<!--
+## Next Steps
+
+With this foundation, you can explore further:
+
+* **Images and Registries:** Understand how to build, tag, and push images to registries like Docker Hub or private registries [[Working with Images|Docker Images]].
+* **Building Images:** Learn best practices for writing efficient [[The Dockerfile|Dockerfiles]].
+* **Networking:** Understand how containers communicate with each other and the outside world [[Networking|Docker Networking Concepts]].
+* **Storage:** Explore volumes and bind mounts for persistent data [[Volumes and persistent data|Managing Data in Docker]].
+* **Orchestration:** Learn how tools like [[Docker Compose|Docker Compose]] or [[1-DevOps/Kubernetes/index|Kubernetes]] manage multi-container applications.
+* **Security:** Dive deeper into container security best practices [[Security|Security]].
+-->

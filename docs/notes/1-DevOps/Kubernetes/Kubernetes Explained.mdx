@@ -1,0 +1,53 @@
+---
+title: "K8s Explained"
+author: "Daniel Gattringer"
+description: "Introduction to Kubernetes and its role in DevOps, covering container orchestration, benefits, and why it's key for production environments."
+date: 2025-04-14
+tags: ["kubernetes", "devops"]
+sidebar_position: 1
+---
+
+import ThemedAsset from '@site/src/components/ThemedAsset/ThemedAsset';
+
+# Kubernetes Explained
+
+The official [Kubernetes website](https://kubernetes.io) defines it concisely as **Production-Grade Container Orchestration**:
+
+<figure align="center">
+<ThemedAsset
+  lightSource={require('./assets/k8s-website.png').default}
+  darkSource={require('./assets/k8s-website.png').default}
+  className="themed-image"
+  alt="Screenshot of the Kubernetes.io homepage showing the tagline Production-Grade Container Orchestration" />
+  <figcaption>Kubernetes Website Homepage</figcaption>
+</figure>
+
+This phrase effectively captures Kubernetes' core purpose: it's a platform designed to **automate the deployment, scaling, and management of containerized applications**, specifically built for the demands of reliable production environments.
+
+It's important to understand that Kubernetes doesn't replace container runtimes like [Docker](../Docker/index.md). Instead, it works *with* them. Kubernetes manages the **clusters** of machines (nodes) where these container runtimes are running, orchestrating the containers across the available infrastructure.
+
+## The Need for Orchestration: From Monoliths to Microservices at Scale
+
+Managing production workloads has changed significantly. In the past, applications often ran as large **monoliths** on a few physical servers. Today, influenced by cloud platforms (like [AWS](https://aws.amazon.com), [Azure](https://azure.microsoft.com), [GCP](https://cloud.google.com)) and modern architecture patterns, applications are commonly built as **containerized microservices**.
+
+While containers provide portability and efficiency, deploying and managing potentially hundreds or thousands of them across numerous machines creates significant new challenges. Imagine trying to manually deploy, update, monitor, network, and ensure the health of a containerized application spread across 100+ instances using only basic commands like `docker run` on each machine. This manual approach is inefficient, error-prone, and doesn't scale effectively.
+
+## Kubernetes as the Solution
+
+This is the core problem Kubernetes solves. It acts as the "operating system" for your cluster, providing a unified **API** and control plane to declaratively manage containerized workloads across all underlying nodes. Although Kubernetes itself is a complex system composed of multiple distributed components (often running as containers), it presents a coherent interface for developers and operators to manage their applications without needing to interact directly with each individual node or container runtime.
+
+## Why Kubernetes is Key for DevOps and Production
+
+Kubernetes directly addresses many critical challenges faced when running containers in production, making it a cornerstone technology for DevOps practices:
+
+* **Automation:** Automates deployment rollouts and rollbacks, scaling, service discovery, load balancing, and self-healing, reducing manual intervention.
+* **Scalability & Resource Management:** Allows applications to scale horizontally (adding more container instances) automatically or manually based on demand. Optimizes resource utilization across the cluster nodes.
+* **High Availability:** Helps ensure applications remain accessible by automatically restarting failed containers, rescheduling them onto healthy nodes, and managing traffic distribution.
+* **Consistent Environments:** Provides a consistent way to define and manage application deployments across different environments (dev, staging, prod).
+* **Release Management:** Supports strategies like rolling updates and canary releases for safer application updates with minimal downtime.
+* **Networking:** Offers built-in service discovery and load balancing, along with sophisticated network policies for isolating workloads.
+* **Stateful Applications:** Provides primitives (like PersistentVolumes and StatefulSets) to manage applications that require persistent storage and stable network identities.
+* **Configuration & Secret Management:** Allows secure injection and management of application configuration and sensitive data (like passwords or API keys).
+* **Access Control (RBAC):** Implements Role-Based Access Control to define granular permissions for users and services interacting with the Kubernetes API.
+
+By tackling these production-specific problems, Kubernetes enables teams to deploy and manage complex, containerized applications reliably and efficiently at scale.
