@@ -22,6 +22,10 @@ jobs:
 
       - name: Install dependencies
         run: npm install --frozen-lockfile
+      - name: Debug POSTHOG_API_KEY
+        run: echo "POSTHOG_API_KEY=$POSTHOG_API_KEY"
+        env:
+          POSTHOG_API_KEY: ${{ secrets.POSTHOG_API_KEY }}
       - name: Build website
         run: npm run build
         env:
