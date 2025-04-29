@@ -17,9 +17,17 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: 23
+          node-version: 18
           cache: npm
-
+      - name: Check if POSTHOG_API_KEY is set
+        run: |
+          if [ -z "${POSTHOG_API_KEY}" ]; then
+            echo "❌ POSTHOG_API_KEY is not set! PostHog will be disabled or the build might fail."
+            # Uncomment the next line if you want to FAIL the workflow when missing:
+            # exit 1
+          else
+            echo "✅ POSTHOG_API_KEY is set."
+          fi
       - name: Install dependencies
         run: npm install --frozen-lockfile
       - name: Build website
