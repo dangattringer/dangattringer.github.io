@@ -1,7 +1,7 @@
 ---
 title: DevOps
 author: "Daniel Gattringer"
-description: "Index file for the 1-DevOps folder."
+description: "Understanding DevOps: Culture, Automation, Measurement, and Sharing"
 draft: false
 sidebar_position: 1
 ---
