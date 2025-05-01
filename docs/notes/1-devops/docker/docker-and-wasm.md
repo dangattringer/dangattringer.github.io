@@ -44,7 +44,7 @@ Components provide a strong abstraction for the application code, while containe
 
 ## Wasm Components & Orchestration Challenges
 
-[Kubernetes](../Kubernetes/index.mdx) excels at infrastructure abstraction and orchestrating containerized workloads at scale. However, running traditional containerized applications on Kubernetes can face limitations, particularly in specific scenarios where Wasm components offer advantages:
+[Kubernetes](../kubernetes/index.mdx) excels at infrastructure abstraction and orchestrating containerized workloads at scale. However, running traditional containerized applications on Kubernetes can face limitations, particularly in specific scenarios where Wasm components offer advantages:
 
 * **Edge Deployments:** Running Kubernetes (even lightweight distributions) and containers on resource-constrained edge devices can be challenging due to the overhead of the container image size and the runtime itself. Wasm's small footprint makes it a better fit.
 * **Resource Efficiency & Cold Starts:** Containers often need to run continuously ("warm") to handle traffic spikes quickly, leading to significant costs for idle resources (as highlighted by studies like the DataDog State of Cloud report). Wasm components' near-instant startup times mitigate the cold start problem, allowing for more efficient, scale-to-zero deployments.
