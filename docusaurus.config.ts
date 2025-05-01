@@ -4,7 +4,6 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const POSTHOG_API_KEY = process.env.POSTHOG_API_KEY || "";
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
-
 const config: Config = {
   title: 'd://log',
   // tagline: 'Dinosaurs are cool',
@@ -31,6 +30,15 @@ const config: Config = {
       "My personal tech log and discoveries."
     ]
   },
+  headTags: [
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'google-site-verification',
+        content: 'MEw6Uc2DQwVqZffTe9aigXtFqJAz9n0oWL1lyfUay0M',
+      },
+    },
+  ],
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
