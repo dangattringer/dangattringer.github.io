@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /tags/
+Disallow: /docs/tags/
+
+Sitemap: https://dangattringer.github.io/sitemap.xml
