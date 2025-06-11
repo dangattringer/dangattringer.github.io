@@ -156,6 +156,9 @@ const config: Config = {
             {
               html: `<a class='footer__link-item' target='_blank' rel='noopener noreferrer' href='https://dev.to/dangattringer'><svg xmlns="http://www.w3.org/2000/svg" aria-hidden='true' focusable='false'  viewBox="0 0 64 64" class='svg-inline--fa fa-dev fa-w-16' role="img" aria-label="dev logo"> <path fill='currentColor' d="M 2 7 L 2 25 L 30 25 L 30 7 L 2 7 z M 4 9 L 28 9 L 28 23 L 4 23 L 4 9 z M 6 11 L 6 21 L 9 21 C 10.654 21 12 19.654 12 18 L 12 14 C 12 12.346 10.654 11 9 11 L 6 11 z M 16 11 C 14.897 11 14 11.897 14 13 L 14 19 C 14 20.103 14.897 21 16 21 L 18 21 L 18 19 L 16 19 L 16 17 L 18 17 L 18 15 L 16 15 L 16 13 L 18 13 L 18 11 L 16 11 z M 19.691406 11 L 21.775391 20.025391 C 21.907391 20.595391 22.415 21 23 21 C 23.585 21 24.092609 20.595391 24.224609 20.025391 L 26.308594 11 L 24.255859 11 L 23 16.439453 L 21.744141 11 L 19.691406 11 z M 8 13 L 9 13 C 9.552 13 10 13.448 10 14 L 10 18 C 10 18.552 9.552 19 9 19 L 8 19 L 8 13 z" transform="translate(0, 0) scale(2)"/> </svg></a>`
             },
+            {
+              html: `<a class='footer__link-item' href='mailto:gattringer.dan@gmail.com'><svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' viewBox="0 0 24 24" role="img" aria-label="Email icon" class="svg-inline--fa fa-envelope fa-w-16" width="24" height="24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zM4 6h16v.01L12 13 4 6.01V6zm0 12V8.49l8 6 8-6V18H4z"/></svg></a>`
+            }
           ]
         }
       ],
