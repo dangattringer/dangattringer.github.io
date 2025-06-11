@@ -83,9 +83,9 @@ Most Kubernetes-native components start with the prefix `kube-`. Two critical ex
 * **etcd:** A third-party distributed key-value store that holds the cluster's state.
 * **Container Engine:** A third-party runtime like `containerd` or `CRI-O` that runs the containers.
 
-You rarely need to install these components manually. For development, tools like **minikube** create a single-node cluster on your local machine. For production, managed services like **Amazon EKS** or **Google GKE** provide pre-configured clusters. For on-premises setups, **kubeadm** is a popular installation utility.
+You rarely need to install these components manually. For development, tools like **[minikube](https://minikube.sigs.k8s.io/docs/start)** create a single-node cluster on your local machine. For production, managed services like **Amazon EKS** or **Google GKE** provide pre-configured clusters. For on-premises setups, **kubeadm** is a popular installation utility.
 
-For a deeper educational experience, Kelsey Hightower's **Kubernetes the Hard Way** tutorial guides you through a manual installation on bare Linux machines. While challenging, it provides invaluable insight into the inner workings of Kubernetes.
+For a deeper educational experience, Kelsey Hightower's [Kubernetes the Hard Way](https://github.com/kelseyhightower/kubernetes-the-hard-way) tutorial guides you through a manual installation on bare Linux machines. While challenging, it provides invaluable insight into the inner workings of Kubernetes.
 
 ### Control Plane Components
 
@@ -103,11 +103,11 @@ Compute node components run on every node and are responsible for running Pods a
 
 * `kubelet`
 * `kube-proxy`
-* `Container runtime`
+* `container runtime`
 
 ### Add-On Components
 
-Add-ons use Kubernetes resources like Deployments and DaemonSets to implement cluster-level features. They typically run in the `kube-system` namespace.
+[Add-ons](https://kubernetes.io/docs/concepts/cluster-administration/addons/) use Kubernetes resources like Deployments and DaemonSets to implement cluster-level features. They typically run in the `kube-system` namespace.
 
 * **DNS:** For cluster-wide service discovery.
 * **Web UI (Dashboard):** A graphical interface for managing the cluster.
@@ -127,7 +127,7 @@ Let's explore the responsibilities of each control plane component.
 
 The `kube-apiserver` is the heart of the Kubernetes control plane. It exposes the Kubernetes API, a RESTful interface that serves as the front end for all cluster operations. Whether you use `kubectl`, a dashboard, or direct API calls, every interaction goes through the `kube-apiserver`.
 
-It is a stateless Go application, and its source code is available on [GitHub](https://github.com/kubernetes/kubernetes) under the Apache 2.0 license. To instruct Kubernetes, you send an HTTP request to a `kube-apiserver` endpoint. It is the single entry point for all create, update, and delete operations.
+It is a stateless Go application, and its source code is available on [GitHub](https://github.com/kubernetes/kubernetes). To instruct Kubernetes, you send an HTTP request to a `kube-apiserver` endpoint. It is the single entry point for all create, update, and delete operations.
 
 The `kube-apiserver` uses the REST standard, which makes it highly extensible. New functionality can be added by introducing new API resources and endpoints. To maintain the state of these resources, `kube-apiserver` relies on an external datastore. While some APIs store data in memory, this creates a stateful service that cannot be scaled. Kubernetes solves this by using **etcd**.
 
@@ -150,7 +150,7 @@ Some of the core resources exposed by the API server include:
 
 You can find a full list of API resources in the official [Kubernetes API reference](https://kubernetes.io/docs/reference/kubernetes-api/).
 
-Notice there is no "container" resource. Kubernetes abstracts containers using a resource called a **Pod**. A Pod can hold one or more containers, though a single-container Pod is the most common use case. For more advanced patterns, see our guide on [multi-container Pods and design patterns](./multi-container-pods-and-design-patterns).
+Notice there is no "container" resource. Kubernetes abstracts containers using a resource called a **Pod**. A Pod can hold one or more containers, though a single-container Pod is the most common use case.
 
 When an object is created via the API, it is stored in `etcd`. Other Kubernetes components then work to bring the cluster's actual state in line with this new desired state. The `kube-apiserver` is the central hub and the single source of truth for the entire cluster.
 
@@ -164,7 +164,7 @@ As a cluster scales, the number of requests to `kube-apiserver` from other compo
 
 The `kube-apiserver` is stateless and relies on **etcd** to store the cluster's state. `etcd` is an open-source, distributed key-value store designed for consistency and high availability. While it's a separate project maintained by the [etcd-io community](https://github.com/etcd-io/etcd), it is a critical dependency for Kubernetes.
 
-Some lightweight Kubernetes distributions like K3s can use alternatives like SQLite or even external databases like MySQL, but `etcd` is the standard for most clusters.
+Some lightweight Kubernetes distributions like [K3s](https://k3s.io/) can use alternatives like SQLite or even external databases like MySQL, but `etcd` is the standard for most clusters.
 
 Every read or write operation made through the Kubernetes API results in a corresponding operation on the `etcd` datastore.
 
@@ -240,7 +240,7 @@ The `cloud-controller-manager` runs on the control plane nodes alongside other c
 
 ## A Closer Look at Compute Node Components
 
-Now let's examine the components that run on every compute (worker) node.
+Now let's take a look at the components that run on every compute (worker) node.
 
 ### Container Engine and Container Runtime
 
@@ -249,7 +249,7 @@ A **container runtime** is the low-level software that executes containers. A **
 * **Container Runtimes (Low-Level):** `runc`, `containerd`
 * **Container Engines (High-Level):** Docker, Podman, CRI-O
 
-While Docker was the original default for Kubernetes, the ecosystem has shifted towards runtimes that adhere to the **Container Runtime Interface (CRI)**. CRI is a plugin interface that allows the `kubelet` to communicate with various container runtimes without needing custom integrations.
+While [Docker](../docker/docker-explained) was the original default for Kubernetes, the ecosystem has shifted towards runtimes that adhere to the **Container Runtime Interface (CRI)**. CRI is a plugin interface that allows the `kubelet` to communicate with various container runtimes without needing custom integrations.
 
 Popular CRI-compliant runtimes include:
 
@@ -272,7 +272,7 @@ The **Open Container Initiative (OCI)** defines open standards for container for
 
 The `kubelet` is the primary agent that runs on each node in the cluster. It is responsible for ensuring that containers described in PodSpecs are running and healthy. The `kubelet` does not run in a container; it runs as a system daemon directly on the host machine.
 
-The `kubelet` acts as a bridge between the `kube-apiserver` and the local container runtime. It periodically polls the API server (by default, every 20 seconds) to get the list of Pods that have been scheduled to its node.
+The `kubelet` acts as a bridge between the `kube-apiserver` and the local container runtime. It periodically polls the API server to get the list of Pods that have been scheduled to its node.
 
 When it receives a Pod specification, the `kubelet` translates it into instructions for the local container runtime (e.g., `containerd`) via its UNIX socket, which then starts the required containers. The `kubelet`'s sole job is to ensure the state of containers on its node reflects the desired state in `etcd`.
 
@@ -294,7 +294,7 @@ The `kube-proxy` is a network proxy that runs on each node and is a fundamental 
 
 **kubectl** is the official command-line tool for interacting with a Kubernetes cluster. It is an HTTP client optimized for making calls to the `kube-apiserver`.
 
-While you could technically use `curl` to interact with the API, `kubectl` simplifies the process immensely. It handles authentication, manages cluster contexts, and provides easy-to-remember commands for complex operations. Mastering `kubectl` is essential for being effective with Kubernetes.
+While you could technically use `curl` to interact with the API, `kubectl` simplifies this process. It handles authentication, manages cluster contexts, and provides easy-to-remember commands for complex operations. Mastering `kubectl` is essential for being effective with Kubernetes.
 
 ### How kubectl Works
 
@@ -311,6 +311,63 @@ To view your current configuration, run:
 ```bash
 kubectl config view
 ```
+
+In the configuration below, you can see several key sections:
+
+* **Clusters**:
+  Defines each Kubernetes API endpoint you can reach, including its URL (`server`) and TLS trust method (`certificate-authority-data` or `insecure-skip-tls-verify`).
+
+* **Users**:
+  The `users` section holds your credentials for each cluster. This can include client certificates (`client-certificate-data` and `client-key-data`) or tokens. These are essential for authenticating you with the Kubernetes API.
+
+  * For `user-admin`, a client certificate and key is used (`<CLIENT_CERT_DATA_PLACEHOLDER>`, `<CLIENT_KEY_DATA_PLACEHOLDER>`), which represent Base64-encoded data.
+  * For `user-readonly`, a token is used instead.
+
+* **Contexts**:
+  Associates a `cluster`, a `user`, and optionally a `namespace` into named contexts. Selecting a context determines where `kubectl` sends requests and using which credentials.
+
+* **Current-Context**:
+  Indicates which context is active for `kubectl`. In the example, it points to `dev-admin@cluster-one`, which ensures subsequent commands target that cluster, user, and namespace.
+
+
+```bash
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: <CA_DATA_PLACEHOLDER>
+    server: https://cluster-one.example.com
+  name: cluster-one
+- cluster:
+    insecure-skip-tls-verify: true
+    server: https://cluster-two.example.com
+  name: cluster-two
+
+contexts:
+- context:
+    cluster: cluster-one
+    user: user-admin
+    namespace: dev
+  name: dev-admin@cluster-one
+- context:
+    cluster: cluster-two
+    user: user-readonly
+    namespace: prod
+  name: prod-readonly@cluster-two
+
+kind: Config
+preferences: {}
+
+current-context: dev-admin@cluster-one
+users:
+- name: user-admin
+  user:
+    client-certificate-data: <CLIENT_CERT_DATA_PLACEHOLDER>
+    client-key-data: <CLIENT_KEY_DATA_PLACEHOLDER>
+- name: user-readonly
+  user:
+    token: <TOKEN_PLACEHOLDER>
+```
+
 
 When you run `kubectl get pods`, the tool sends an HTTP `GET` request to the `/api/v1/pods` endpoint on the `kube-apiserver`. The server responds with data from `etcd`, which `kubectl` then formats into a human-readable table.
 
@@ -339,7 +396,7 @@ The main drawback of the imperative approach is that it's difficult to track cha
 
 The declarative approach involves defining the desired state of your resources in a manifest file, typically written in **YAML**. You then apply this file to the cluster, and Kubernetes works to achieve that state.
 
-YAML ("YAML Ain't Markup Language") is a human-readable data serialization format. It is not a programming language but a way to define configuration using key-value pairs.
+[YAML ("YAML Ain't Markup Language")](https://yaml.org/) is a human-readable data serialization format. It is not a programming language but a way to define configuration using key-value pairs.
 
 Here is the declarative equivalent of the imperative `kubectl run` command from before:
 
@@ -368,15 +425,13 @@ Every Kubernetes manifest must contain four top-level keys:
 * `metadata`: Data that helps uniquely identify the object, including its `name`.
 * `spec`: The desired state of the object, including details like container images, ports, and replicas.
 
-The declarative approach enables **Infrastructure as Code (IaC)**. You can store your YAML files in a Git repository, track changes over time, and easily recreate your applications. You can also define multiple resources in a single file, separated by `---`.
+The declarative approach enables **[Infrastructure as Code (IaC)](../iac)**. You can store your YAML files in a Git repository, track changes over time, and easily recreate your applications. You can also define multiple resources in a single file, separated by `---`.
 
 You don't need to memorize the entire YAML syntax. The `kubectl explain` command is a powerful tool for inspecting the fields of any resource:
 
 ```bash
 kubectl explain pod.spec.containers.image
 ```
-
-Mastering both imperative and declarative methods is key, as each has its strengths and is suited for different tasks.
 
 ## Architecting for High Availability
 
@@ -397,6 +452,15 @@ A single-node cluster runs all control plane and compute components on a single 
 ### Single-Master, Multi-Node Cluster
 
 This setup features one control plane node and multiple compute nodes. It provides high availability for your applications, as they can be distributed across multiple machines. However, the control plane itself remains a single point of failure.
+
+<figure align="center">
+<ThemedAsset
+  lightSource={require('./assets/k8s-single-nodes.png').default}
+  darkSource={require('./assets/k8s-single-nodes.png').default}
+  className="themed-image"
+  alt="A highly available Kubernetes cluster with multiple control plane nodes behind a load balancer and multiple compute nodes." />
+  <figcaption>Kubernetes cluster with multi-control plane node</figcaption>
+</figure>
 
 If the control plane node fails, you lose the ability to manage the cluster, and the `etcd` instance running on it is at risk. This setup also has scaling limitations, as a single `kube-apiserver` can become a bottleneck.
 
