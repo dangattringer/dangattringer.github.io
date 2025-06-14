@@ -1,0 +1,327 @@
+---
+title: Terraform
+author: "Daniel Gattringer"
+description: "Learn what Terraform is and how its declarative IaC workflow helps you deploy cloud infrastructure in minutes. Explore core components, providers, and the init/plan/apply cycle."
+datePublished: 2025-06-14
+tags: [devops, iac, terraform]
+draft: false
+sidebar_position: 0
+---
+
+import ThemedAsset from '@site/src/components/ThemedAsset/ThemedAsset';
+
+# What is Terraform? An Introduction to Infrastructure as Code
+
+<details>
+  <summary>TL;DR</summary>
+  
+- **Terraform** is a leading Infrastructure as Code (IaC) tool that lets you define and provision infrastructure using a declarative language called HCL.
+- **Infrastructure as Code (IaC)** applies software development practices like version control, testing, and CI/CD to infrastructure management, improving quality and speed.
+- **Core Components:** Terraform uses a CLI, providers (plugins for APIs like AWS or GCP), backends (for state storage), and workspaces (to manage separate deployments).
+- **Declarative Language:** You define the desired end state of your infrastructure, and Terraform figures out how to create, update, or delete resources to achieve it.
+- **Standard Workflow:** The deployment process follows three main commands: `terraform init` (to prepare the project), `terraform plan` (to preview changes), and `terraform apply` (to execute the changes).
+- **Common Use Cases:** Terraform is widely used for building ML training clusters, deploying scalable web services, managing SSO systems, and enabling rapid prototyping.
+
+</details>
+
+Imagine launching over 70 cloud resources to create a highly available Virtual Private Cloud (VPC) in about a minute. With [Terraform](https://developer.hashicorp.com/terraform), this is not just possible—it's standard practice. A task that once took hours of manual configuration becomes a simple, reusable block of code.
+
+This efficiency transforms infrastructure management. Developers without deep networking expertise can spin up complex environments independently. Infrastructure becomes a collection of reliable, version-controlled building blocks that can be shared across different systems. When one team improves a block, like a VPC module, that enhancement cascades to every project using it, improving quality and consistency across the board.
+
+This reproducibility also fosters a culture of experimentation. Instead of sharing a single, bottlenecked test environment, each developer can create their own isolated copy of the entire system. This allows them to build and test new features in a realistic environment, iterating on changes without impacting others.
+
+## How Does Terraform Work?
+
+Terraform provides a single, unified interface for managing thousands of different services and vendors. Whether you're creating local files, launching cloud servers, or updating DNS records, you use the same consistent language and workflow. This is achieved by abstracting system-specific details into components called **providers**.
+
+The Terraform Core, located in the command-line interface (CLI), translates the developer's code into actions for the appropriate provider, which then communicates with the vendor's API. This modular design allows vendors and the community to develop and release providers independently of Terraform itself. The official [Terraform Provider Registry](https://registry.terraform.io/browse/providers) currently lists over 3,000 providers.
+
+<figure style={{ textAlign: 'center' }}>
+<ThemedAsset
+  lightSource={require('./assets/terraform-architecture.png').default}
+  darkSource={require('./assets/terraform-architecture.png').default}
+  className="themed-image"
+  alt="A diagram showing how the Terraform Core communicates with different providers (like AWS, GCP, Azure), which in turn interact with their respective vendor APIs. This illustrates the abstraction layer." />
+  <figcaption>A diagram of Terraform's architecture.</figcaption>
+</figure>
+
+### The Terraform Language (HCL)
+
+Terraform uses the **HashiCorp Configuration Language (HCL)**, which is designed to be easily readable by humans. HCL is a **declarative language**, meaning you define the desired end state of your infrastructure rather than the step-by-step process to get there.
+
+This contrasts with other IaC tools that use general-purpose imperative languages or data-only formats like YAML, which can become difficult to read and manage.
+
+### The Terraform CLI and Core
+
+The **Terraform CLI** is the primary tool for running and managing Terraform projects. It contains the core engine that translates HCL code into API calls via providers. You use the CLI to initialize projects, create infrastructure, update it, and destroy it.
+
+CI/CD platforms built for Terraform, like HCP Terraform or Spacelift, are built around the CLI and call it directly to execute commands. For developers, the CLI is an essential tool for daily work, even when a full CI/CD pipeline is in place.
+
+### Providers
+
+A **provider** is a Terraform plugin that defines resources and data sources for a specific vendor, like Azure, AWS, or Google Cloud. Providers are essentially wrappers around a vendor's API, translating Terraform's instructions into API calls. Most providers are written in Go and communicate with the Terraform Core over gRPC.
+
+Since vendors typically create and maintain their own providers, most Terraform users will never need to build one themselves. Each provider has its own documentation, style, and set of available resources.
+
+<figure style={{ textAlign: 'center' }}>
+<ThemedAsset
+  lightSource={require('./assets/vendor-abstraction.png').default}
+  darkSource={require('./assets/vendor-abstraction.png').default}
+  className="themed-image"
+  alt="A simplified diagram showing the relationship: Terraform Core communicates via gRPC to a Provider, which then communicates via an API to the Vendor's system." />
+  <figcaption>A simplified diagram showing the vendor abstraction.</figcaption>
+</figure>
+
+### Vendors
+
+Terraform is vendor-agnostic, meaning it can manage almost any type of infrastructure as long as a provider exists for it. Vendors range from major cloud platforms to specialized services. You can find providers for:
+
+- Cloud service providers ([AWS](https://registry.terraform.io/providers/hashicorp/aws/latest), [Azure](https://registry.terraform.io/providers/hashicorp/azurerm/latest), [GCP](https://registry.terraform.io/providers/hashicorp/google/latest))
+- DNS providers ([Cloudflare](https://registry.terraform.io/providers/cloudflare/cloudflare/latest))
+- Data analytics platforms ([Datadog](https://registry.terraform.io/providers/DataDog/datadog/latest), [Snowflake](https://registry.terraform.io/providers/snowflakedb/snowflake/latest))
+- Version control systems ([GitHub](https://registry.terraform.io/providers/integrations/github/latest), [GitLab](https://registry.terraform.io/providers/gitlabhq/gitlab/latest))
+- Authentication systems ([Okta](https://registry.terraform.io/providers/okta/okta/latest), [Auth0](https://registry.terraform.io/providers/auth0/auth0/latest))
+- Container orchestration ([Kubernetes](https://registry.terraform.io/providers/hashicorp/kubernetes/latest), [Docker](https://registry.terraform.io/providers/kreuzwerker/docker/latest))
+- Monitoring and alerting systems ([Prometheus](https://registry.terraform.io/providers/prometheus-community/prometheus/latest), [Grafana](https://registry.terraform.io/providers/grafana/grafana/latest))
+
+There are also [community providers](https://registry.terraform.io/browse/providers?tier=community) for tasks, like managing local files, running shell commands, or interacting with databases. These providers are often developed by the community and can be used to extend Terraform's capabilities beyond traditional infrastructure.
+
+### Backends
+
+A **backend** determines where Terraform stores its **state file**—a JSON file containing metadata about the resources it manages. By default, Terraform uses the `local` backend, storing the state file on your local machine. This is fine for testing but doesn't scale for teams.
+
+To enable collaboration, you can configure a remote backend to store the state file in a shared location, such as:
+
+- Amazon S3
+- Azure Storage Account
+- Google Cloud Storage
+
+Remote backends ensure that everyone on the team is working with the same state, preventing conflicts and enabling collaborative workflows.
+
+### Workspaces
+
+A **Terraform workspace** is an isolated instance of a Terraform configuration. It includes the code, input variables, and its own state file. You can think of a workspace as a specific deployment of your infrastructure.
+
+Just like a software program can be installed multiple times with different configurations, a single Terraform codebase can be deployed into multiple workspaces. This is commonly used to create separate environments like `production`, `staging`, and `development`, all managed from the same code but with different state files and variables.
+
+## Understanding Terraform's Declarative Language
+
+Terraform's use of a declarative language is fundamental to how it works. In a declarative model, you describe *what* you want the final outcome to be, and the engine figures out *how* to achieve it.
+
+When Terraform runs, it analyzes your code and creates a **plan**—a directed acyclic graph (DAG) of actions needed to bring your live infrastructure into the desired state. This approach is common in IaC and configuration management tools like [Kubernetes](../kubernetes/kubernetes-explained) and Puppet.
+
+### Declarative vs. Imperative Languages
+
+Most developers are familiar with **imperative** languages like JavaScript or Python, where you write explicit statements to change a system's state.
+
+- **Imperative:** Describes *how* to do something (e.g., "Check if a server exists. If not, create it. Then, configure it.").
+- **Declarative:** Describes *what* the outcome should be (e.g., "There should be a server with this configuration.").
+
+The declarative approach is powerful for infrastructure because it eliminates the need to write complex migration logic. You can move between different versions of your infrastructure just by changing the code that defines the end state.
+
+### Automatic Dependency Resolution
+
+Modern applications consist of many interconnected components: a web server, a database, a cache, and DNS records. These components have dependencies—for example, the application needs the database credentials before it can connect.
+
+Terraform automatically resolves these dependencies. When you use an output from one resource (like a database password) as an input for another (the application's configuration), Terraform infers the relationship. It builds a dependency graph and creates, updates, or deletes resources in the correct order without you needing to explicitly define it.
+
+### Pitfalls of Declarative Languages
+
+The primary challenge with declarative languages is handling **circular dependencies**. This occurs when a chain of resources depends on each other in a loop, creating a situation where no resource can be created first.
+
+<figure style={{ textAlign: 'center' }}>
+<ThemedAsset
+  lightSource={require('./assets/circular-dependency.png').default}
+  darkSource={require('./assets/circular-dependency.png').default}
+  className="themed-image"
+  alt="An example of a circular dependency where Resource A depends on Resource B, Resource B depends on Resource C, Resource C depends on Resource D, Resource D depends on Resource E, and Resource E depends back on Resource B." />
+  <figcaption>A diagram with five resources (A, B, C, D, E), creating a circular dependency.</figcaption>
+</figure>
+
+Terraform cannot resolve these cycles on its own. While circular dependencies are generally an anti-pattern in system design, Terraform provides workarounds for rare cases where they are unavoidable.
+
+## The Standard Terraform Workflow: Init, Plan, Apply
+
+Deploying infrastructure with Terraform follows a consistent, three-step workflow. Although often automated in a CI/CD pipeline, each step is initiated by a Terraform CLI command.
+
+<figure style={{ textAlign: 'center' }}>
+<ThemedAsset
+  lightSource={require('./assets/terraform-workflow.png').default}
+  darkSource={require('./assets/terraform-workflow.png').default}
+  className="themed-image"
+  alt="A flowchart showing the Terraform workflow: Change Desired ->`terraform init` -> `terraform plan` -> Review Plan -> `terraform apply`." />
+  <figcaption>The standard Terraform development workflow, from making a code change to applying it.</figcaption>
+</figure>
+
+### 1. terraform init
+
+Before you can run any other commands, you must initialize the project. The `terraform init` command performs several setup tasks:
+
+- **Initializes the backend:** Connects to the configured backend (e.g., local filesystem or a remote object store) to prepare for state management.
+- **Downloads providers:** Finds and installs the necessary providers specified in your code (e.g., the AWS provider).
+- **Downloads modules:** Installs any modules your project depends on.
+
+```bash
+# Example of initializing a Terraform project
+$ terraform init
+
+Initializing the backend...
+
+Initializing provider plugins...
+- Finding hashicorp/azurerm versions matching "~> 3.0"...
+- Finding hashicorp/google versions matching "~> 4.0"...
+- Finding hashicorp/aws versions matching "~> 5.0"...
+- Installing hashicorp/azurerm v3.117.1...
+- Installed hashicorp/azurerm v3.117.1 (signed by HashiCorp)
+- Installing hashicorp/google v4.85.0...
+- Installed hashicorp/google v4.85.0 (signed by HashiCorp)
+- Installing hashicorp/aws v5.100.0...
+- Installed hashicorp/aws v5.100.0 (signed by HashiCorp)
+
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+```
+
+### 2. terraform plan
+
+The `terraform plan` command creates an execution plan that shows you exactly what Terraform will do to your infrastructure. This is a dry run—no changes are made. The planning process involves three steps:
+
+1. **Refresh:** Terraform reads the current state of your remote infrastructure to detect any out-of-band changes.
+2. **Compare:** It compares the current state to the desired state defined in your code.
+3. **Plan:** It generates a sequence of actions (create, update, or destroy) to align the infrastructure with your code.
+
+The output clearly shows which resources will be added, changed, or removed.
+
+```bash
+# Example of running a Terraform plan
+$ terraform plan -out tfplan
+
+Terraform used the selected providers to generate the following execution plan.
+Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+# aws_s3_bucket.example will be created
+  + resource "aws_s3_bucket" "example" {
+      + acl     = "private"
+      + bucket  = "my-example-s3-bucket-123456"
+      + id      = (known after apply)
+      + ... other default attributes ...
+    }
+
+  # azurerm_resource_group.example will be created
+  + resource "azurerm_resource_group" "example" {
+      + id       = (known after apply)
+      + location = var.azure_location
+      + name     = "example-resources"
+      + ... other default attributes ...
+    }
+
+  # google_storage_bucket.example will be created
+  + resource "google_storage_bucket" "example" {
+      + id       = (known after apply)
+      + name     = "my-gcp-bucket-123456"
+      + location = var.gcp_region
+      + ... other default attributes ...
+    }
+
+Plan: 3 to add, 0 to change, 0 to destroy.
+```
+
+You can visualize this plan as a dependency graph using the `terraform graph` command.
+
+### 3. terraform apply
+
+Once you have reviewed the plan and are satisfied with the proposed changes, you run `terraform apply`. This command executes the actions defined in the plan.
+
+If you provide a saved plan file, Terraform will execute that exact plan. If not, it will generate a new plan and ask for confirmation before applying it.
+
+```bash
+# Example of applying a Terraform plan
+$ terraform apply "tfplan"
+
+...
+
+Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+```
+
+Terraform executes operations concurrently whenever possible to speed up provisioning, though it is often limited by the vendor's API response times.
+
+## Frequently Asked Questions
+
+<details>
+  <summary>What is Terraform used for?</summary>
+
+  Terraform is used to define, provision, and manage infrastructure as code. Common use cases include deploying cloud resources (like servers and databases), building multi‑cloud environments, managing Kubernetes clusters, and setting up CI/CD pipelines.
+</details>
+
+<details>
+  <summary>Is Terraform a declarative or imperative language?</summary>
+  
+  Terraform uses a **declarative** language called HCL (HashiCorp Configuration Language). You describe the desired end state of your infrastructure, and Terraform figures out what needs to be created, updated, or deleted to reach that state.
+</details>
+
+<details>
+  <summary>What are Terraform providers?</summary>
+  
+  Providers are plugins that bridge Terraform and external APIs (like AWS, Azure, GCP, GitHub). They define the resources Terraform can manage and translate your HCL into API calls for those platforms. 
+</details>
+
+<details>
+  <summary>What is the difference between <code>terraform plan</code> and <code>terraform apply</code>?</summary>
+  
+  `terraform plan` is a **dry-run** command that previews the changes Terraform will make, without applying them. `terraform apply` actually **executes** the changes to create, update, or delete resources based on that plan.
+</details>
+
+
+import FAQSchema from '@site/src/components/FAQSchema';
+
+<FAQSchema mainEntity= {
+  [
+    {
+      "@type": "Question",
+      "name": "What is Terraform used for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Terraform is used to define, provision, and manage infrastructure as code. Common use cases include deploying cloud resources like servers and databases, building multi‑cloud environments, managing Kubernetes clusters, and setting up CI/CD pipelines."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Terraform a declarative or imperative language?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Terraform uses a declarative language called HCL (HashiCorp Configuration Language). This means you define the desired end state of your infrastructure, and Terraform figures out the necessary actions (create, update, destroy) to reach that state."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are Terraform providers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Providers are plugins that bridge Terraform and external APIs (like AWS, Azure, GCP, GitHub). They define the resources Terraform can manage and translate HCL code into API calls for each platform."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between \"terraform plan\" and \"terraform apply\"?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "\"terraform plan\" is a dry run that shows what changes Terraform will make without applying them. \"terraform apply\" actually executes those changes to create, update, or delete resources."
+      }
+    }
+  ]
+} />

@@ -43,7 +43,7 @@ Treating your infrastructure as code unlocks several powerful advantages that ar
 
 Several tools dominate the IaC landscape, each with its own strengths:
 
-* **[Terraform](https://developer.hashicorp.com/terraform):** An open-source tool from HashiCorp that has become the industry standard for infrastructure provisioning. It uses a declarative approach and supports hundreds of cloud providers and services through its extensive provider ecosystem.
+* **[Terraform](./terraform/index.md):** An open-source tool from HashiCorp that has become the industry standard for infrastructure provisioning. It uses a declarative approach and supports hundreds of cloud providers and services through its extensive provider ecosystem.
 * **[Ansible](https://docs.ansible.com/):** A agentless automation tool built for configuration management and deploying applications. While it can perform some provisioning, it's often used to configure servers after they've been created by a tool like Terraform.
 * **[AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html):** A service provided by Amazon Web Services that allows you to model and provision AWS resources using YAML or JSON templates. It is tightly integrated with the AWS ecosystem but is limited to AWS resources.
 * **[Azure Resource Manager (ARM) Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview):** The native IaC solution for Microsoft Azure, similar to CloudFormation for AWS.
