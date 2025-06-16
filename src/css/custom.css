@@ -147,3 +147,7 @@ table {
   width: initial;
   margin: 0 auto;
 }
+
+.hidden {
+  display: none;
+}
