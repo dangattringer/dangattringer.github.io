@@ -1,8 +1,8 @@
 ---
 title: Docker 
 author: "Daniel Gattringer"
-description: "Core concepts, commands, and best practices for using Docker."
-date: 2025-03-29
+description: "Learn the fundamentals of Docker, from core concepts like containers and images to essential commands and best practices for modern development and CI/CD workflows."
+datePublished: 2025-03-29
 draft: false
 sidebar_position: 1
 ---
@@ -18,6 +18,18 @@ import ThemedAsset from '@site/src/components/ThemedAsset/ThemedAsset';
   alt="Docker definition from the official website: 'Accelerate how you build, share, and run applications. Docker helps developers build, share, run, and verify applications anywhere — without tedious environment configuration or management." />
   <figcaption>Docker definition from the official website</figcaption>
 </figure>
+
+Docker is a platform designed to make it easier to build, share, and run applications in isolated environments called **containers**. These containers ensure that software runs uniformly and predictably, regardless of the underlying infrastructure. 
+
+Integrating Docker into a development workflow offers many advantages for building, testing, and deploying applications.
+
+*   **Consistent Environments:** By bundling dependencies within a container, Docker eliminates inconsistencies between development, staging, and production setups.
+*   **Service Isolation:** Each container runs in its own isolated environment, preventing conflicts between services and enhancing security.
+*   **Simplified CI/CD:** Docker streamlines continuous integration and continuous delivery (CI/CD) pipelines. New code can be automatically built into an image, tested in a container, and deployed to production with confidence.
+*   **Multi-Container Applications:** For complex systems with multiple services (e.g., a web server, database, and caching layer), **Docker Compose** allows you to define and run the entire application stack with a single command.
+
+
+This section provides core Docker concepts, commands, and best practices.
 
 ---
 

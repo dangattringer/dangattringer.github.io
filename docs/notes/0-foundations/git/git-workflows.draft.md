@@ -2,7 +2,7 @@
 title: Git Workflows
 author: Daniel Gattringer
 description: "Git workflows, branching strategies, and best practices for effective collaboration."
-date: 2025-04-18
+datePublished: 2025-04-18
 draft: true
 tags:
   - git

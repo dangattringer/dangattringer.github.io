@@ -2,7 +2,7 @@
 title: The Dockerfile
 author: Daniel Gattringer
 description: ""
-date: 2025-04-10
+datePublished: 2025-04-10
 tags: [docker]
 draft: true
 sidebar_position: 5

@@ -3,7 +3,6 @@ title: DevOps
 author: "Daniel Gattringer"
 description: "Learn the core principles of DevOps, including the CAMS model (Culture, Automation, Measurement, Sharing) and the key practices that accelerate software delivery."
 draft: false
-
 sidebar_position: 1
 ---
 

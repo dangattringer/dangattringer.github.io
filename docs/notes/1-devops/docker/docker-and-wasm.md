@@ -2,7 +2,7 @@
 title: Docker vs Wasm
 author: "Daniel Gattringer"
 description: "Comparing Docker containers and WebAssembly (Wasm) components, their use cases, and how they interact with Kubernetes orchestration."
-date: 2025-04-04
+datePublished: 2025-04-04
 tags: ["docker"]
 draft: false
 sidebar_position: 7
