@@ -2,7 +2,7 @@
 title: RAG Platform
 author: "Daniel Gattringer"
 description: ""
-draft: false
+draft: true
 sidebar_position: 2
 ---
 

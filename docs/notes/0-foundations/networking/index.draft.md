@@ -1,7 +1,9 @@
 ---
-title: APIs-Networking
+sidebar_label: "APIs-Networking"
+title: ""
 author: "Daniel Gattringer"
 description: "Index file for the APIs-Networking folder."
+datePublished: 2025-06-10
 draft: true
 sidebar_position: 4
 ---

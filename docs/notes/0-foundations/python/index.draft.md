@@ -1,7 +1,9 @@
 ---
-title: Python
+sidebar_label: "Python"
+title: ""
 author: "Daniel Gattringer"
 description: "Index file for the Python folder."
+datePublished: 2025-06-10
 draft: true
 sidebar_position: 2
 ---

@@ -1,5 +1,6 @@
 ---
-title: Security
+sidebar_label: "Security"
+title: "Security"
 author: "Daniel Gattringer"
 description: ""
 datePublished: 2025-04-04

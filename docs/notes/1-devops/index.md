@@ -1,5 +1,6 @@
 ---
-title: DevOps
+sidebar_label: "DevOps"
+title: "What is DevOps? A Guide to Culture, Tools, and Practices"
 author: "Daniel Gattringer"
 description: "Learn the core principles of DevOps, including the CAMS model (Culture, Automation, Measurement, Sharing) and the key practices that accelerate software delivery."
 draft: false

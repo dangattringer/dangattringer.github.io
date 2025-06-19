@@ -1,6 +1,7 @@
 ---
-title: Git Workflows
-author: Daniel Gattringer
+sidebar_label: "Git Workflows"
+title: ""
+author: "Daniel Gattringer"
 description: "Git workflows, branching strategies, and best practices for effective collaboration."
 datePublished: 2025-04-18
 draft: true

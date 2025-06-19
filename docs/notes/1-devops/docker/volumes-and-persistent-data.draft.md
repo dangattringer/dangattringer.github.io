@@ -1,5 +1,6 @@
 ---
-title: Volumes and persistent data
+sidebar_label: "Volumes and persistent data"
+title: "Volumes and persistent data"
 author: "Daniel Gattringer"
 description: ""
 datePublished: 2025-04-04

@@ -1,7 +1,9 @@
 ---
-title: Linux-Bash
+sidebar_label: "Linux-Bash"
+title: ""
 author: "Daniel Gattringer"
 description: "Index file for the Linux-Bash folder."
+datePublished: 2025-06-10
 draft: true
 sidebar_position: 1
 ---

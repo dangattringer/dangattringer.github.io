@@ -1,5 +1,6 @@
 ---
-title: Docker Compose
+sidebar_label: "Docker Compose"
+title: "Docker Compose"
 author: "Daniel Gattringer"
 description: ""
 datePublished: 2025-04-04

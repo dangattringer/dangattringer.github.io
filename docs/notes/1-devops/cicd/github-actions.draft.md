@@ -1,8 +1,9 @@
 ---
-title: GitHub Actions
-author: Daniel Gattringer
+sidebar_label: "GitHub Actions"
+title: "GitHub Actions"
+author: "Daniel Gattringer"
 description: "GitHub Actions, CI/CD, and DevOps practices for modern software development."
-date: 2025-04-18
+datePublished: 2025-04-18
 tags:
   - devops
 draft: true

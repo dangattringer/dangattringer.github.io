@@ -1,7 +1,8 @@
 ---
-title: Vector Databases
+sidebar_label: "Vector Stores"
+title: "What Is a Vector Database? A Guide to AI Search & RAG"
 author: "Daniel Gattringer"
-description: "Learn what vector databases are and how they enable powerful AI features like semantic search and RAG. This guide covers vector embeddings, ANN algorithms like HNSW, and top database options."
+description: "Learn what a vector database is and how it powers AI features like semantic search and RAG. This guide covers vector embeddings, ANN algorithms, and top options."
 datePublished: 2025-06-14
 draft: false
 sidebar_position: 5
@@ -9,7 +10,7 @@ sidebar_position: 5
 
 import ThemedAsset from '@site/src/components/ThemedAsset/ThemedAsset';
 
-# Vector Databases: The Engine for AI-Powered Search
+# Vector stores: The Engine for AI-Powered Search
 
 <details>
   <summary>TL;DR</summary>
@@ -17,12 +18,12 @@ import ThemedAsset from '@site/src/components/ThemedAsset/ThemedAsset';
 - **What is a vector database?** A specialized database built to store, manage, and search high-dimensional vector embeddings, which are numerical representations of data like text, images, or audio.
 - **Why are they needed?** Traditional databases are slow and inefficient at finding similar items in complex, high-dimensional data, a problem known as the "curse of dimensionality."
 - **How do they work?** They use Approximate Nearest Neighbor (ANN) algorithms to find "good enough" matches almost instantly, trading perfect accuracy for significant speed improvements.
-- **What are the key use cases?** Vector databases are essential for modern AI features like semantic search, recommendation engines, image recognition, and Retrieval-Augmented Generation (RAG) for LLMs.
+- **What are the key use cases?** Vector stores are essential for modern AI features like semantic search, recommendation engines, image recognition, and Retrieval-Augmented Generation (RAG) for LLMs.
 - **What about hybrid solutions?** Systems like PostgreSQL (with `pgvector`) and Elasticsearch now offer vector search capabilities, providing a convenient option for smaller-scale needs, though dedicated databases offer better performance at scale.
 
 </details>
 
-Vector databases are specialized databases built to efficiently store and retrieve high-dimensional vectors. These vectors, known as embeddings, are numerical representations of complex data like text, images, and audio. As AI applications in natural language processing (NLP) and computer vision become standard, vector databases provide the essential infrastructure for features like semantic search, recommendation engines, and generative AI.
+Vector stores are specialized databases built to efficiently store and retrieve high-dimensional vectors. These vectors, known as embeddings, are numerical representations of complex data like text, images, and audio. As AI applications in natural language processing (NLP) and computer vision become standard, Vector stores provide the essential infrastructure for features like semantic search, recommendation engines, and generative AI.
 
 ## What Are Vector Embeddings?
 
@@ -53,7 +54,7 @@ This challenge is often called the **"curse of dimensionality."** As the number 
 
 ### The Rise of Hybrid Solutions
 
-The line between traditional and vector databases is blurring. Many popular data systems now offer extensions or native features for handling vector search, providing a convenient alternative to adopting a new, specialized database.
+The line between traditional and Vector stores is blurring. Many popular data systems now offer extensions or native features for handling vector search, providing a convenient alternative to adopting a new, specialized database.
 
 - **PostgreSQL:** The `pgvector` extension allows developers to store and query vector embeddings directly within a familiar relational database using SQL.
 - **Elasticsearch & OpenSearch:** These powerful search engines have incorporated native vector search capabilities, enabling teams to combine traditional keyword filters with modern semantic search in a single system.
@@ -67,13 +68,13 @@ These hybrid solutions are practical for teams looking to use existing infrastru
 | **Features** | Advanced filtering, real-time indexing, specialized APIs. | Basic vector search; relies on existing database features. |
 | **Best For** | High-performance, large-scale production AI applications. | Prototypes, smaller projects, teams consolidating their tech stack. |  
 
-*<p align="center">Table 1: Comparing Dedicated Vector Databases and Hybrid Solutions</p>*
+*<p align="center">Table 1: Comparing Dedicated Vector stores and Hybrid Solutions</p>*
 
-While convenient, these integrated systems can struggle with performance and scalability compared to purpose-built vector databases. A dedicated engine is engineered from the ground up for vector search and is optimized to handle billions of vectors with millisecond latency. The choice depends on your specific needs: the convenience of an all-in-one system versus the high performance of a specialized database.
+While convenient, these integrated systems can struggle with performance and scalability compared to purpose-built Vector stores. A dedicated engine is engineered from the ground up for vector search and is optimized to handle billions of vectors with millisecond latency. The choice depends on your specific needs: the convenience of an all-in-one system versus the high performance of a specialized database.
 
-## How Vector Databases Work: Speed Through Approximation
+## How Vector stores Work: Speed Through Approximation
 
-Vector databases solve the performance problem by trading perfect accuracy for massive speed gains. Instead of finding the absolute nearest neighbors, they use **Approximate Nearest Neighbor (ANN)** algorithms to find "good enough" matches almost instantly.
+Vector stores solve the performance problem by trading perfect accuracy for massive speed gains. Instead of finding the absolute nearest neighbors, they use **Approximate Nearest Neighbor (ANN)** algorithms to find "good enough" matches almost instantly.
 
 The workflow consists of two primary stages: indexing and querying.
 
@@ -93,9 +94,9 @@ When a query vector is received, the database uses the ANN index to quickly navi
 
 This approach returns results that are highly likely to be the true nearest neighbors in a fraction of the time an exhaustive search would take.
 
-## Common Use Cases for Vector Databases
+## Common Use Cases for Vector stores
 
-Vector databases are the backbone of many AI-powered systems. Here are some use cases:
+Vector stores are the backbone of many AI-powered systems. Here are some use cases:
 
 - **Semantic Search:** Go beyond keyword matching. Users can search with natural language, and the system returns results based on conceptual meaning, not just shared words.
 - **Recommendation Engines:** Find similar products, articles, or songs by comparing their vector embeddings. If a user likes a product, the system can recommend others that are "close" to it in the vector space.
@@ -113,7 +114,7 @@ When evaluating a vector database, consider these essential features:
 - **Developer Experience:** Clean APIs, comprehensive SDKs (like Python and JavaScript), and simple integration with machine learning frameworks.
 - **Deployment Options:** Flexibility to deploy as a managed cloud service, on-premises, or as an open-source solution.
 
-Popular vector databases include managed services like **[Pinecone](https://www.pinecone.io/)** and open-source solutions like **[Weaviate](https://weaviate.io/)**, **[Milvus](https://milvus.io/)**, and **[Chroma](https://www.trychroma.com/)**.
+Popular Vector stores include managed services like **[Pinecone](https://www.pinecone.io/)** and open-source solutions like **[Weaviate](https://weaviate.io/)**, **[Milvus](https://milvus.io/)**, and **[Chroma](https://www.trychroma.com/)**.
 
 ---
 
@@ -122,13 +123,13 @@ Popular vector databases include managed services like **[Pinecone](https://www.
 <details>
   <summary>What is the main difference between a vector database and a traditional database?</summary>
   
-  The main difference is the type of query they are built for. Traditional databases (like SQL or NoSQL) are designed for structured data and exact-match lookups. Vector databases are designed for high-dimensional data and perform similarity searches to find the 'closest' items.
+  The main difference is the type of query they are built for. Traditional databases (like SQL or NoSQL) are designed for structured data and exact-match lookups. Vector stores are designed for high-dimensional data and perform similarity searches to find the 'closest' items.
 </details>
 
 <details>
   <summary>Is a vector database a type of NoSQL database?</summary>
   
-  While vector databases share some characteristics with NoSQL databases (like scalability and flexible schemas), they are a distinct category. Their core architecture is built around specialized indexing algorithms (like HNSW or IVF) for Approximate Nearest Neighbor (ANN) search, a capability not native to most NoSQL systems.
+  While Vector stores share some characteristics with NoSQL databases (like scalability and flexible schemas), they are a distinct category. Their core architecture is built around specialized indexing algorithms (like HNSW or IVF) for Approximate Nearest Neighbor (ANN) search, a capability not native to most NoSQL systems.
 </details>
 
 <details>
@@ -138,7 +139,7 @@ Popular vector databases include managed services like **[Pinecone](https://www.
 </details>
 
 <details>
-  <summary>What is Retrieval-Augmented Generation (RAG) and how do vector databases enable it?</summary>
+  <summary>What is Retrieval-Augmented Generation (RAG) and how do Vector stores enable it?</summary>
   
   Retrieval-Augmented Generation (RAG) is a technique that improves the accuracy of Large Language Models (LLMs) by providing them with external knowledge. A vector database stores and retrieves relevant data (e.g., company documents, a knowledge base) based on a user's prompt. This retrieved context is then passed to the LLM along with the original prompt, allowing it to generate more factual and up-to-date answers.
 </details>
@@ -151,14 +152,14 @@ import FAQSchema from '@site/src/components/FAQSchema';
     "name": "What is the main difference between a vector database and a traditional database?",
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "The main difference is the type of query they are built for. Traditional databases (like SQL or NoSQL) are designed for structured data and exact-match lookups. Vector databases are designed for high-dimensional data and perform similarity searches to find the 'closest' items."
+      "text": "The main difference is the type of query they are built for. Traditional databases (like SQL or NoSQL) are designed for structured data and exact-match lookups. Vector stores are designed for high-dimensional data and perform similarity searches to find the 'closest' items."
     }
   },{
     "@type": "Question",
     "name": "Is a vector database a type of NoSQL database?",
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "While vector databases share some characteristics with NoSQL databases (like scalability and flexible schemas), they are a distinct category. Their core architecture is built around specialized indexing algorithms (like HNSW or IVF) for Approximate Nearest Neighbor (ANN) search, a capability not native to most NoSQL systems."
+      "text": "While Vector stores share some characteristics with NoSQL databases (like scalability and flexible schemas), they are a distinct category. Their core architecture is built around specialized indexing algorithms (like HNSW or IVF) for Approximate Nearest Neighbor (ANN) search, a capability not native to most NoSQL systems."
     }
   },{
     "@type": "Question",
@@ -169,7 +170,7 @@ import FAQSchema from '@site/src/components/FAQSchema';
     }
   },{
     "@type": "Question",
-    "name": "What is Retrieval-Augmented Generation (RAG) and how do vector databases enable it?",
+    "name": "What is Retrieval-Augmented Generation (RAG) and how do Vector stores enable it?",
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "Retrieval-Augmented Generation (RAG) is a technique that improves the accuracy of Large Language Models (LLMs) by providing them with external knowledge. A vector database stores and retrieves relevant data (e.g., company documents, a knowledge base) based on a user's prompt. This retrieved context is then passed to the LLM along with the original prompt, allowing it to generate more factual and up-to-date answers."

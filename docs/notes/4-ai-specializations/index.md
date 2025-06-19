@@ -1,8 +1,10 @@
 ---
-title: AI
+sidebar_label: "AI Specializations"
+title: "AI Specializations: An Overview"
 author: "Daniel Gattringer"
-description: "AI specializations, including Computer Vision, and Natural Language Processing (NLP), Agentic Systems, and more."
+description: "Explore key AI specializations like Computer Vision, Natural Language Processing (NLP), Agents, and more. Understand the core concepts driving modern artificial intelligence."
 draft: false
+datePublished: 2025-06-16
 sidebar_position: 4
 ---
 

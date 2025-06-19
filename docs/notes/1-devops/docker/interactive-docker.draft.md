@@ -1,5 +1,6 @@
 ---
-title: Interactive Docker
+sidebar_label: "Interactive Docker"
+title: ""
 author: "Daniel Gattringer"
 description: "Interactive Docker, the container lifecycle, all you need to know to get started with Docker CLI."
 datePublished: 2025-04-16

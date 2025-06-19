@@ -1,7 +1,9 @@
 ---
-title: CI-CD
+sidebar_label: "CI-CD"
+title: "CI/CD Overview"
 author: "Daniel Gattringer"
 description: "Index file for the CI-CD folder."
+datePublished: 2025-06-10
 draft: true
 sidebar_position: 3
 ---

@@ -1,9 +1,10 @@
 ---
-title: Docker vs Wasm
+sidebar_label: "Docker vs Wasm"
+title: "Docker vs. WebAssembly: Which is Better for Kubernetes?"
 author: "Daniel Gattringer"
-description: "Comparing Docker containers and WebAssembly (Wasm) components, their use cases, and how they interact with Kubernetes orchestration."
+description: "Explore the key differences between Docker containers and WebAssembly (Wasm). Learn which is better for microservices, edge computing, and Kubernetes orchestration."
 datePublished: 2025-04-04
-tags: ["docker"]
+tags: ["docker", "wasm", "kubernetes"]
 draft: false
 sidebar_position: 7
 ---

@@ -1,5 +1,6 @@
 ---
-title: Networking
+sidebar_label: "Networking"
+title: "Networking"
 author: "Daniel Gattringer"
 description: ""
 datePublished: 2025-04-04

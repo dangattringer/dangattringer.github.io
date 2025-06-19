@@ -1,12 +1,27 @@
 ---
-title: Kubernetes
+sidebar_label: "Kubernetes"
+title: "What Is Kubernetes? A Guide to Container Orchestration"
+author: "Daniel Gattringer"
+description: "Learn what Kubernetes is, how it works, and why it's the leading platform for container orchestration. Explore core concepts like pods, nodes, and clusters."
 draft: false
+datePublished: 2025-05-01
 sidebar_position: 2
 ---
 
+import DocCardList from '@theme/DocCardList';
 import ThemedAsset from '@site/src/components/ThemedAsset/ThemedAsset';
 
-<!-- <h1>
-<img src="kubernetes.svg" width="50" height="50" style="vertical-align: middle" />
-Kubernetes
-</h1> -->
+Kubernetes, also known as K8s, is an open-source platform for automating the deployment, scaling, and management of containerized applications. While tools like [Docker](docker) are excellent for creating and running individual containers, Kubernetes orchestrates them at scale, ensuring that complex, multi-container applications run reliably across a cluster of machines.
+
+By managing the application lifecycle, Kubernetes provides a robust framework for running distributed systems resiliently.
+
+*   **Automated Scaling and Self-Healing:** Kubernetes can automatically scale applications based on resource usage and restart containers that fail, replacing and rescheduling them on healthy nodes to ensure high availability.
+*   **Service Discovery and Load Balancing:** It assigns stable IP addresses and DNS names to containers and can load-balance traffic across them, simplifying communication between microservices.
+*   **Declarative Configuration:** You define the desired state of your application (e.g., "run three instances of this container"), and Kubernetes works continuously to maintain that state.
+*   **Environment Consistency:** It provides a consistent runtime environment across development, testing, and production, whether on-premises, in a public cloud, or in a hybrid setup.
+
+This section covers the core architecture, key components, and foundational concepts of the Kubernetes ecosystem.
+
+---
+
+<DocCardList />

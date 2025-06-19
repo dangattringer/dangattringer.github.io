@@ -1,7 +1,8 @@
 ---
-title: IaC
+sidebar_label: "Infrastructure as Code"
+title: "What is Infrastructure as Code (IaC)? Tools & Benefits"
 author: "Daniel Gattringer"
-description: "Learn what Infrastructure as Code (IaC) is, its benefits, key tools like Terraform and Ansible, and how it automates cloud infrastructure management."
+description: "Learn what Infrastructure as Code (IaC) is, its key benefits, and top tools like Terraform and Ansible for automating modern cloud infrastructure management."
 draft: false
 sidebar_position: 4
 ---

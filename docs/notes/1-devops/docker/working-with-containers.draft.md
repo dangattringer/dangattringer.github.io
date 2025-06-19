@@ -1,5 +1,6 @@
 ---
-title: Working with containers
+side_label: "Working with containers"
+title: "Working with containers"
 author: Daniel Gattringer
 description: ""
 datePublished: 2025-04-04

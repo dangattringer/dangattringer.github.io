@@ -1,5 +1,6 @@
 ---
-title: The Dockerfile
+side_label: "The Dockerfile"
+title: "The Dockerfile"
 author: Daniel Gattringer
 description: ""
 datePublished: 2025-04-10
@@ -14,7 +15,7 @@ import ThemedAsset from '@site/src/components/ThemedAsset/ThemedAsset';
 
 :::warning
 This part is not done yet.
-::: 
+:::
 
 A Dockerfile or Containerfile is a text document that contains a set of instructions for building a container image. It defines the base image, sets up the environment, copies the application code, installs the dependencies, and configures the runtime settings. Dockerfiles provide a reproducible and automated way to create consistent images, enabling developers to version and share their application configurations.
 
