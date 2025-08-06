@@ -71,6 +71,7 @@ const config: Config = {
           rehypePlugins: [katex],
           sidebarPath: './sidebars.ts',
           exclude: ['**/*.draft.md'],
+          sidebarCollapsed: false,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           //   editUrl:
@@ -110,7 +111,7 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
-  
+
   stylesheets: [
     'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css',
   ],
