@@ -12,7 +12,7 @@ type HomePageProps = {
 export default function HomePage({ name, title, tagline, descriptionLines }: HomePageProps): JSX.Element {
     return (
         <section className={styles.hero}>
-            <img src='/img/fox.png' alt={`${title} Logo`} className={styles.logo} />
+            <img src='/img//img.jpeg' alt={`${title} Logo`} className={styles.logo} />
             <span>{name}</span>
             <span className={styles.subtitle}>{tagline}</span>
 

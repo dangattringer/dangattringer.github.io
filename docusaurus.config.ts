@@ -1,6 +1,8 @@
 import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+const math = require('remark-math');
+const katex = require('rehype-katex');
 
 const POSTHOG_API_KEY = process.env.POSTHOG_API_KEY || "";
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
@@ -65,8 +67,11 @@ const config: Config = {
       'classic',
       {
         docs: {
+          remarkPlugins: [math],
+          rehypePlugins: [katex],
           sidebarPath: './sidebars.ts',
           exclude: ['**/*.draft.md'],
+          sidebarCollapsed: false,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           //   editUrl:
@@ -105,6 +110,10 @@ const config: Config = {
         },
       } satisfies Preset.Options,
     ],
+  ],
+
+  stylesheets: [
+    'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css',
   ],
 
   themeConfig: {
