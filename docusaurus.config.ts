@@ -112,8 +112,17 @@ const config: Config = {
     ],
   ],
 
+  themes: ['@docusaurus/theme-mermaid'],
+  markdown: {
+    mermaid: true,
+  },
+
   stylesheets: [
     'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css',
+    {
+      href: 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css',
+      type: 'text/css',
+    },
   ],
 
   themeConfig: {
